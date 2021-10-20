@@ -159,10 +159,6 @@
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     }*/
 
-    .capitalize {
-      text-transform: capitalize;
-    }
-
     #items_slider img {
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       height: auto;
@@ -474,8 +470,8 @@
         document.getElementById("arrow-right").innerHTML = right_chevron; 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ");
-        document.getElementById("scout_name").className = "capitalize";
+        document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ")
+          .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
         console.log(urlParams.get("scoutname"));
         console.log(urlParams.get("domain"));
         console.log(document.getElementById("scout_name").value);
