@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html>
   <head>
     <base target="_top">
@@ -472,7 +472,7 @@
         const urlParams = new URLSearchParams(queryString);
         //const urlParams = new URLSearchParams(queryString);
         //queryString == "" ? queryString = "?scoutname=" : null;
-        urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ")
+        urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
           .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
       //  console.log(queryString);
       //  console.log(urlParams.get("scoutname"));
