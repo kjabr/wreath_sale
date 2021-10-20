@@ -470,7 +470,7 @@
         document.getElementById("arrow-right").innerHTML = right_chevron; 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/./g, " ");
+        document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ");
         console.log(urlParams.get("scoutname"));
         console.log(urlParams.get("domain"));
       }, false);
