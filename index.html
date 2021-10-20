@@ -467,7 +467,9 @@
 
         fetch_logic();
         document.getElementById("arrow-left").innerHTML = left_chevron;
-        document.getElementById("arrow-right").innerHTML = right_chevron;
+        document.getElementById("arrow-right").innerHTML = right_chevron; 
+        const queryString = window.location.search;
+        console.log(queryString);
       }, false);
 
       var formvalues = [];
