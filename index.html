@@ -469,7 +469,9 @@
         document.getElementById("arrow-left").innerHTML = left_chevron;
         document.getElementById("arrow-right").innerHTML = right_chevron; 
         const queryString = window.location.search;
-        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        console.log(urlParams.get("scoutname"));
+        console.log(urlParams.get("domain"));
       }, false);
 
       var formvalues = [];
