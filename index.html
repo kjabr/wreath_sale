@@ -159,6 +159,10 @@
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     }*/
 
+    .capitalize {
+      text-transform: capitalize;
+    }
+
     #items_slider img {
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       height: auto;
@@ -471,6 +475,7 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ");
+        document.getElementById("scout_name").className = capitalize; 
         console.log(urlParams.get("scoutname"));
         console.log(urlParams.get("domain"));
       }, false);
