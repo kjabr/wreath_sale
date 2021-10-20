@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <title>T432 Wreath Sale</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <style>
+
+    * {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @-moz-document url-prefix() { /* Disable scrollbar Firefox */
+            body, #items_slider{
+              scrollbar-width: none;
+            }
+          }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    body {
+      max-width: 100%;
+      height: 100%;
+      background-color: #F7F6EF;
+      padding: 5px;
+    }
+
+    .container {
+      padding: 0 0 0 0;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .modal-backdrop {
+      background-color: #F7F6EF;
+    }
+
+    .btn {
+      margin-right: 10px;
+    }
+
+    #scout_name {
+      background-color: #E3EEFC;
+      margin: 3px;
+      padding: 2px;
+      border:0.2px solid #000000;
+      border-radius: 4px;
+      width:12em
+    }
+
+
+    textarea {
+      background-color: #E3EEFC;
+      margin: 3px;
+      border-radius: 4px;
+      border: 0.2px solid #000000;
+      padding: 2px;
+      max-width: 90%;
+    }
+
+    .modal_style {
+
+      background: transparent;
+    }
+
+    .modal input {
+      background-color: #E3EEFC;
+      margin: 3px;
+      padding: 1px 5px 1px 5px;
+      border:0.2px solid #000000;
+      border-radius: 4px;
+      width: 14em;
+      max-width: 95%;
+    }
+
+    .modal-dialog {
+
+}
+
+    #state {
+      background-color: #E3EEFC;
+    }
+
+    .modal-body {
+      max-height: 45rem;
+      overflow-y: auto;
+      padding-bottom: 0;
+      font-size: 14px;
+
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      position: sticky;
+      bottom: 0;
+      background-color: white;
+    }
+
+    .modal {
+
+    }
+
+    .span_header {
+     align-items: center;
+     max-width: 100%;
+     margin: auto;
+    }
+
+    body::-webkit-scrollbar, #items_slider::-webkit-scrollbar {
+     width: 0px;  /* Remove scrollbar space */
+     background: transparent;  /* Optional: just make scrollbar invisible */
+     display: none;
+    }
+
+    .container1 {
+      position: relative;
+      margin-right: 10px;
+    }
+
+    .item_group > .row {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: space-between;
+      overflow: auto;
+      align-items: center;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .item_group > .row > .col-xs-3 {
+      flex-shrink: 0;
+    }
+    .col-xs-3 {
+      color: black;
+      font-size: 14px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      width: 300px;
+      max-width: 55vh;
+      background: transparent;
+    }
+
+   /* .col-xs-3:hover {
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }*/
+
+    #items_slider img {
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      height: auto;
+      max-width: 55vw;
+    }
+
+    .v_bar {
+      border-right: 3px solid grey;
+      height: 150px;
+      width: 1px;
+      border-radius: 3px;
+    }
+
+    .v_bar:last-child {
+      border-right: none;
+    }
+
+    .cart_btn {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .w-100:hover {
+      cursor: pointer;
+    }
+
+    .arrow {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      margin-top: -35px;
+    /*  width: 0;
+      height: 0;
+      border-style: solid;
+      */
+    }
+    #arrow-left {
+      /*
+      border-width: 20px 30px 20px 0;
+      border-color: transparent dodgerblue transparent transparent;
+      */
+      left: 0;
+      margin-left: 20px;
+      z-index: 10;
+    }
+
+    #arrow-right {
+      /*
+      border-width: 20px 0 20px 30px;
+      border-color: transparent transparent transparent dodgerblue;
+      */
+      right: 0;
+      margin-right: 20px;
+      z-index: 10;
+
+    }
+
+    @media (hover: none) and (pointer: coarse) and (max-width: 800px) {
+
+      .arrow {
+        display: none;
+      }
+
+      .col-xs-3 {
+        max-width: 30vh;
+      }
+
+      .modal-body {
+        max-height: 566px;
+        font-size: 12px !important;
+      }
+
+      body {
+        font-size: 14px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      h5 {
+        font-size: 16px;
+      }
+
+      .btn {
+        font-size: 0.7rem;
+      }
+
+      .cart_btn {
+        font-size: 1rem;
+      }
+
+    }
+
+
+</style>
+
+  <body>
+
+    <div class="container">
+      <br>
+      <div class="span_header">
+      <span id="page_title"></span>
+      <h5>Gift Shipper Web Store</h5><br>
+      <span id="page_description" style="text-align: left;"></span></div>
+        Scout Name or Org Name: <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional">
+
+        <input type="button" class="" data-toggle="modal" data-target="#scout_info_modal" style="border:none; background:none; color:blue;" value="[i]">
+
+        <button type="button" onclick="build_cart()" class="btn cart_btn btn-success btn-sm ml-5" data-toggle="modal" data-target="#cart_modal" id="cart_button">Shopping Cart</button>
+
+        <div class="alert alert-primary alert-dismissable mt-2" style="display:none;" role="alert" id="sale_over_alert" >
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+          <strong>The wreath sale is over! Thank you for supporting Scouts!</strong>
+        </div>
+
+        <div class="mt-2">
+          <h6 style="text-align: center;">Swipe right to see more products >>> <span class="badge badge-pill badge-info"></span></h6>
+        </div>
+
+        <div class="container1 item_group">
+          <div id="arrow-left" class="arrow" onmousedown="go_left(event)" onmouseup="cancel_scroll()"></div>
+          <div class="row text-center" id="items_slider">
+
+          </div>
+          <div id="arrow-right" class="arrow" onmousedown="go_right(event)" onmouseup="cancel_scroll()"></div>
+        </div>
+
+        <center>
+        </center>
+        <div>
+          <center>* All prices include shipping cost.</center>
+          </div>
+      </div>
+      <!-- Modal form -->
+      <div class="modal fade" id="form_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal_style" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h5 class="modal-title" id="ModalLabel">Item Shipping Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mx-3">
+          <div class="md-form mb-3">
+            <form id="form">
+              <p id="item_details"></p>
+              Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1"> <br>
+              * Gift Message <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional"> <br>
+              * Name of person you want this shipped to:
+              <span class="ml-3">
+                <input type="text" id="ship_name" style="width:13em;" name="ship_name" autocomplete="off" placeholder="Required" required> <br>
+              </span>
+              <div class="mt-2 mb-3">
+                * Their Address: (required)<br>
+          <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
+                <div class="ml-3">
+                Street Address <input type="text" id="street_address_search" style="width:14em;" name="street_address" autocomplete="off" required> <br>
+                City <input type="text" id="city" name="city_search" style="width:10em;" autocomplete="off" required>
+                <br>
+                State <select id="state_search" name="state">
+                	<option value="AL">AL</option>
+                	<option value="AK">AK</option>
+                	<option value="AR">AR</option>
+                	<option value="AZ">AZ</option>
+                	<option value="CA">CA</option>
+                	<option value="CO">CO</option>
+                	<option value="CT">CT</option>
+                	<option value="DC">DC</option>
+                	<option value="DE">DE</option>
+                	<option value="FL">FL</option>
+                	<option value="GA">GA</option>
+                	<option value="HI">HI</option>
+                	<option value="IA">IA</option>
+                	<option value="ID">ID</option>
+                	<option value="IL">IL</option>
+                	<option value="IN">IN</option>
+                	<option value="KS">KS</option>
+                	<option value="KY">KY</option>
+                	<option value="LA">LA</option>
+                	<option value="MA">MA</option>
+                	<option value="MD">MD</option>
+                	<option value="ME">ME</option>
+                	<option value="MI">MI</option>
+                	<option value="MN">MN</option>
+                	<option value="MO">MO</option>
+                	<option value="MS">MS</option>
+                	<option value="MT">MT</option>
+                	<option value="NC">NC</option>
+                	<option value="NE">NE</option>
+                	<option value="NH">NH</option>
+                	<option value="NJ">NJ</option>
+                	<option value="NM">NM</option>
+                	<option value="NV">NV</option>
+                	<option value="NY">NY</option>
+                	<option value="ND">ND</option>
+                	<option value="OH">OH</option>
+                	<option value="OK">OK</option>
+                	<option value="OR" selected>OR</option>
+                	<option value="PA">PA</option>
+                	<option value="RI">RI</option>
+                	<option value="SC">SC</option>
+                	<option value="SD">SD</option>
+                	<option value="TN">TN</option>
+                	<option value="TX">TX</option>
+                	<option value="UT">UT</option>
+                	<option value="VT">VT</option>
+                	<option value="VA">VA</option>
+                	<option value="WA">WA</option>
+                	<option value="WI">WI</option>
+                	<option value="WV">WV</option>
+                	<option value="WY">WY</option>
+                </select>
+                <span class="ml-3">
+                Zip code <input type="number" id="zip_code_search" style="width:6em;" name="zip_code" autocomplete="off" required>
+              </span>
+            </div>
+              </div>
+
+            <div class="modal-footer">
+              <span></span>
+              <span>
+              <button type="button" onclick="form_reset()" class="btn btn-secondary">Cancel</button>
+              <button type="submit" id="add_to_cart_button" class="btn btn-primary">Add to Cart</button>
+              <label id="add_msg"></label>
+            </span>
+            </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal shopping cart -->
+    <div class="modal fade" id="cart_modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal_style" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="ModalLabel">Shopping Cart</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body ml-3 mr-3">
+        <div class="md-form mb-3">
+          <p>Thank you for supporting Scouts!</p>
+          <span id="cart_contents">
+          </span>
+          <p>**Prices include shipping cost.</p>
+
+        </div>
+        <div class="modal-footer">
+          <span id="cart_total_footer"></span>
+          <span>
+            <button type="button" onclick="clear_cart()" class="btn btn-secondary">Clear</button>
+            <button type="button" id="paypal_button" onclick="paypal()" class="btn btn-primary">Pay with PayPal</button>
+            <label id="add_msg"></label>
+          </span>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="modal fade" id="scout_info_modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal_style" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="ModalLabel">Scout Name or Organization Name</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <p>The Scout Name or Organization Name is an optional field. The field is intended to provide the appropriate Scout or Organization credit for the sale.</p>
+          <span id="cart_contents">
+          </span>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="paypal_div">
+    </div>
+</body>
+    <script>
+      var left_chevron = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="dodgerblue" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+    <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        </svg>
+      `;
+
+      var right_chevron = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="dodgerblue" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      `;
+
+      document.addEventListener('DOMContentLoaded', function() {
+
+        fetch_logic();
+        document.getElementById("arrow-left").innerHTML = left_chevron;
+        document.getElementById("arrow-right").innerHTML = right_chevron;
+      }, false);
+
+      var formvalues = [];
+      var shopping_cart = [];
+      var store_items = [];
+      var paypal_param = [];
+      var currentIndex;
+      var scroll_timer;
+      var part_number = [];
+      var part_name = [];
+
+      var setup_data =
+      [
+    [
+        "Production?",
+        "Title",
+        "Store Description",
+        "Shopping URL",
+        "Custom Field",
+        "Production Paypal ID",
+        "Production PayPal URL",
+        "Staging PayPal ID",
+        "Staging PayPal URL"
+    ],
+    [
+        "yes",
+        "Troop 432 Annual Wreath Sale!",
+        "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we'll get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! ",
+        "https://wreaths.Troop432LO.org",
+        "Wreath Sale",
+        "treasurer.LOTroop432@troopmaster.email",
+        "https://www.paypal.com/cgi-bin/webscr",
+        "sb-mtuh33943900@business.example.com",
+        "https://www.sandbox.paypal.com/cgi-bin/webscr"
+    ]
+];
+
+
+      var wreath_data =
+      [
+    [
+        "Publish?",
+        "Item Name",
+        "Item Description",
+        "Item Cost",
+        "Item Photo Link",
+        "Part number"
+    ],
+    [
+        "yes",
+        "Deluxe Wreath",
+        "26” Diameter Noble Fir, Incense Cedar, and Oregon Juniper accented with Ponderosa Cones and berries.",
+        65,
+        "https://lh3.googleusercontent.com/pw/AM-JKLWV9oK46MjJeFZYAj-0gywdwaYgvYryiyfZQcLu3RT22ldvFbhVpq3jzcKYVYxJ6N3aeGac58NsHaatCuRRxPExN6YAf1qlC5gb8ZEHq8aNDHZewodLRWl8S1xQf5yqqFL_WxHty_qOYWoCLHdm_Et7uA=w2036-h1728-no",
+        "FRGCEA"
+    ],
+    [
+        "yes",
+        "Mixed Evergreen Wreath",
+        "22” Diameter Noble Fir, Incense Cedar and Oregon Juniper wreath accented with Ponderosa Cones and a red bow.",
+        55,
+        "https://lh3.googleusercontent.com/pw/AM-JKLV4vv0phtPNxMCYdRNhQgjoYWK_pIY1J95aRskmi8wmExGE3fPIx4wtcKPCtu8uX1AHZ6Z6oDMhy3YNhYokj7it6C3DZe3OGovrVtC3ZCW3zQkBWkWu1CT61DsaKxngPDALIzd6GsYyMXS55KN8lLFexg=w1876-h1855-no",
+        "FRGWEA"
+    ],
+    [
+        "yes",
+        "Winter Wonderland",
+        "26” Diameter Noble Fir, Western Red Cedar, and Oregon Juniper wreath accented with white tipped cones, brown cones, and faux White Berries.",
+        70,
+        "https://lh3.googleusercontent.com/pw/AM-JKLUL6_h8hS9JV9Y0J2jPzWTqhNqT7jS2wj0aWRvFN89xnmykiqR36sroxKQ-trObUSK6u9fZePcevynIdY1AB871I-F1TRs80CodLXRXTYLS-i7SaXFis1AtXs6XtMpLy5KEHbM1uwfYe7O0wVasV7u_JA=w1946-h1898-no",
+        "FGWWEA"
+    ],
+    [
+        "yes",
+        "Bark Basket Centerpiece",
+        "10” x 15” Noble Fir, Western Red Cedar, Oregon Juniper, Princess Pine, White Painted Lodgepole Pine Cones, faux berries and plaid bow in a hand-held basket.",
+        55,
+        "https://lh3.googleusercontent.com/pw/AM-JKLXVC7agLwcBCyZPahBv5U2F9B6-LDa9WyOTnVaJiltWa3AG28d-sabsIyWRatdE-NCLMm4lQDXt9eYdY6ecFhAjj8XEIq2KZ9PELFI3C5_4Fx4akkr4RCqXISXZN31UbWCgZk_tLz-Jj7ak88bUZB45jQ=w2036-h1462-no",
+        "FRGBEA"
+    ],
+    [
+        "yes",
+        "Yuletide Cheer",
+        "28” long. Incense Cedar, Blue Berried Juniper, a spray of Red Berries and Lodgepole Cones in swag",
+        55,
+        "https://lh3.googleusercontent.com/pw/AM-JKLVU7U31k8OhlR27KFF7bj0KwKccdhor1Y6jbmBaOHxA9JrBsTYwMk92xfm-eC1D2rXTT3wedrwZ2j_MAOwqB2O_R8JfJDqgbOcCRWLu39VTCcI_0I5CJg7tko7SatiZuAp8pLelLTofwChpe8Fmuw42Tw=w1050-h1044-no",
+        "FGYSEA"
+    ],
+    [
+        "yes",
+        "Be Merry Centerpiece",
+        "7” Diameter 9” Height. Noble Fir, Western Red Cedar, Oregon Juniper, Natural and white Lodgepole Cones, faux Red Holly Berries, and a cheerful galvanized container.",
+        45,
+        "https://lh3.googleusercontent.com/pw/AM-JKLXx_F4XVv9TqU-gMCrw4bXZOYcFps1S2lEzH8zQRl1c32L-mQhNSdaSzmOh-1lMjJ7ogFuw-fuPZ-qNgX5rfArE288LoUHgx0hTK5GWezSwvv-W-wPrIM8RQVEoU-so3IhsimZm0z4pMHBA_p3sWK1d5g=w720-h618-no",
+        "FGBMEA"
+    ],
+    [
+        "yes",
+        "Winter White Combo",
+        "26” Wreath and 14” Centerpiece ships in the same box. Noble Fir, Western Red Cedar, and Oregon Juniper accented with white tipped cones, brown cones, and faux White Berries.",
+        85,
+        "https://lh3.googleusercontent.com/pw/AM-JKLWxoUJtVwaRTHUH7L_oN5UfL5v9uZNK20DTD2jP2cNy7Y0vGKsQgvLh8Fu0l1qZ4T-UAKUNtRtHs5ZtPagDQD7lRo7gMh38lHdLFOT-_ayHpnkLoNhSNtZgH4CO2zdyjmWh8EW771b51VV4vrLzCCuAzA=w1138-h932-no",
+        "FGWCEA"
+    ]
+];
+
+
+
+      function form_reset(){
+      //  $('#form_modal').fadeOut();
+      //  $('.modal-backdrop').fadeOut();
+      $('#form_modal').modal('hide');
+      }
+
+      //whenever the modal is closed, then clear the form
+      $('.modal').on('hidden.bs.modal', function () {
+        document.getElementById("form").reset();
+      });
+
+      document.querySelector('form').addEventListener("submit", (e) => {
+        document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[,@*&!^%$#\.]/g, '');
+        document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#\.]/g, '');
+        const formData = new FormData(e.target);
+        e.preventDefault();
+        //console.log(formData.get("gift_msg"));
+        //document.getElementById("ship_addr").value = (document.getElementById("ship_addr").value).replace(/(?:\r\n|\r|\n)/g, ' ');
+        for (var value of formData.values()){
+          //console.log(value);
+          formvalues.push(value);
+        }
+        formvalues.unshift(store_items[currentIndex+1][3]);
+        formvalues.unshift(store_items[currentIndex+1][1]);
+        formvalues.unshift(document.getElementById("scout_name").value);
+        formvalues[6] = formvalues[6] + ", " + formvalues[7] + ", " + formvalues[8] + " " + formvalues[9];
+        //console.log(formvalues);
+        shopping_cart.push(formvalues);
+        formvalues = [];
+        //console.log(shopping_cart);
+        $('#add_to_cart_button').prop('disabled',true);
+        document.getElementById("add_msg").innerHTML="&nbsp;Item added to cart";
+        document.getElementById("cart_button").innerHTML="Shopping Cart " + shopping_cart.length;
+        setTimeout(function clear_text(){
+          document.getElementById("add_msg").innerHTML="";
+          //$('#form_modal').fadeOut();
+          //$('.modal-backdrop').fadeOut();
+          $('#form_modal').modal('hide');
+          $('#add_to_cart_button').prop('disabled',false);
+
+        }, 2000);
+      });
+
+       function clear_item(m5){
+        console.log(m5);
+        shopping_cart.splice(m5,1);
+        if (shopping_cart.length > 0) {
+          document.getElementById("cart_button").innerHTML = "Shopping Cart " + shopping_cart.length;
+        }
+        else {
+          document.getElementById("cart_button").innerHTML = "Shopping Cart";
+        }
+        build_cart();
+      }
+
+      function build_cart(){
+        var cart_total = 0;
+        if (shopping_cart.length > 0) {
+          $('#paypal_button').prop('disabled',false);
+        }
+        else {
+          $('#paypal_button').prop('disabled',true);
+        }
+        var show_cart = "Scout/Org Name: " + document.getElementById("scout_name").value + "<br>";
+        for (m1 = 0; m1 < shopping_cart.length; m1++ ) {
+            //console.log(shopping_cart[m1][m2]);
+            show_cart += "<ul>";
+            show_cart += "<li>Item: " + shopping_cart[m1][1];
+            show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; width:5rem;' value='[delete]' onclick='clear_item";
+            show_cart += "(" + m1 + ")'></li>";
+            show_cart += "<ul>";
+            show_cart += "<li>Price Each: $" + shopping_cart[m1][2] + "</li>";
+            show_cart += "<li>Quantity: " + shopping_cart[m1][3] + "</li>";
+            show_cart += "<li>Gift Message: " + shopping_cart[m1][4] + "</li>";
+            show_cart += "<li>Ship-to Name: " + shopping_cart[m1][5] + "</li>";
+            show_cart += "<li>Address: " + shopping_cart[m1][6] + "</li>";
+            show_cart += "</ul>";
+            show_cart += "</ul>";
+            //console.log(shopping_cart[m1][2]);
+            cart_total += shopping_cart[m1][2] * Number(shopping_cart[m1][3]);
+        }
+        //show_cart += "Total: $" + cart_total;
+        document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
+        document.getElementById("cart_contents").innerHTML = show_cart;
+      }
+
+      function build_paypal(data){
+        paypal_param = [...data];
+          if (paypal_param[1][0] == "yes") {
+          $("#sale_over_alert").hide();
+        }
+        else {
+          $("#sale_over_alert").show();
+        }
+
+        document.getElementById("page_title").innerHTML = "<h3><center>" + paypal_param [1][1] + "</center></h3>";
+        document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='https://contact.troop432lo.org' target='_blank'>[Contact Link]<a></p>";
+        //google.script.run.withSuccessHandler(build_html).get_data_from_sheets("Store");
+        build_html(wreath_data);
+
+      }
+
+      function paypal(){
+        var paypal_start = "";
+        var paypal_items = "";
+        var count = 0;
+        var cost = [];
+        var paypal_account = "";
+        var paypal_url = "";
+
+        if (paypal_param[1][0] == "yes") {
+          paypal_account = paypal_param[1][5];
+          paypal_url = paypal_param[1][6];
+
+        }
+        else {
+          paypal_account = paypal_param[1][7];
+          paypal_url = paypal_param[1][8];
+        }
+
+
+        if (shopping_cart.length > 0) {
+          paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='theForm'>"
+          paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
+          paypal_start += "<input type='hidden' name='upload' value='1'>";
+          paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
+          paypal_start += "<input type='hidden' name='shopping_url' value='" + paypal_param[1][3] + "'>";
+          paypal_start += "<input type='hidden' name='cancel_return' value='" + paypal_param[1][3] + "'>";
+          paypal_start += "<input type='hidden' name='custom' value='" + paypal_param[1][4] + "'>";
+
+          // url_split = dynamic_data[i][3].split(/=w/);
+
+          for (m2 = 0; m2 < shopping_cart.length; m2++ ) {
+            count++;
+            //cost = shopping_cart[m2][2].split(/\$/);
+            paypal_items += "<input type='hidden' name='item_name_" + count + "' value='" + shopping_cart[m2][1] + "'>";
+            paypal_items += "<input type='hidden' name='amount_" + count + "' value='" + shopping_cart[m2][2] + "'>";
+            paypal_items += "<input type='hidden' name='quantity_" + count + "' value='" + Number(shopping_cart[m2][3]) + "'>";
+            paypal_items += "<input type='hidden' name='on0_" + count + "' value='Ship_to'>";
+            paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + shopping_cart[m2][5] + ": " + shopping_cart[m2][6] + "'>";
+            paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
+            paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + shopping_cart[m2][4] + "'>";
+            paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
+            paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + document.getElementById("scout_name").value + "'>";
+            paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
+            paypal_items += "<input type='hidden' name='os3_" + count + "' value='" + part_number[part_name.findIndex(x=>x.includes(shopping_cart[m2][1]))] + "'>";
+
+          }
+          document.getElementById("paypal_div").innerHTML = paypal_start + paypal_items + "</form>";
+          $('#cart_modal').modal('hide');
+          clear_cart();
+          document.getElementById("paypal_form").submit();
+        }
+        //console.log(paypal_start + paypal_items);
+
+      }
+
+      function clear_cart(){
+        document.getElementById("cart_contents").innerHTML = "<br>Cart is empty<br>";
+        document.getElementById("cart_button").innerHTML = "Shopping Cart";
+        $('#paypal_button').prop('disabled',true);
+        shopping_cart = [];
+        cart_total = 0;
+        document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
+
+      }
+
+      function fetch_logic(){
+        //google.script.run.withSuccessHandler(build_paypal).get_data_from_sheets("Setup");
+        build_paypal(setup_data);
+      }
+
+      function select_item(item){
+        currentIndex = Number(item.id);
+        var item_details;
+        item_details = "<strong>" + store_items[currentIndex+1][1] + "</strong>: " + store_items[currentIndex+1][2];
+        item_details += " [$" + store_items[currentIndex+1][3] + "]";
+        document.getElementById("item_details").innerHTML = item_details;
+      }
+
+      function build_html(items){
+        var i = 0;
+        var n = 0;
+        var dynamic_html_indicators = "";
+        var dynamic_html_items = "";
+        var url_split = [];
+        store_items = [...items];
+
+        while (i < store_items.length-1){
+          i++; //starting on the 2nd row
+          //check to see if column A has a yes. Keep going to the next column until you find one.
+          while (i < store_items.length) {
+            if (store_items[i][0] != "yes" || !store_items[i][1] || !store_items[i][2] || !store_items[i][3] || !store_items[i][4]) {i++;}
+              else break;
+          }
+  /*        if (i < store_items.length){
+            url_split = store_items[i][4].split(/=w/);
+            if (i==1) {
+            dynamic_html_indicators += "<li data-target='#myCarousel' data-slide-to='" + n + "'class='active'></li>";
+            dynamic_html_items += "<div class='carousel-item active'>";
+            dynamic_html_items += "<img class='d-block w-100' src='" + url_split[0] + "=w480-h320-no' alt=' '>";
+            dynamic_html_items += "<div class='carousel-caption'>";
+            dynamic_html_items += "<h3>" + store_items[i][1] + "</h3>";
+            dynamic_html_items += "<p> Cost: $" + store_items[i][3] + "<br>";
+            dynamic_html_items += store_items[i][2] + "</p>";
+            dynamic_html_items += "</div> </div>";
+            n++;
+          } else {
+            dynamic_html_indicators += "<li data-target='#myCarousel' data-slide-to='" + n + "'></li>";
+            dynamic_html_items += "<div class='carousel-item'>";
+            dynamic_html_items += "<img class='d-block w-100' src='" + url_split[0] + "=w480-h320-no' alt=' '>";
+            dynamic_html_items += "<div class='carousel-caption'>";
+            dynamic_html_items += "<h3>" + store_items[i][1] + "</h3>";
+            dynamic_html_items += "<p> Cost: $" + store_items[i][3] + "<br>";
+            dynamic_html_items += store_items[i][2] + "</p>";
+            dynamic_html_items += "</div> </div>";
+            n++
+          }
+        }*/
+
+          if (i < store_items.length){
+            url_split = store_items[i][4].split(/=w/);
+            dynamic_html_items += "<div class='col-xs-3 align-middle'>";
+            dynamic_html_items += "<div class='justify-content-center text-center text-wrap'>";
+            dynamic_html_items += "<img class='w-100 rounded' src='" + url_split[0] + "=w480 '";
+            dynamic_html_items += "id='" + n + "' onclick='select_item(this)' data-toggle='modal'";
+            dynamic_html_items += "data-target='#form_modal '";
+            dynamic_html_items += "alt=' '>";
+            dynamic_html_items += "<h4 class='mt-3'>" + store_items[i][1] + "</h4>";
+            dynamic_html_items += "<h6>" + "Cost: $" + store_items[i][3] + "</h6>";
+            dynamic_html_items += "<p>" + store_items[i][2] + "</p>";
+            dynamic_html_items += "<button type='button' class='btn btn-primary btn-sm' id='" + n + "'";
+            dynamic_html_items += "onclick='select_item(this)' data-toggle='modal'";
+            dynamic_html_items += "data-target='#form_modal'>Select Item</button>";
+            dynamic_html_items += "</div>";
+            dynamic_html_items += "</div>"
+            dynamic_html_items += "<div class='col-xs-3 v_bar justify-content-center ml-5 mr-5'></div>";
+            part_number[n] = store_items[i][5];
+            part_name[n] = store_items[i][1];
+            n++;
+          }
+
+        }
+
+        //document.getElementById("carousel-indicators").innerHTML = dynamic_html_indicators;
+        document.getElementById("items_slider").innerHTML = dynamic_html_items;
+        dynamic_html_indicators = "";
+        dynamic_html_items = "";
+        document.getElementById("items_slider").scrollLeft = 150;
+
+      }
+
+      function go_left(event){
+        event.stopPropagation();
+        event.preventDefault();
+        document.getElementById("items_slider").scrollLeft -= 50;
+        scroll_timer=setInterval(function(){document.getElementById("items_slider").scrollLeft -= 50;}, 100);
+
+
+      }
+
+      function go_right(event){
+        event.stopPropagation();
+        event.preventDefault();
+        document.getElementById("items_slider").scrollLeft += 50;
+        scroll_timer=setInterval(function(){document.getElementById("items_slider").scrollLeft += 50;}, 100);
+      }
+
+      function cancel_scroll(){
+        clearInterval(scroll_timer);
+      }
+
+    </script>
+</html>
