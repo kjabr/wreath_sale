@@ -468,14 +468,16 @@
         fetch_logic();
         document.getElementById("arrow-left").innerHTML = left_chevron;
         document.getElementById("arrow-right").innerHTML = right_chevron; 
-        const queryString = window.location.search;
-        queryString != NULL ? const urlParams = new URLSearchParams(queryString) : urlParams = "";
+        var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ")
+        //const urlParams = new URLSearchParams(queryString);
+        //queryString == "" ? queryString = "?scoutname=" : null;
+        urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ")
           .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
-        console.log(urlParams.get("scoutname"));
-        console.log(urlParams.get("domain"));
-        console.log(document.getElementById("scout_name").value);
+      //  console.log(queryString);
+      //  console.log(urlParams.get("scoutname"));
+      //  console.log(urlParams.get("domain"));
+      //  console.log(document.getElementById("scout_name").value);
       }, false);
 
       var formvalues = [];
