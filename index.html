@@ -475,9 +475,10 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/\./g, " ");
-        document.getElementById("scout_name").className = "capitalize"; 
+        document.getElementById("scout_name").className = "capitalize";
         console.log(urlParams.get("scoutname"));
         console.log(urlParams.get("domain"));
+        console.log(document.getElementById("scout_name").value);
       }, false);
 
       var formvalues = [];
