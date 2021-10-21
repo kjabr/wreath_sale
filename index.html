@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <base target="_top">
@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   </head>
   <style>
 
@@ -465,9 +466,7 @@
 
       document.addEventListener('DOMContentLoaded', function() {
 
-        fetch_logic();
-        document.getElementById("arrow-left").innerHTML = left_chevron;
-        document.getElementById("arrow-right").innerHTML = right_chevron; 
+
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         //const urlParams = new URLSearchParams(queryString);
@@ -480,6 +479,13 @@
       //  console.log(document.getElementById("scout_name").value);
       }, false);
 
+
+      var CLIENT_ID = '935648351212-4mklk43j7cr0v8c10clcnc8p4dl0e9h3.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyCuZVfsn2nPvu-HkSMNwizj9x8V_T4f6-k';
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+
       var formvalues = [];
       var shopping_cart = [];
       var store_items = [];
@@ -488,7 +494,57 @@
       var scroll_timer;
       var part_number = [];
       var part_name = [];
+      var setup_data = [];
+      var wreath_data = [];
 
+
+      function handleClientLoad() {
+        gapi.load('client', initClient);
+      }
+
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          init_web_app();
+          document.getElementById("arrow-left").innerHTML = left_chevron;
+          document.getElementById("arrow-right").innerHTML = right_chevron; 
+        }, function(error) {
+          console.log(JSON.stringify(error, null, 2));
+        });
+      }
+
+      function init_web_app(){
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+          range: "'Setup'!A1:I",
+        }).then(function(response) {
+          var range1 = response.result;
+      //    console.log(range1.values);
+          //setup_data = range1.values;
+          build_paypal(range1.values);
+        }, function(response) {
+          console.log('Error: ' + response.result.error.message);
+        });
+
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+          range: "'Store'!A2:F",
+        }).then(function(response) {
+          var range2 = response.result;
+      //    console.log(range2.values);
+          //wreath_data = range2.values;
+          build_html(range2.values);
+        }, function(response) {
+          console.log('Error: ' + response.result.error.message);
+        });
+
+      }
+
+/*
       var setup_data =
       [
     [
@@ -584,7 +640,7 @@
     ]
 ];
 
-
+*/
 
       function form_reset(){
       //  $('#form_modal').fadeOut();
@@ -684,7 +740,7 @@
         document.getElementById("page_title").innerHTML = "<h3><center>" + paypal_param [1][1] + "</center></h3>";
         document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='https://contact.troop432lo.org' target='_blank'>[Contact Link]<a></p>";
         //google.script.run.withSuccessHandler(build_html).get_data_from_sheets("Store");
-        build_html(wreath_data);
+        //build_html(wreath_data);
 
       }
 
@@ -754,8 +810,9 @@
       }
 
       function fetch_logic(){
+        init_web_app();
         //google.script.run.withSuccessHandler(build_paypal).get_data_from_sheets("Setup");
-        build_paypal(setup_data);
+        //build_paypal(setup_data);
       }
 
       function select_item(item){
@@ -859,4 +916,8 @@
       }
 
     </script>
+<script async defer src="https://apis.google.com/js/api.js"
+  onload="this.onload=function(){};handleClientLoad()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
 </html>
