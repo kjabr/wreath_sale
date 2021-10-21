@@ -264,9 +264,14 @@
       <span id="page_title"></span>
       <h5>Gift Shipper Web Store</h5><br>
       <span id="page_description" style="text-align: left;"></span></div>
-        Scout Name or Org Name: <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional">
+      <span id="scoutname">
+        Scout Name or Org Name: </span>
+      <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional">
 
         <input type="button" class="" data-toggle="modal" data-target="#scout_info_modal" style="border:none; background:none; color:blue;" value="[i]">
+      </span>
+
+
 
         <button type="button" onclick="build_cart()" class="btn cart_btn btn-success btn-sm ml-5" data-toggle="modal" data-target="#cart_modal" id="cart_button">Shopping Cart</button>
 
@@ -450,6 +455,23 @@
     </div>
 </body>
     <script>
+      var CLIENT_ID = '935648351212-4mklk43j7cr0v8c10clcnc8p4dl0e9h3.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyCuZVfsn2nPvu-HkSMNwizj9x8V_T4f6-k';
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+      var formvalues = [];
+      var shopping_cart = [];
+      var store_items = [];
+      var paypal_param = [];
+      var currentIndex;
+      var scroll_timer;
+      var part_number = [];
+      var part_name = [];
+      var setup_data = [];
+      var wreath_data = [];
+      var url_org = "";
+
       var left_chevron = `
         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="dodgerblue" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
@@ -464,6 +486,11 @@
         </svg>
       `;
 
+      var orgs = {
+        LGPC: ["Lake Grove Presbyterian Church", "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we will get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! For any questions or concerns please contact Kati Knudsen at <a href='mailto:keknudsen@msn.com'>keknudsen@msn.com<a>."],
+        OLL: ["Our Lady of the Lake", "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we will get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! For any questions or concerns please contact Jenni Miller-Duhl at <a href='mailto:Jenniduhl@gmail.com'>Jenniduhl@gmail.com<a>."]
+      };
+
       document.addEventListener('DOMContentLoaded', function() {
 
 
@@ -473,30 +500,16 @@
         //queryString == "" ? queryString = "?scoutname=" : null;
         urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
           .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+        urlParams.get("org") != null ? (
+          document.getElementById("scoutname").innerHTML = "<strong>" + orgs[urlParams.get("org")][0] + "</strong>",
+          url_org = urlParams.get("org"), document.getElementById("scout_name").value = orgs[urlParams.get("org")][0],
+          document.getElementById("scoutname_field").style.display = "none")
+          : null;
       //  console.log(queryString);
       //  console.log(urlParams.get("scoutname"));
       //  console.log(urlParams.get("domain"));
       //  console.log(document.getElementById("scout_name").value);
       }, false);
-
-
-      var CLIENT_ID = '935648351212-4mklk43j7cr0v8c10clcnc8p4dl0e9h3.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyCuZVfsn2nPvu-HkSMNwizj9x8V_T4f6-k';
-      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
-      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
-
-
-      var formvalues = [];
-      var shopping_cart = [];
-      var store_items = [];
-      var paypal_param = [];
-      var currentIndex;
-      var scroll_timer;
-      var part_number = [];
-      var part_name = [];
-      var setup_data = [];
-      var wreath_data = [];
-
 
       function handleClientLoad() {
         gapi.load('client', initClient);
@@ -739,7 +752,9 @@
         }
 
         document.getElementById("page_title").innerHTML = "<h3><center>" + paypal_param [1][1] + "</center></h3>";
-        document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='https://contact.troop432lo.org' target='_blank'>[Contact Link]<a></p>";
+
+        url_org != "" ? document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>" :
+          document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='https://contact.troop432lo.org' target='_blank'>[Contact Link]<a></p>";
         //google.script.run.withSuccessHandler(build_html).get_data_from_sheets("Store");
         //build_html(wreath_data);
 
