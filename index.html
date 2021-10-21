@@ -469,8 +469,6 @@
 
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        console.log("the URL is: ");
-        console.log(window.location.href);
         //const urlParams = new URLSearchParams(queryString);
         //queryString == "" ? queryString = "?scoutname=" : null;
         urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
