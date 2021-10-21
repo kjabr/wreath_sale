@@ -535,7 +535,7 @@
           range: "'Store'!A2:F",
         }).then(function(response) {
           var range2 = response.result;
-      //    console.log(range2.values);
+          console.log(range2.values);
           //wreath_data = range2.values;
           build_html(range2.values);
         }, function(response) {
@@ -686,7 +686,7 @@
       });
 
        function clear_item(m5){
-        console.log(m5);
+        //console.log(m5);
         shopping_cart.splice(m5,1);
         if (shopping_cart.length > 0) {
           document.getElementById("cart_button").innerHTML = "Shopping Cart " + shopping_cart.length;
@@ -708,6 +708,7 @@
         var show_cart = "Scout/Org Name: " + document.getElementById("scout_name").value + "<br>";
         for (m1 = 0; m1 < shopping_cart.length; m1++ ) {
             //console.log(shopping_cart[m1][m2]);
+            shopping_cart[m1][2] = shopping_cart[m1][2].replace(/\$/g, '');
             show_cart += "<ul>";
             show_cart += "<li>Item: " + shopping_cart[m1][1];
             show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; width:5rem;' value='[delete]' onclick='clear_item";
@@ -864,6 +865,7 @@
         }*/
 
           if (i < store_items.length){
+            store_items[i][3] =  store_items[i][3].replace(/\$/g, '');
             url_split = store_items[i][4].split(/=w/);
             dynamic_html_items += "<div class='col-xs-3 align-middle'>";
             dynamic_html_items += "<div class='justify-content-center text-center text-wrap'>";
