@@ -469,6 +469,8 @@
 
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
+        console.log("the URL is: ");
+        console.log(window.location.href);
         //const urlParams = new URLSearchParams(queryString);
         //queryString == "" ? queryString = "?scoutname=" : null;
         urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
@@ -769,8 +771,8 @@
           paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
           paypal_start += "<input type='hidden' name='upload' value='1'>";
           paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
-          paypal_start += "<input type='hidden' name='shopping_url' value='" + paypal_param[1][3] + "'>";
-          paypal_start += "<input type='hidden' name='cancel_return' value='" + paypal_param[1][3] + "'>";
+          paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
+          paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
           paypal_start += "<input type='hidden' name='custom' value='" + paypal_param[1][4] + "'>";
 
           // url_split = dynamic_data[i][3].split(/=w/);
