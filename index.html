@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   </head>
   <style>
 
@@ -73,6 +74,7 @@
     }
 
     .modal_style {
+
       background: transparent;
     }
 
@@ -86,6 +88,10 @@
       max-width: 95%;
     }
 
+    .modal-dialog {
+
+}
+
     #state {
       background-color: #E3EEFC;
     }
@@ -95,6 +101,7 @@
       overflow-y: auto;
       padding-bottom: 0;
       font-size: 14px;
+
     }
 
     .modal-footer {
@@ -106,9 +113,7 @@
     }
 
     .modal {
-      /*position: absolute;
-      vertical-align: middle;*/
-      top: 2%;
+
     }
 
     .span_header {
@@ -257,9 +262,16 @@
       <br>
       <div class="span_header">
       <span id="page_title"></span>
-      <h5><u>Local Wreaths</u> Web Store</h5><br>
+      <h5 id="store_type">Gift Shipper Web Store</h5><br>
       <span id="page_description" style="text-align: left;"></span></div>
-        <strong>Our Lady of the Lake</strong>
+      <span id="scoutname">
+        Scout Name or Org Name: </span>
+      <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional">
+
+        <input type="button" class="" data-toggle="modal" data-target="#scout_info_modal" style="border:none; background:none; color:blue;" value="[i]">
+      </span>
+
+
 
         <button type="button" onclick="build_cart()" class="btn cart_btn btn-success btn-sm ml-5" data-toggle="modal" data-target="#cart_modal" id="cart_button">Shopping Cart</button>
 
@@ -283,7 +295,7 @@
         <center>
         </center>
         <div>
-          <center>* You delivery address will be collected when you pay with PayPal.</center>
+          <center id="footer1">* All prices include shipping cost.</center>
           </div>
       </div>
       <!-- Modal form -->
@@ -291,7 +303,7 @@
         <div class="modal-dialog modal_style" role="document">
           <div class="modal-content">
             <div class="modal-header text-center">
-              <h5 class="modal-title" id="ModalLabel">Item Details</h5>
+              <h5 class="modal-title" id="ModalLabel">Item Shipping Details</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -301,17 +313,88 @@
             <form id="form">
               <p id="item_details"></p>
               Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1"> <br>
+              <span id="delivery_info1">
+                * Gift Message <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional"> <br>
+                * Name of person you want this shipped to:
+                <span class="ml-3">
+                  <input type="text" id="ship_name" style="width:13em;" name="ship_name" autocomplete="off" placeholder="Required" required> <br>
+                </span>
+                <div class="mt-2 mb-3">
+                  * Their Address: (required)<br>
+            <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
+                  <div class="ml-3">
+                  Street Address <input type="text" id="street_address_search" style="width:14em;" name="street_address" autocomplete="off" required> <br>
+                  City <input type="text" id="city" name="city_search" style="width:10em;" autocomplete="off" required>
+                  <br>
+                  State <select id="state_search" name="state">
+                  	<option value="AL">AL</option>
+                  	<option value="AK">AK</option>
+                  	<option value="AR">AR</option>
+                  	<option value="AZ">AZ</option>
+                  	<option value="CA">CA</option>
+                  	<option value="CO">CO</option>
+                  	<option value="CT">CT</option>
+                  	<option value="DC">DC</option>
+                  	<option value="DE">DE</option>
+                  	<option value="FL">FL</option>
+                  	<option value="GA">GA</option>
+                  	<option value="HI">HI</option>
+                  	<option value="IA">IA</option>
+                  	<option value="ID">ID</option>
+                  	<option value="IL">IL</option>
+                  	<option value="IN">IN</option>
+                  	<option value="KS">KS</option>
+                  	<option value="KY">KY</option>
+                  	<option value="LA">LA</option>
+                  	<option value="MA">MA</option>
+                  	<option value="MD">MD</option>
+                  	<option value="ME">ME</option>
+                  	<option value="MI">MI</option>
+                  	<option value="MN">MN</option>
+                  	<option value="MO">MO</option>
+                  	<option value="MS">MS</option>
+                  	<option value="MT">MT</option>
+                  	<option value="NC">NC</option>
+                  	<option value="NE">NE</option>
+                  	<option value="NH">NH</option>
+                  	<option value="NJ">NJ</option>
+                  	<option value="NM">NM</option>
+                  	<option value="NV">NV</option>
+                  	<option value="NY">NY</option>
+                  	<option value="ND">ND</option>
+                  	<option value="OH">OH</option>
+                  	<option value="OK">OK</option>
+                  	<option value="OR" selected>OR</option>
+                  	<option value="PA">PA</option>
+                  	<option value="RI">RI</option>
+                  	<option value="SC">SC</option>
+                  	<option value="SD">SD</option>
+                  	<option value="TN">TN</option>
+                  	<option value="TX">TX</option>
+                  	<option value="UT">UT</option>
+                  	<option value="VT">VT</option>
+                  	<option value="VA">VA</option>
+                  	<option value="WA">WA</option>
+                  	<option value="WI">WI</option>
+                  	<option value="WV">WV</option>
+                  	<option value="WY">WY</option>
+                  </select>
+                    <span class="ml-3">
+                    Zip code <input type="number" id="zip_code_search" style="width:6em;" name="zip_code" autocomplete="off" required>
+                  </span>
+                </div>
+                </div>
+            </span>
 
-              </div>
 
-              <div class="modal-footer">
-                <span></span>
-                <span>
-                <button type="button" onclick="form_reset()" class="btn btn-secondary">Cancel</button>
-                <button type="submit" id="add_to_cart_button" class="btn btn-primary">Add to Cart</button>
-                <label id="add_msg"></label>
-              </span>
-              </div>
+            <div class="modal-footer">
+              <span></span>
+              <span>
+              <button type="button" onclick="form_reset()" class="btn btn-secondary">Cancel</button>
+              <button type="submit" id="add_to_cart_button" class="btn btn-primary">Add to Cart</button>
+              <label id="add_msg"></label>
+            </span>
+            </div>
             </form>
             </div>
           </div>
@@ -329,12 +412,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body mx-3">
+          <div class="modal-body ml-3 mr-3">
         <div class="md-form mb-3">
           <p>Thank you for supporting Scouts!</p>
           <span id="cart_contents">
           </span>
-          <p class="mt-2">**You delivery address will be collected when you pay with PayPal.</p>
+          <p id="footer2">**Prices include shipping cost.</p>
 
         </div>
         <div class="modal-footer">
@@ -375,6 +458,25 @@
     </div>
 </body>
     <script>
+      var CLIENT_ID = '935648351212-4mklk43j7cr0v8c10clcnc8p4dl0e9h3.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyCuZVfsn2nPvu-HkSMNwizj9x8V_T4f6-k';
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+      var formvalues = [];
+      var shopping_cart = [];
+      var store_items = [];
+      var paypal_param = [];
+      var currentIndex;
+      var scroll_timer;
+      var part_number = [];
+      var part_name = [];
+      var setup_data = [];
+      var wreath_data = [];
+      var url_org = "";
+      var target_sheet = "";
+      var local = false;
+
       var left_chevron = `
         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="dodgerblue" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
@@ -389,21 +491,93 @@
         </svg>
       `;
 
+      var orgs = {
+        LGPC: ["Lake Grove Presbyterian Church", "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we will get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! For any questions or concerns please contact Kati Knudsen at <a href='mailto:keknudsen@msn.com'>keknudsen@msn.com<a>."],
+        OLL: ["Our Lady of the Lake", "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we will get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! For any questions or concerns please contact Jenni Miller-Duhl at <a href='mailto:Jenniduhl@gmail.com'>Jenniduhl@gmail.com<a>."]
+      };
+
       document.addEventListener('DOMContentLoaded', function() {
-        fetch_logic();
-        document.getElementById("arrow-left").innerHTML = left_chevron;
-        document.getElementById("arrow-right").innerHTML = right_chevron;
+
+
+        var queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        //const urlParams = new URLSearchParams(queryString);
+        //queryString == "" ? queryString = "?scoutname=" : null;
+        urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
+          .toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+
+        if (urlParams.get("org")) {
+        orgs.hasOwnProperty(urlParams.get("org").toUpperCase()) ? (
+          document.getElementById("scoutname").innerHTML = "<strong>" + orgs[urlParams.get("org").toUpperCase()][0] + "</strong>",
+          url_org = urlParams.get("org").toUpperCase(),
+          document.getElementById("scout_name").value = orgs[urlParams.get("org").toUpperCase()][0],
+          document.getElementById("scoutname_field").style.display = "none")
+          : null;
+        }
+
+        if (urlParams.get("local"))
+          {urlParams.get("local") == "yes" ? (
+            local = true,
+            document.getElementById("store_type").innerHTML = "<u>Local Wreaths</u> Web Store",
+            document.getElementById("footer1").innerHTML = "* You delivery address will be collected when you pay with PayPal.",
+            document.getElementById("footer2").innerHTML = "** You delivery address will be collected when you pay with PayPal.",
+            document.getElementById("delivery_info1").innerHTML = "<br>"
+          )
+            : local = false;}
+      //  console.log(queryString);
+      //  console.log(urlParams.get("scoutname"));
+      //  console.log(urlParams.get("domain"));
+      //  console.log(document.getElementById("scout_name").value);
       }, false);
 
-      var formvalues = [];
-      var shopping_cart = [];
-      var store_items = [];
-      var paypal_param = [];
-      var currentIndex;
-      var scroll_timer;
-      var part_number = [];
-      var part_name = [];
+      function handleClientLoad() {
+        gapi.load('client', initClient);
+      }
 
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          init_web_app();
+          document.getElementById("arrow-left").innerHTML = left_chevron;
+          document.getElementById("arrow-right").innerHTML = right_chevron; 
+        }, function(error) {
+          console.log(JSON.stringify(error, null, 2));
+        });
+      }
+
+      function init_web_app(){
+        local == true ? target_sheet = "'Local'!A2:F" : target_sheet = "'Store'!A2:F";
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+          range: "'Setup'!A1:I",
+        }).then(function(response) {
+          var range1 = response.result;
+      //    console.log(range1.values);
+          //setup_data = range1.values;
+          build_paypal(range1.values);
+        }, function(response) {
+          console.log('Error: ' + response.result.error.message);
+        });
+
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+          range: target_sheet,
+        }).then(function(response) {
+          var range2 = response.result;
+      //    console.log(range2.values);
+          //wreath_data = range2.values;
+          build_html(range2.values);
+        }, function(response) {
+          console.log('Error: ' + response.result.error.message);
+        });
+
+      }
+
+/*
       var setup_data =
       [
     [
@@ -422,7 +596,7 @@
         "Troop 432 Annual Wreath Sale!",
         "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we'll get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! ",
         "https://wreaths.Troop432LO.org",
-        "OLL_Local",
+        "Wreath Sale",
         "treasurer.LOTroop432@troopmaster.email",
         "https://www.paypal.com/cgi-bin/webscr",
         "sb-mtuh33943900@business.example.com",
@@ -443,63 +617,63 @@
     ],
     [
         "yes",
+        "Deluxe Wreath",
+        "26” Diameter Noble Fir, Incense Cedar, and Oregon Juniper accented with Ponderosa Cones and berries.",
+        65,
+        "https://lh3.googleusercontent.com/pw/AM-JKLWV9oK46MjJeFZYAj-0gywdwaYgvYryiyfZQcLu3RT22ldvFbhVpq3jzcKYVYxJ6N3aeGac58NsHaatCuRRxPExN6YAf1qlC5gb8ZEHq8aNDHZewodLRWl8S1xQf5yqqFL_WxHty_qOYWoCLHdm_Et7uA=w2036-h1728-no",
+        "FRGCEA"
+    ],
+    [
+        "yes",
+        "Mixed Evergreen Wreath",
+        "22” Diameter Noble Fir, Incense Cedar and Oregon Juniper wreath accented with Ponderosa Cones and a red bow.",
+        55,
+        "https://lh3.googleusercontent.com/pw/AM-JKLV4vv0phtPNxMCYdRNhQgjoYWK_pIY1J95aRskmi8wmExGE3fPIx4wtcKPCtu8uX1AHZ6Z6oDMhy3YNhYokj7it6C3DZe3OGovrVtC3ZCW3zQkBWkWu1CT61DsaKxngPDALIzd6GsYyMXS55KN8lLFexg=w1876-h1855-no",
+        "FRGWEA"
+    ],
+    [
+        "yes",
         "Winter Wonderland",
-        "26in diameter Noble Fir, Western Red Cedar, Princess Pine and Oregon Juniper wreath accented with white tipped cones, brown cones, and faux snowberries.",
-        45,
-        "https://lh3.googleusercontent.com/pw/AM-JKLXlqlQYeNEqQ8waqesd5_UNjDyR2RE6W9I198XgSl7vAHZvvO0tD1_WlF7VlXZKy4UFczBwAsrTl5ZxIwHcoTjaoGBitCGfEkriCM5C3reGyaWRBVhwZsvpoJlAYrFAjRK1BEZH7sqzO3FW3NeLLWWu2w=w1952-h1904-no",
-        "FRWWCA"
+        "26” Diameter Noble Fir, Western Red Cedar, and Oregon Juniper wreath accented with white tipped cones, brown cones, and faux White Berries.",
+        70,
+        "https://lh3.googleusercontent.com/pw/AM-JKLUL6_h8hS9JV9Y0J2jPzWTqhNqT7jS2wj0aWRvFN89xnmykiqR36sroxKQ-trObUSK6u9fZePcevynIdY1AB871I-F1TRs80CodLXRXTYLS-i7SaXFis1AtXs6XtMpLy5KEHbM1uwfYe7O0wVasV7u_JA=w1946-h1898-no",
+        "FGWWEA"
     ],
     [
         "yes",
-        "Mixed Evergreen",
-        "22in Diameter Noble Fir, Incense Cedar and Oregon Juniper wreath accented with Ponderosa Cones and a red bow.",
-        35,
-        "https://lh3.googleusercontent.com/pw/AM-JKLWK6o25aOVfzFOAf2h0I6I2wo9jXK_TjaAvLiupbLiEHYH5CTMWdTmnzxWTvFddQn-gv0s1FkCklmPOD32OUz-lw-YrRE5PHPPO6o636xeJFuAj-W0vE3ec_6UQDOFYtazfp5sCL-G7UrbDNucxaQgmyA=w1876-h1855-no",
-        "FRMWCA"
-    ],
-    [
-        "yes",
-        "Be Merry Centerpiece",
-        "7in x 9in Noble Fir, Western Red Cedar, Oregon Juniper, white and natural lodgepole cones,  Faux Holly Berries.",
-        30,
-        "https://lh3.googleusercontent.com/pw/AM-JKLX29G7D1RAuvf9x4Pv0RBiwUV3DIvjH833jP-vsCRsnrCi8SCtv5u3NvHY2tQLeCZsPsRIXorfYatvvbrE2bhrruQMkmFGa9cXApKz58eXPTOs8cn3q-fwW6Vg84JZ-vnNX4GOFbxouSliYaFLuwe2bPw=w1658-h1906-no",
-        "FRBMCA"
-    ],
-    [
-        "yes",
-        "Dwarf Alberta Spruce (large)",
-        "9in-12in tall in 1-gallon pot. Living tree decorated with garland in a red pot cover.",
-        30,
-        "https://lh3.googleusercontent.com/pw/AM-JKLV6mDUFPPP3vYIBXkSDu7z2YGiLyQlE0sGkLkQtA2wnuv8MTAlW4GX8F3TakhWVFwKQ1OM4MD_lgpRj9p9BSotS6yAqj6VXpMf_3HhyVcLp9adGkhZhIw19VOCcTw92ACikPkpesaSofro0fAH0Q4pZgw=w1190-h1904-no",
-        "FRPGCA"
-    ],
-    [
-        "yes",
-        "Winter White Centerpiece",
-        "14in Diameter, Noble Fir, Western Red Cedar, Oregon Juniper, Natural and White Lodgepole cones, faux snowberries, and Ivory Candle.",
-        30,
-        "https://lh3.googleusercontent.com/pw/AM-JKLUOtilPRPcs7Wug6NqO1sPVFqyOqZ3et5qC8xYSHwpdBbU91zA7Qt_jGooCR-rnb1tqk7SRAdDZpdQwTe0fXrnF0BpxHlj1qoyJPgOwdCGojk0-L0b3E1DXnyx0kqZdkZpAvDXMbaTuWU5OMI6ZHwqLVA=w1932-h1904-no",
-        "FRWCCA"
+        "Bark Basket Centerpiece",
+        "10” x 15” Noble Fir, Western Red Cedar, Oregon Juniper, Princess Pine, White Painted Lodgepole Pine Cones, faux berries and plaid bow in a hand-held basket.",
+        55,
+        "https://lh3.googleusercontent.com/pw/AM-JKLXVC7agLwcBCyZPahBv5U2F9B6-LDa9WyOTnVaJiltWa3AG28d-sabsIyWRatdE-NCLMm4lQDXt9eYdY6ecFhAjj8XEIq2KZ9PELFI3C5_4Fx4akkr4RCqXISXZN31UbWCgZk_tLz-Jj7ak88bUZB45jQ=w2036-h1462-no",
+        "FRGBEA"
     ],
     [
         "yes",
         "Yuletide Cheer",
-        "Incense Cedar, Blue Berried Juniper, a spray of Red Berries and Lodgepole Cones in a swag. Length 28in.",
-        25,
-        "https://lh3.googleusercontent.com/pw/AM-JKLU5AKj6eECr9T88MwqZLKw2xfY2-7Kx4oC6W3eYhS1Xt7f6KHnuqvw79MCup0KhCobShTzXXP4Di4iItLiKMARQYGzDwgtB-aUrfuGvnbzOkhGTNoI23xYicJWKOx4IxA10x6UMx36KMWjRpUzPnVY6uA=w745-h1263-no",
-        "FRYSCA"
+        "28” long. Incense Cedar, Blue Berried Juniper, a spray of Red Berries and Lodgepole Cones in swag",
+        55,
+        "https://lh3.googleusercontent.com/pw/AM-JKLVU7U31k8OhlR27KFF7bj0KwKccdhor1Y6jbmBaOHxA9JrBsTYwMk92xfm-eC1D2rXTT3wedrwZ2j_MAOwqB2O_R8JfJDqgbOcCRWLu39VTCcI_0I5CJg7tko7SatiZuAp8pLelLTofwChpe8Fmuw42Tw=w1050-h1044-no",
+        "FGYSEA"
     ],
     [
         "yes",
-        "Western Red Cedar Garland",
-        "25 ft. in length. Perfect size to decorate your door or banister.",
-        55,
-        "https://lh3.googleusercontent.com/pw/AM-JKLU38JAEJKEYrBX07TsbPNqJLJwEhE7NnqnX3p_0fsElhJpRCMT0FQT_iOVO2w3ahIQMbfjOhK972H9QZGCkS0TBWt8cWIPWbw68XV_3h3-vLxNb-TEYDqdyeGxfUT58MdoQkyxO8PhX9uFzXExDZ3lXzw=w900-h778-no",
-        "FRGLCA"
+        "Be Merry Centerpiece",
+        "7” Diameter 9” Height. Noble Fir, Western Red Cedar, Oregon Juniper, Natural and white Lodgepole Cones, faux Red Holly Berries, and a cheerful galvanized container.",
+        45,
+        "https://lh3.googleusercontent.com/pw/AM-JKLXx_F4XVv9TqU-gMCrw4bXZOYcFps1S2lEzH8zQRl1c32L-mQhNSdaSzmOh-1lMjJ7ogFuw-fuPZ-qNgX5rfArE288LoUHgx0hTK5GWezSwvv-W-wPrIM8RQVEoU-so3IhsimZm0z4pMHBA_p3sWK1d5g=w720-h618-no",
+        "FGBMEA"
+    ],
+    [
+        "yes",
+        "Winter White Combo",
+        "26” Wreath and 14” Centerpiece ships in the same box. Noble Fir, Western Red Cedar, and Oregon Juniper accented with white tipped cones, brown cones, and faux White Berries.",
+        85,
+        "https://lh3.googleusercontent.com/pw/AM-JKLWxoUJtVwaRTHUH7L_oN5UfL5v9uZNK20DTD2jP2cNy7Y0vGKsQgvLh8Fu0l1qZ4T-UAKUNtRtHs5ZtPagDQD7lRo7gMh38lHdLFOT-_ayHpnkLoNhSNtZgH4CO2zdyjmWh8EW771b51VV4vrLzCCuAzA=w1138-h932-no",
+        "FGWCEA"
     ]
 ];
 
-
+*/
 
       function form_reset(){
       //  $('#form_modal').fadeOut();
@@ -513,6 +687,12 @@
       });
 
       document.querySelector('form').addEventListener("submit", (e) => {
+        local == false ?
+        (
+          document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[,@*&!^%$#\.]/g, ''),
+          document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#\.]/g, '')
+        )
+        : null;
         const formData = new FormData(e.target);
         e.preventDefault();
         //console.log(formData.get("gift_msg"));
@@ -523,8 +703,10 @@
         }
         formvalues.unshift(store_items[currentIndex+1][3]);
         formvalues.unshift(store_items[currentIndex+1][1]);
-        formvalues.unshift("OLL_Local_Wreaths");
-        formvalues[6] = "";
+        formvalues.unshift(document.getElementById("scout_name").value);
+        local == false ?
+          formvalues[6] = formvalues[6] + ", " + formvalues[7] + ", " + formvalues[8] + " " + formvalues[9]
+          : formvalues[6] = "";
         //console.log(formvalues);
         shopping_cart.push(formvalues);
         formvalues = [];
@@ -543,7 +725,7 @@
       });
 
        function clear_item(m5){
-        console.log(m5);
+        //console.log(m5);
         shopping_cart.splice(m5,1);
         if (shopping_cart.length > 0) {
           document.getElementById("cart_button").innerHTML = "Shopping Cart " + shopping_cart.length;
@@ -562,19 +744,36 @@
         else {
           $('#paypal_button').prop('disabled',true);
         }
-        var show_cart = "Scout/Org Name: " + "Our Lady of the Lake" + "<br>";
+        var show_cart = "Scout/Org Name: " + document.getElementById("scout_name").value + "<br>";
         for (m1 = 0; m1 < shopping_cart.length; m1++ ) {
             //console.log(shopping_cart[m1][m2]);
-            show_cart += "<ul>";
-            show_cart += "<li>Item: " + shopping_cart[m1][1];
-            show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; width:5rem;' value='[delete]' onclick='clear_item";
-            show_cart += "(" + m1 + ")'></li>";
-            show_cart += "<ul>";
-            show_cart += "<li>Price Each: $" + shopping_cart[m1][2] + "</li>";
-            show_cart += "<li>Quantity: " + shopping_cart[m1][3] + "</li>";
+            if (local == false) {
+              shopping_cart[m1][2] = shopping_cart[m1][2].replace(/\$/g, '');
+              show_cart += "<ul>";
+              show_cart += "<li>Item: " + shopping_cart[m1][1];
+              show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; width:5rem;' value='[delete]' onclick='clear_item";
+              show_cart += "(" + m1 + ")'></li>";
+              show_cart += "<ul>";
+              show_cart += "<li>Price Each: $" + shopping_cart[m1][2] + "</li>";
+              show_cart += "<li>Quantity: " + shopping_cart[m1][3] + "</li>";
+              show_cart += "<li>Gift Message: " + shopping_cart[m1][4] + "</li>";
+              show_cart += "<li>Ship-to Name: " + shopping_cart[m1][5] + "</li>";
+              show_cart += "<li>Address: " + shopping_cart[m1][6] + "</li>";
+              show_cart += "</ul>";
+              show_cart += "</ul>";
+            }
+            else {
+              show_cart += "<ul>";
+              show_cart += "<li>Item: " + shopping_cart[m1][1];
+              show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; width:5rem;' value='[delete]' onclick='clear_item";
+              show_cart += "(" + m1 + ")'></li>";
+              show_cart += "<ul>";
+              show_cart += "<li>Price Each: $" + shopping_cart[m1][2] + "</li>";
+              show_cart += "<li>Quantity: " + shopping_cart[m1][3] + "</li>";
 
-            show_cart += "</ul>";
-            show_cart += "</ul>";
+              show_cart += "</ul>";
+              show_cart += "</ul>";
+            }
             //console.log(shopping_cart[m1][2]);
             cart_total += shopping_cart[m1][2] * Number(shopping_cart[m1][3]);
         }
@@ -593,10 +792,11 @@
         }
 
         document.getElementById("page_title").innerHTML = "<h3><center>" + paypal_param [1][1] + "</center></h3>";
-      //  document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='https://contact.troop432lo.org' target='_blank'>[Contact Link]<a></p>";
+
+        url_org != "" ? document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>" :
+          document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='https://contact.troop432lo.org' target='_blank'>[Contact Link]<a></p>";
         //google.script.run.withSuccessHandler(build_html).get_data_from_sheets("Store");
-        document.getElementById("page_description").innerHTML = "<p>" + "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we will get them delivered to you around Thanksgiving. Thank you for supporting Scouts! " + "For any questions or concerns please contact Jenni Miller-Duhl at <a href='mailto:Jenniduhl@gmail.com'>Jenniduhl@gmail.com<a>.</p>";
-        build_html(wreath_data);
+        //build_html(wreath_data);
 
       }
 
@@ -620,27 +820,57 @@
 
 
         if (shopping_cart.length > 0) {
-          paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='theForm'>"
-          paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
-          paypal_start += "<input type='hidden' name='upload' value='1'>";
-          paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
-          paypal_start += "<input type='hidden' name='shopping_url' value='" + "https://sites.google.com/view/oll-local-wreaths" + "'>";
-          paypal_start += "<input type='hidden' name='cancel_return' value='" + "https://sites.google.com/view/oll-local-wreaths" + "'>";
-          paypal_start += "<input type='hidden' name='custom' value='" + paypal_param[1][4] + "'>";
+          if (local == false) {
+            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='theForm'>"
+            paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
+            paypal_start += "<input type='hidden' name='upload' value='1'>";
+            paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
+            paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='custom' value='" + paypal_param[1][4] + "'>";
+          }
+          else {
+            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='theForm'>"
+            paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
+            paypal_start += "<input type='hidden' name='upload' value='1'>";
+            paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
+            paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='custom' value='" + "local_wreaths" + "'>";
+          }
 
           // url_split = dynamic_data[i][3].split(/=w/);
 
           for (m2 = 0; m2 < shopping_cart.length; m2++ ) {
             count++;
             //cost = shopping_cart[m2][2].split(/\$/);
-            paypal_items += "<input type='hidden' name='item_name_" + count + "' value='" + shopping_cart[m2][1] + "'>";
-            paypal_items += "<input type='hidden' name='amount_" + count + "' value='" + shopping_cart[m2][2] + "'>";
-            paypal_items += "<input type='hidden' name='quantity_" + count + "' value='" + Number(shopping_cart[m2][3]) + "'>";
+            if (local == false) {
+              paypal_items += "<input type='hidden' name='item_name_" + count + "' value='" + shopping_cart[m2][1] + "'>";
+              paypal_items += "<input type='hidden' name='amount_" + count + "' value='" + shopping_cart[m2][2] + "'>";
+              paypal_items += "<input type='hidden' name='quantity_" + count + "' value='" + Number(shopping_cart[m2][3]) + "'>";
+              paypal_items += "<input type='hidden' name='on0_" + count + "' value='Ship_to'>";
+              paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + shopping_cart[m2][5] + ": " + shopping_cart[m2][6] + "'>";
+              paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
+              paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + shopping_cart[m2][4] + "'>";
+              paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
+              paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + document.getElementById("scout_name").value + "'>";
+              paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
+              paypal_items += "<input type='hidden' name='os3_" + count + "' value='" + part_number[part_name.findIndex(x=>x.includes(shopping_cart[m2][1]))] + "'>";
+            }
+            else {
+              paypal_items += "<input type='hidden' name='item_name_" + count + "' value='" + shopping_cart[m2][1] + "'>";
+              paypal_items += "<input type='hidden' name='amount_" + count + "' value='" + shopping_cart[m2][2] + "'>";
+              paypal_items += "<input type='hidden' name='quantity_" + count + "' value='" + Number(shopping_cart[m2][3]) + "'>";
+              paypal_items += "<input type='hidden' name='on0_" + count + "' value='Ship_to'>";
+              paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + "NA" + "'>";
+              paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
+              paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + "NA" + "'>";
+              paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
+              paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + document.getElementById("scout_name").value + "'>";
+              paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
+              paypal_items += "<input type='hidden' name='os3_" + count + "' value='" + part_number[part_name.findIndex(x=>x.includes(shopping_cart[m2][1]))] + "'>";
 
-            paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
-            paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + "OLL_Local_Wreaths" + "'>";
-            paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
-            paypal_items += "<input type='hidden' name='os3_" + count + "' value='" + part_number[part_name.findIndex(x=>x.includes(shopping_cart[m2][1]))] + "'>";
+            }
 
           }
           document.getElementById("paypal_div").innerHTML = paypal_start + paypal_items + "</form>";
@@ -663,8 +893,9 @@
       }
 
       function fetch_logic(){
+        init_web_app();
         //google.script.run.withSuccessHandler(build_paypal).get_data_from_sheets("Setup");
-        build_paypal(setup_data);
+        //build_paypal(setup_data);
       }
 
       function select_item(item){
@@ -716,6 +947,7 @@
         }*/
 
           if (i < store_items.length){
+            store_items[i][3] =  store_items[i][3].replace(/\$/g, '');
             url_split = store_items[i][4].split(/=w/);
             dynamic_html_items += "<div class='col-xs-3 align-middle'>";
             dynamic_html_items += "<div class='justify-content-center text-center text-wrap'>";
@@ -768,4 +1000,8 @@
       }
 
     </script>
+<script async defer src="https://apis.google.com/js/api.js"
+  onload="this.onload=function(){};handleClientLoad()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
 </html>
