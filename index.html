@@ -476,6 +476,7 @@
       var url_org = "";
       var target_sheet = "";
       var local = false;
+      var prod = true;
 
       var left_chevron = `
         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="dodgerblue" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
@@ -491,39 +492,11 @@
         </svg>
       `;
 
-      var orgs = {
-        LGPC: ["Lake Grove Presbyterian Church", "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we will get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! For any questions or concerns please contact Kati Knudsen at <a href='mailto:keknudsen@msn.com'>keknudsen@msn.com<a>."],
-        OLL: ["Our Lady of the Lake", "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we will get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! For any questions or concerns please contact Jenni Miller-Duhl at <a href='mailto:Jenniduhl@gmail.com'>Jenniduhl@gmail.com<a>."]
-      };
+      var orgs;
 
       document.addEventListener('DOMContentLoaded', function() {
 
 
-        var queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        //const urlParams = new URLSearchParams(queryString);
-        //queryString == "" ? queryString = "?scoutname=" : null;
-        urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
-          .toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
-
-        if (urlParams.get("org")) {
-        orgs.hasOwnProperty(urlParams.get("org").toUpperCase()) ? (
-          document.getElementById("scoutname").innerHTML = "<strong>" + orgs[urlParams.get("org").toUpperCase()][0] + "</strong>",
-          url_org = urlParams.get("org").toUpperCase(),
-          document.getElementById("scout_name").value = orgs[urlParams.get("org").toUpperCase()][0],
-          document.getElementById("scoutname_field").style.display = "none")
-          : null;
-        }
-
-        if (urlParams.get("local"))
-          {urlParams.get("local") == "yes" ? (
-            local = true,
-            document.getElementById("store_type").innerHTML = "<u>Local Wreaths</u> Web Store",
-            document.getElementById("footer1").innerHTML = "* You delivery address will be collected when you pay with PayPal.",
-            document.getElementById("footer2").innerHTML = "** You delivery address will be collected when you pay with PayPal.",
-            document.getElementById("delivery_info1").innerHTML = "<br>"
-          )
-            : local = false;}
       //  console.log(queryString);
       //  console.log(urlParams.get("scoutname"));
       //  console.log(urlParams.get("domain"));
@@ -550,31 +523,81 @@
       }
 
       function init_web_app(){
-        local == true ? target_sheet = "'Local'!A2:F" : target_sheet = "'Store'!A2:F";
         gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
-          range: "'Setup'!A1:I",
+          range: "'Orgs'!A2:C",
         }).then(function(response) {
-          var range1 = response.result;
-      //    console.log(range1.values);
-          //setup_data = range1.values;
-          build_paypal(range1.values);
-        }, function(response) {
-          console.log('Error: ' + response.result.error.message);
-        });
-
-        gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
-          range: target_sheet,
-        }).then(function(response) {
-          var range2 = response.result;
+          var range3 = response.result;
       //    console.log(range2.values);
           //wreath_data = range2.values;
-          build_html(range2.values);
+          //build_html(range2.values);
+          orgs_init(range3.values);
+
+          local == true ? target_sheet = "'Local'!A2:F" : target_sheet = "'Store'!A2:F";
+          gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+            range: "'Setup'!A1:I",
+          }).then(function(response) {
+            var range1 = response.result;
+        //    console.log(range1.values);
+            //setup_data = range1.values;
+            build_paypal(range1.values);
+          }, function(response) {
+            console.log('Error: ' + response.result.error.message);
+          });
+
+          gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+            range: target_sheet,
+          }).then(function(response) {
+            var range2 = response.result;
+        //    console.log(range2.values);
+            //wreath_data = range2.values;
+            build_html(range2.values);
+          }, function(response) {
+            console.log('Error: ' + response.result.error.message);
+          });
+
         }, function(response) {
           console.log('Error: ' + response.result.error.message);
         });
 
+      }
+
+      function orgs_init(org_data){
+        orgs = org_data.reduce((a, [k1, k2, k3]) => {
+          a[k1] = [k2, k3];
+          return a;
+          }, {});
+        var queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        //const urlParams = new URLSearchParams(queryString);
+        //queryString == "" ? queryString = "?scoutname=" : null;
+        urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
+          .toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+
+        if (urlParams.get("org")) {
+        orgs.hasOwnProperty(urlParams.get("org").toUpperCase()) ? (
+          document.getElementById("scoutname").innerHTML = "<strong>" + orgs[urlParams.get("org").toUpperCase()][0] + "</strong>",
+          url_org = urlParams.get("org").toUpperCase(),
+          document.getElementById("scout_name").value = orgs[urlParams.get("org").toUpperCase()][0],
+          document.getElementById("scoutname_field").style.display = "none")
+          : null;
+        }
+
+        if (urlParams.get("local"))
+          {urlParams.get("local") == "yes" ? (
+            local = true,
+            document.getElementById("store_type").innerHTML = "<u>Local Wreaths</u> Web Store",
+            document.getElementById("footer1").innerHTML = "* You delivery address will be collected when you pay with PayPal.",
+            document.getElementById("footer2").innerHTML = "** You delivery address will be collected when you pay with PayPal.",
+            document.getElementById("delivery_info1").innerHTML = "<br>"
+          )
+            : local = false;}
+
+        if (urlParams.get("prod")) {
+          urlParams.get("prod") == "no" ? prod = false : prod = true;
+        }
       }
 
 /*
@@ -784,7 +807,7 @@
 
       function build_paypal(data){
         paypal_param = [...data];
-          if (paypal_param[1][0] == "yes") {
+          if (paypal_param[1][0] == "yes" && prod == true) {
           $("#sale_over_alert").hide();
         }
         else {
@@ -808,7 +831,7 @@
         var paypal_account = "";
         var paypal_url = "";
 
-        if (paypal_param[1][0] == "yes") {
+        if (paypal_param[1][0] == "yes" && prod == true) {
           paypal_account = paypal_param[1][5];
           paypal_url = paypal_param[1][6];
 
