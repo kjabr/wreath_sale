@@ -501,8 +501,9 @@
         urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
           .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
         urlParams.get("org") != null ? (
-          document.getElementById("scoutname").innerHTML = "<strong>" + orgs[urlParams.get("org")][0] + "</strong>",
-          url_org = urlParams.get("org"), document.getElementById("scout_name").value = orgs[urlParams.get("org")][0],
+          document.getElementById("scoutname").innerHTML = "<strong>" + orgs[urlParams.get("org").toUpperCase()][0] + "</strong>",
+          url_org = urlParams.get("org").toUpperCase(), 
+          document.getElementById("scout_name").value = orgs[urlParams.get("org").toUpperCase()][0],
           document.getElementById("scoutname_field").style.display = "none")
           : null;
       //  console.log(queryString);
