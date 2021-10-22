@@ -148,7 +148,7 @@
     }
     .col-xs-3 {
       color: black;
-      font-size: 1vw;
+      font-size: max(1vw, 12px);
       padding-bottom: 10px;
       padding-top: 10px;
       width: 25%;
@@ -938,36 +938,12 @@
         store_items = [...items];
 
         while (i < store_items.length-1){
-          i++; //starting on the 2nd row
+        //  i++; //starting on the 2nd row
           //check to see if column A has a yes. Keep going to the next column until you find one.
           while (i < store_items.length) {
             if (store_items[i][0] != "yes" || !store_items[i][1] || !store_items[i][2] || !store_items[i][3] || !store_items[i][4]) {i++;}
               else break;
           }
-  /*        if (i < store_items.length){
-            url_split = store_items[i][4].split(/=w/);
-            if (i==1) {
-            dynamic_html_indicators += "<li data-target='#myCarousel' data-slide-to='" + n + "'class='active'></li>";
-            dynamic_html_items += "<div class='carousel-item active'>";
-            dynamic_html_items += "<img class='d-block w-100' src='" + url_split[0] + "=w480-h320-no' alt=' '>";
-            dynamic_html_items += "<div class='carousel-caption'>";
-            dynamic_html_items += "<h3>" + store_items[i][1] + "</h3>";
-            dynamic_html_items += "<p> Cost: $" + store_items[i][3] + "<br>";
-            dynamic_html_items += store_items[i][2] + "</p>";
-            dynamic_html_items += "</div> </div>";
-            n++;
-          } else {
-            dynamic_html_indicators += "<li data-target='#myCarousel' data-slide-to='" + n + "'></li>";
-            dynamic_html_items += "<div class='carousel-item'>";
-            dynamic_html_items += "<img class='d-block w-100' src='" + url_split[0] + "=w480-h320-no' alt=' '>";
-            dynamic_html_items += "<div class='carousel-caption'>";
-            dynamic_html_items += "<h3>" + store_items[i][1] + "</h3>";
-            dynamic_html_items += "<p> Cost: $" + store_items[i][3] + "<br>";
-            dynamic_html_items += store_items[i][2] + "</p>";
-            dynamic_html_items += "</div> </div>";
-            n++
-          }
-        }*/
 
           if (i < store_items.length){
             store_items[i][3] =  store_items[i][3].replace(/\$/g, '');
@@ -991,6 +967,8 @@
             part_name[n] = store_items[i][1];
             n++;
           }
+
+          i++;
 
         }
 
