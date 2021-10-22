@@ -41,6 +41,7 @@
     }
 
     .container {
+      display: none;
       padding: 0 0 0 0;
       text-align: center;
       max-width: 90%;
@@ -259,7 +260,7 @@
 
   <body>
 
-    <div class="container">
+    <div class="container" id="container">
       <br>
       <div class="span_header">
       <span id="page_title"></span>
@@ -509,59 +510,70 @@
       }
 
       function initClient() {
+        var queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
         gapi.client.init({
           apiKey: API_KEY,
           clientId: CLIENT_ID,
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
         }).then(function () {
-          init_web_app();
-          document.getElementById("arrow-left").innerHTML = left_chevron;
-          document.getElementById("arrow-right").innerHTML = right_chevron; 
+          if (urlParams.get("id")) {
+            document.getElementById("container").style.display = "block";
+            init_web_app();
+            document.getElementById("arrow-left").innerHTML = left_chevron;
+            document.getElementById("arrow-right").innerHTML = right_chevron; 
+          }
+
         }, function(error) {
           console.log(JSON.stringify(error, null, 2));
         });
       }
 
       function init_web_app(){
-        gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
-          range: "'Orgs'!A2:C",
-        }).then(function(response) {
-          var range3 = response.result;
-      //    console.log(range2.values);
-          //wreath_data = range2.values;
-          //build_html(range2.values);
-          orgs_init(range3.values);
-
-          local == true ? target_sheet = "'Local'!A2:F" : target_sheet = "'Store'!A2:F";
+        var queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if (urlParams.get("id")) {
+          var id = urlParams.get("id");
           gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
-            range: "'Setup'!A1:I",
+            spreadsheetId: id+'RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+            range: "'Orgs'!A2:C",
           }).then(function(response) {
-            var range1 = response.result;
-        //    console.log(range1.values);
-            //setup_data = range1.values;
-            build_paypal(range1.values);
-          }, function(response) {
-            console.log('Error: ' + response.result.error.message);
-          });
-
-          gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '18RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
-            range: target_sheet,
-          }).then(function(response) {
-            var range2 = response.result;
+            var range3 = response.result;
         //    console.log(range2.values);
             //wreath_data = range2.values;
-            build_html(range2.values);
+            //build_html(range2.values);
+            orgs_init(range3.values);
+
+            local == true ? target_sheet = "'Local'!A2:F" : target_sheet = "'Store'!A2:F";
+            gapi.client.sheets.spreadsheets.values.get({
+              spreadsheetId: id+'RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+              range: "'Setup'!A1:I",
+            }).then(function(response) {
+              var range1 = response.result;
+          //    console.log(range1.values);
+              //setup_data = range1.values;
+              build_paypal(range1.values);
+            }, function(response) {
+              console.log('Error: ' + response.result.error.message);
+            });
+
+            gapi.client.sheets.spreadsheets.values.get({
+              spreadsheetId: id+'RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw',
+              range: target_sheet,
+            }).then(function(response) {
+              var range2 = response.result;
+          //    console.log(range2.values);
+              //wreath_data = range2.values;
+              build_html(range2.values);
+            }, function(response) {
+              console.log('Error: ' + response.result.error.message);
+            });
+
           }, function(response) {
             console.log('Error: ' + response.result.error.message);
           });
-
-        }, function(response) {
-          console.log('Error: ' + response.result.error.message);
-        });
+        }
 
       }
 
