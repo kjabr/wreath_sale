@@ -543,7 +543,7 @@
         if (urlParams.get("id")) {
           var id = urlParams.get("id");
           gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: id,
+            spreadsheetId: id +"RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw",
             range: "'Orgs'!A2:C",
           }).then(function(response) {
             var range3 = response.result;
@@ -554,7 +554,7 @@
 
             local == true ? target_sheet = "'Local'!A2:F" : target_sheet = "'Store'!A2:F";
             gapi.client.sheets.spreadsheets.values.get({
-              spreadsheetId: id,
+              spreadsheetId: id + "RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw",
               range: "'Setup'!A1:I",
             }).then(function(response) {
               var range1 = response.result;
@@ -565,7 +565,7 @@
             });
 
             gapi.client.sheets.spreadsheets.values.get({
-              spreadsheetId: id,
+              spreadsheetId: id + "RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw",
               range: target_sheet,
             }).then(function(response) {
               var range2 = response.result;
