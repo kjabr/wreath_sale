@@ -559,7 +559,6 @@
             }).then(function(response) {
               var range1 = response.result;
           //    console.log(range1.values);
-              //setup_data = range1.values;
               build_paypal(range1.values);
             }, function(response) {
               console.log('Error: ' + response.result.error.message);
@@ -570,8 +569,7 @@
               range: target_sheet,
             }).then(function(response) {
               var range2 = response.result;
-          //    console.log(range2.values);
-              //wreath_data = range2.values;
+              //console.log(range2.values);
               build_html(range2.values);
             }, function(response) {
               console.log('Error: ' + response.result.error.message);
@@ -619,104 +617,6 @@
           urlParams.get("prod") == "no" ? prod = false : prod = true;
         }
       }
-
-/*
-      var setup_data =
-      [
-    [
-        "Production?",
-        "Title",
-        "Store Description",
-        "Shopping URL",
-        "Custom Field",
-        "Production Paypal ID",
-        "Production PayPal URL",
-        "Staging PayPal ID",
-        "Staging PayPal URL"
-    ],
-    [
-        "yes",
-        "Troop 432 Annual Wreath Sale!",
-        "All revenue goes to help our troop keep costs low. Order as many wreaths as you want and we'll get them shipped to anyone in the US. Expect delivery by UPS around Thanksgiving. Thank you for supporting Scouts! ",
-        "https://wreaths.Troop432LO.org",
-        "Wreath Sale",
-        "treasurer.LOTroop432@troopmaster.email",
-        "https://www.paypal.com/cgi-bin/webscr",
-        "sb-mtuh33943900@business.example.com",
-        "https://www.sandbox.paypal.com/cgi-bin/webscr"
-    ]
-];
-
-
-      var wreath_data =
-      [
-    [
-        "Publish?",
-        "Item Name",
-        "Item Description",
-        "Item Cost",
-        "Item Photo Link",
-        "Part number"
-    ],
-    [
-        "yes",
-        "Deluxe Wreath",
-        "26” Diameter Noble Fir, Incense Cedar, and Oregon Juniper accented with Ponderosa Cones and berries.",
-        65,
-        "https://lh3.googleusercontent.com/pw/AM-JKLWV9oK46MjJeFZYAj-0gywdwaYgvYryiyfZQcLu3RT22ldvFbhVpq3jzcKYVYxJ6N3aeGac58NsHaatCuRRxPExN6YAf1qlC5gb8ZEHq8aNDHZewodLRWl8S1xQf5yqqFL_WxHty_qOYWoCLHdm_Et7uA=w2036-h1728-no",
-        "FRGCEA"
-    ],
-    [
-        "yes",
-        "Mixed Evergreen Wreath",
-        "22” Diameter Noble Fir, Incense Cedar and Oregon Juniper wreath accented with Ponderosa Cones and a red bow.",
-        55,
-        "https://lh3.googleusercontent.com/pw/AM-JKLV4vv0phtPNxMCYdRNhQgjoYWK_pIY1J95aRskmi8wmExGE3fPIx4wtcKPCtu8uX1AHZ6Z6oDMhy3YNhYokj7it6C3DZe3OGovrVtC3ZCW3zQkBWkWu1CT61DsaKxngPDALIzd6GsYyMXS55KN8lLFexg=w1876-h1855-no",
-        "FRGWEA"
-    ],
-    [
-        "yes",
-        "Winter Wonderland",
-        "26” Diameter Noble Fir, Western Red Cedar, and Oregon Juniper wreath accented with white tipped cones, brown cones, and faux White Berries.",
-        70,
-        "https://lh3.googleusercontent.com/pw/AM-JKLUL6_h8hS9JV9Y0J2jPzWTqhNqT7jS2wj0aWRvFN89xnmykiqR36sroxKQ-trObUSK6u9fZePcevynIdY1AB871I-F1TRs80CodLXRXTYLS-i7SaXFis1AtXs6XtMpLy5KEHbM1uwfYe7O0wVasV7u_JA=w1946-h1898-no",
-        "FGWWEA"
-    ],
-    [
-        "yes",
-        "Bark Basket Centerpiece",
-        "10” x 15” Noble Fir, Western Red Cedar, Oregon Juniper, Princess Pine, White Painted Lodgepole Pine Cones, faux berries and plaid bow in a hand-held basket.",
-        55,
-        "https://lh3.googleusercontent.com/pw/AM-JKLXVC7agLwcBCyZPahBv5U2F9B6-LDa9WyOTnVaJiltWa3AG28d-sabsIyWRatdE-NCLMm4lQDXt9eYdY6ecFhAjj8XEIq2KZ9PELFI3C5_4Fx4akkr4RCqXISXZN31UbWCgZk_tLz-Jj7ak88bUZB45jQ=w2036-h1462-no",
-        "FRGBEA"
-    ],
-    [
-        "yes",
-        "Yuletide Cheer",
-        "28” long. Incense Cedar, Blue Berried Juniper, a spray of Red Berries and Lodgepole Cones in swag",
-        55,
-        "https://lh3.googleusercontent.com/pw/AM-JKLVU7U31k8OhlR27KFF7bj0KwKccdhor1Y6jbmBaOHxA9JrBsTYwMk92xfm-eC1D2rXTT3wedrwZ2j_MAOwqB2O_R8JfJDqgbOcCRWLu39VTCcI_0I5CJg7tko7SatiZuAp8pLelLTofwChpe8Fmuw42Tw=w1050-h1044-no",
-        "FGYSEA"
-    ],
-    [
-        "yes",
-        "Be Merry Centerpiece",
-        "7” Diameter 9” Height. Noble Fir, Western Red Cedar, Oregon Juniper, Natural and white Lodgepole Cones, faux Red Holly Berries, and a cheerful galvanized container.",
-        45,
-        "https://lh3.googleusercontent.com/pw/AM-JKLXx_F4XVv9TqU-gMCrw4bXZOYcFps1S2lEzH8zQRl1c32L-mQhNSdaSzmOh-1lMjJ7ogFuw-fuPZ-qNgX5rfArE288LoUHgx0hTK5GWezSwvv-W-wPrIM8RQVEoU-so3IhsimZm0z4pMHBA_p3sWK1d5g=w720-h618-no",
-        "FGBMEA"
-    ],
-    [
-        "yes",
-        "Winter White Combo",
-        "26” Wreath and 14” Centerpiece ships in the same box. Noble Fir, Western Red Cedar, and Oregon Juniper accented with white tipped cones, brown cones, and faux White Berries.",
-        85,
-        "https://lh3.googleusercontent.com/pw/AM-JKLWxoUJtVwaRTHUH7L_oN5UfL5v9uZNK20DTD2jP2cNy7Y0vGKsQgvLh8Fu0l1qZ4T-UAKUNtRtHs5ZtPagDQD7lRo7gMh38lHdLFOT-_ayHpnkLoNhSNtZgH4CO2zdyjmWh8EW771b51VV4vrLzCCuAzA=w1138-h932-no",
-        "FGWCEA"
-    ]
-];
-
-*/
 
       function form_reset(){
       //  $('#form_modal').fadeOut();
@@ -957,7 +857,7 @@
         var url_split = [];
         store_items = [...items];
 
-        while (i < store_items.length-1){
+        while (i < store_items.length){
         //  i++; //starting on the 2nd row
           //check to see if column A has a yes. Keep going to the next column until you find one.
           while (i < store_items.length) {
@@ -984,7 +884,10 @@
             dynamic_html_items += "</div>"
             dynamic_html_items += "<div class='col-xs-3 v_bar justify-content-center ml-5 mr-5'></div>";
             part_number[n] = store_items[i][5];
+            console.log(part_number[n]);
             part_name[n] = store_items[i][1];
+            console.log(part_name[n]);
+            console.log("i= " + i);
             n++;
           }
 
