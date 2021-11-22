@@ -690,7 +690,7 @@
 
       function build_cart(){
         var cart_total = 0;
-        if (shopping_cart.length > 0) {
+        if (shopping_cart.length > 0 && paypal_param[1][0] == "yes") {
           $('#paypal_button').prop('disabled',false);
         }
         else {
