@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="config.js"></script>
 
   </head>
   <style>
@@ -476,8 +477,8 @@
     </div>
 </body>
     <script>
-      //var CLIENT_ID = '935648351212-4mklk43j7cr0v8c10clcnc8p4dl0e9h3.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyCuZVfsn2nPvu-HkSMNwizj9x8V_T4f6-k';
+      //var API_KEY = 'AIzaSyCuZVfsn2nPvu-HkSMNwizj9x8V_T4f6-k';
+      API_KEY = API_key1;
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
       var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
@@ -530,7 +531,6 @@
         const urlParams = new URLSearchParams(queryString);
         gapi.client.init({
           apiKey: API_KEY,
-          //clientId: CLIENT_ID,
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
         }).then(function () {
