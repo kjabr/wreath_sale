@@ -279,7 +279,7 @@
 
       .donate_button {
         top: 5px;
-        right: -2px;
+        right: 0;
     }
 
     }
@@ -349,7 +349,7 @@
             </div>
             <div class="modal-body mx-3">
           <div class="md-form mb-3">
-            <form id="form">
+            <form id="form_main">
               <p id="item_details"></p>
               Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1"> <br>
               <span id="delivery_info1">
@@ -649,10 +649,10 @@
 
       //whenever the modal is closed, then clear the form
       $('.modal').on('hidden.bs.modal', function () {
-        document.getElementById("form").reset();
+        document.getElementById("form_main").reset();
       });
 
-      document.querySelector('form').addEventListener("submit", (e) => {
+      document.querySelector('#form_main').addEventListener("submit", (e) => {
         local == false ?
         (
           document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[,@*&!^%$#\.]/g, ''),
