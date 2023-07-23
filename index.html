@@ -49,10 +49,16 @@
       max-width: 90%;
     }
 
+      /*
     .donate_button {
       position: absolute;
       top: 30px;
       right: 40px;
+    }
+    */
+    .donate_button {
+      align-items: center;
+
     }
 
     .modal-backdrop {
@@ -290,6 +296,9 @@
   <body>
 
     <div class="container" id="container">
+      <br>
+      <div class="span_header">
+      <span id="page_title"></span>
       <div class="donate_button">
         <form action="https://www.paypal.com/donate" method="post" target="_blank">
           <input type="hidden" name="hosted_button_id" value="A588BMC2UH8LU" />
@@ -298,9 +307,6 @@
           </form>
           
       </div>
-      <br>
-      <div class="span_header">
-      <span id="page_title"></span>
       <h5 id="store_type">Gift Shipper Web Store</h5><br>
       <span id="page_description" style="text-align: left;"></span></div>
       <span id="scoutname">
