@@ -311,7 +311,7 @@
       <span id="page_description" style="text-align: left;"></span></div>
       <span id="scoutname">
         Scout Name or Org Name: </span>
-      <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional">
+      <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = numb_char_format(this.value)">
 
         <input type="button" class="" data-toggle="modal" data-target="#scout_info_modal" style="border:none; background:none; color:blue;" value="[i]">
       </span>
@@ -425,7 +425,7 @@
                   	<option value="WY">WY</option>
                   </select>
                     <span class="ml-3">
-                    Zip code <input type="text" inputmode="decimal" id="zip_code_search" style="width:6em;" name="zip_code" autocomplete="off" required>
+                    Zip code <input type="text" inputmode="decimal" id="zip_code_search" style="width:6em;" name="zip_code" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required>
                   </span>
                 </div>
                 </div>
