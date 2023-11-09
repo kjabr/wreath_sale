@@ -359,17 +359,17 @@
               <p id="item_details"></p>
               Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1"> <br>
               <span id="delivery_info1">
-                * Gift Message <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional"> <br>
+                * Gift Message <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"> <br>
                 * Name of person you want this shipped to:
                 <span class="ml-3">
-                  <input type="text" id="ship_name" style="width:13em;" name="ship_name" autocomplete="off" placeholder="Required" required> <br>
+                  <input type="text" id="ship_name" style="width:13em;" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = numb_char_format(this.value)" required> <br>
                 </span>
                 <div class="mt-2 mb-3">
                   * Their Address: (required)<br>
             <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
                   <div class="ml-3">
-                  Street Address <input type="text" id="street_address_search" style="width:14em;" name="street_address" autocomplete="off" required> <br>
-                  City <input type="text" id="city" name="city_search" style="width:10em;" autocomplete="off" required>
+                  Street Address <input type="text" id="street_address_search" style="width:14em;" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required> <br>
+                  City <input type="text" id="city" name="city_search" style="width:10em;" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required>
                   <br>
                   State <select id="state_search" name="state">
                   	<option value="AL">AL</option>
@@ -661,8 +661,9 @@
       document.querySelector('#form_main').addEventListener("submit", (e) => {
         local == false ?
         (
-          document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[,@*&!^%$#\.]/g, ''),
-          document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#\.]/g, '')
+          document.getElementById("ship_name").value = (document.getElementById("ship_name").value).replace(/[,@*&!^%$#'\.]/g, ''),
+          document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[,@*&!^%$#'\.]/g, ''),
+          document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#'\.]/g, '')
         )
         : null;
         const formData = new FormData(e.target);
@@ -876,6 +877,14 @@
         item_details = "<strong>" + store_items[currentIndex][1] + "</strong>: " + store_items[currentIndex][2];
         item_details += " [$" + store_items[currentIndex][3] + "]";
         document.getElementById("item_details").innerHTML = item_details;
+      }
+
+      function numb_char_format(input) {
+        //returns numbers and characters only
+        input = input.replace(/[^&a-zA-Z0-9\s]/g, '');
+        var size = input.length;
+        if (size>0) {input += input}
+        return input;	
       }
 
       function build_html(items){
