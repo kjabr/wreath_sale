@@ -1151,7 +1151,10 @@
         dynamic_html_items = "";
 
         //move slider to the right a little
-        document.getElementById("items_slider").scrollLeft = 170;
+        //document.getElementById("items_slider").scrollLeft = 170;
+
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        vw > 1000 ? document.getElementById("items_slider").scrollLeft = 170 : null;
 
         //using IntersectionObserver from
         //https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
