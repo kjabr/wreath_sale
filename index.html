@@ -665,6 +665,7 @@
       function initClient() {
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
+        console.log(urlParams.get("id2"));
         gapi.client.init({
           apiKey: urlParams.get("id2"),
           discoveryDocs: DISCOVERY_DOCS,
