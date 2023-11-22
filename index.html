@@ -6,12 +6,6 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href="#">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="config.js"></script>
-
   </head>
   <style>
 
@@ -20,7 +14,7 @@
     }
 
     @-moz-document url-prefix() { /* Disable scrollbar Firefox */
-            body, #items_slider{
+            body, .items_slider{
               scrollbar-width: none;
             }
           }
@@ -39,14 +33,17 @@
       max-width: 100%;
       height: 100%;
       background-color: #F7F6EF;
-      padding: 5px;
+      font-family: Geneva, 'Lucida Grande', 'Lucida Sans Unicode', serif;
+
     }
 
     .container {
-      display: none;
-      padding: 0 0 0 0;
-      text-align: center;
-      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
     }
 
       /*
@@ -66,7 +63,42 @@
     }
 
     .btn {
-      margin-right: 10px;
+        align-items: center;
+        background-clip: padding-box;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 16px;
+        justify-content: center;
+        line-height: 1.25;
+        padding: 5px;
+        position: relative;
+        margin-left: 5px;
+      }
+
+    .btn:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+      color: blanchedalmond;
+    }
+
+    .btn_green {
+    background-color: #4CAF50;
+    }
+
+    .btn_blue {
+      background-color: #008CBA;
+    }
+
+    .btn_gray {
+      background-color: darksalmon;
+    }
+
+    .btn_disabled {
+      background-color: lightgrey;
     }
 
     #scout_name {
@@ -88,62 +120,8 @@
       max-width: 90%;
     }
 
-    .modal_style {
-
-      background: transparent;
-    }
-
-    .modal input {
-      background-color: #E3EEFC;
-      margin: 3px;
-      padding: 1px 5px 1px 5px;
-      border:0.2px solid #000000;
-      border-radius: 4px;
-      width: 14em;
-      max-width: 95%;
-    }
-
-    .modal select {
-      background-color: #E3EEFC;
-      margin: 3px;
-      padding: 1px 5px 1px 5px;
-      border:0.2px solid #000000;
-      border-radius: 4px;
-    }
-
-    .modal-dialog {
-
-}
-
     #state {
       background-color: #E3EEFC;
-    }
-
-    .modal-body {
-      max-height: 45rem;
-      overflow-y: auto;
-      padding-bottom: 0;
-      font-size: 14px;
-
-    }
-
-    .modal-footer {
-      display: flex;
-      justify-content: space-between;
-      position: sticky;
-      position: -webkit-sticky;
-      bottom: 0;
-      background-color: white;
-    }
-
-    .modal {
- 
-    }
-
-    .span_header {
-     align-items: center;
-     max-width: 100%;
-     margin: auto;
     }
 
     body::-webkit-scrollbar, #items_slider::-webkit-scrollbar {
@@ -152,33 +130,36 @@
      display: none;
     }
 
-    .container1 {
+   .container1 {
+      width: 100%;
       position: relative;
-      margin-right: 10px;
-    }
+   }
 
-    .item_group > .row {
+    .items_slider {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap:nowrap;
+      overflow-x: auto;
+      margin: 20px;
+      gap: 20px;
       flex-direction: row;
-      justify-content: space-between;
-      overflow: auto;
       align-items: center;
-      -webkit-overflow-scrolling: touch;
     }
-
-    .item_group > .row > .col-xs-3 {
-      flex-shrink: 0;
-    }
+    
     .col-xs-3 {
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: column;
+
       color: black;
       font-size: max(1vw, 12px);
       padding-bottom: 10px;
       padding-top: 10px;
       width: 55vh;
-      max-width: min(30%, 300px);
+      max-width: min(30%, 330px);
       height: auto;
       background: transparent;
+      justify-content: space-between;
+
     }
 
    /* .col-xs-3:hover {
@@ -189,6 +170,10 @@
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       height: auto;
       width: 80%;
+    }
+
+    #item_details {
+      width: 37vw;
     }
 
     .v_bar {
@@ -206,7 +191,33 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     }
 
-    .w-100:hover {
+    .center_items {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: -10px;
+    }
+
+    .center_items > h2, .center_items > h3 {
+      margin-top: 8px;
+      margin-bottom: 2px;
+    }
+
+    .container > h2 {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    #page_title > h1 {
+      margin-bottom: 5px;
+
+    }
+
+    .center_items > img {
+      margin: 0;
+    }
+
+    .w-100:hover, .scout_info {
       cursor: pointer;
     }
 
@@ -214,7 +225,7 @@
       cursor: pointer;
       position: absolute;
       top: 50%;
-      margin-top: -35px;
+      margin-top: -10vh;
     /*  width: 0;
       height: 0;
       border-style: solid;
@@ -226,7 +237,7 @@
       border-color: transparent dodgerblue transparent transparent;
       */
       left: 0;
-      margin-left: 20px;
+      margin-left: -3vw;
       z-index: 10;
     }
 
@@ -236,58 +247,168 @@
       border-color: transparent transparent transparent dodgerblue;
       */
       right: 0;
-      margin-right: 20px;
+      margin-right: -3vw;
       z-index: 10;
 
     }
 
-    @media (max-width: 1080px) {
-      .container {
-        max-width: 100%;
-      }
-
+    .middle_swipe_info {
+      margin-bottom: -2em;
     }
 
+    .popup {
+        max-width: 100%;
+        max-height: 100%;
+        position: fixed;
+        z-index: 1101;
+        left: 50%;
+        top: 50%;
+        border-radius: 8px;
+        margin: auto;
+        transform: translate(-50%, -50%);
+        transition: opacity 400ms ease-in;
+        background: #F7F6EF;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      .popup_overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1100;
+
+        opacity: 0.8;
+        background-color: rgba(0,0,0,0.5);
+      }
+
+      .popup_content {
+        margin: 10px;
+
+      }
+      
+      .popup_footer {
+        margin-top: 1em;
+      }
+
+      .popup_button {
+        position: absolute;
+        top: -16px;
+        right: -16px;
+        background-color: teal;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #fff;
+        padding: 3px;
+      }
+
+      .form_main {
+        margin: 1em;
+      }
+
+      #cart_contents, #scoutname_span {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        max-height: 55vh;
+        display: block;
+        width: 100%;
+      }
+
+      #cart_contents > ul {
+        margin-left: -1em;
+      }
+
+      .delivery_info1 > input {
+
+        background-color: #E3EEFC;
+        margin: 3px;
+        margin-bottom: 0.3em;
+
+        padding: 1px 5px 1px 5px;
+        border: 0.2px solid #000000;
+        border-radius: 4px;
+        width: 14em;
+        max-width: 95%;
+      }
+
+      .delivery_info_span {
+        margin-bottom: 0.3em;
+
+      }
+
+      .delivery_info_span2 {
+        margin-left: 1em;
+      }
+
+      .delivery_info_span2 > input {
+        background-color: #E3EEFC;
+        margin: 3px;
+        margin-bottom: 0.3em;
+
+        padding: 1px 5px 1px 5px;
+        border: 0.2px solid #000000;
+        border-radius: 4px;
+        width: 14em;
+        max-width: 95%;
+      }
+
+      #gift_msg {
+        width: 22vw;
+      }
+
     @media (max-width: 800px) {
+
+      body {
+        h1 {
+          font-size: 5vw;
+        }
+
+        h2 {
+          font-size: 4vw;
+        }
+      }
+
+      .container {
+        max-width: 97%;
+      }
+
+      .popup {
+        width: 90vw;
+      }
 
       .arrow {
         display: none;
       }
 
-      .col-xs-3 {
-        max-width: 30vh;
-      }
-
-      .modal-body {
-        max-height: 566px;
-        font-size: 12px !important;
-      }
-
-      body {
-        font-size: 14px;
-      }
-
-      h3 {
-        font-size: 18px;
-      }
-
-      h5 {
-        font-size: 16px;
+      .items_slider {
+        width: inherit;
+        margin-left: 0px;
+        margin-right: 0px;
       }
 
       .btn {
-        font-size: 0.7rem;
+        font-size: 2vw;
       }
 
-      .cart_btn {
-        font-size: 1rem;
-      }
-
-      .donate_button {
-        top: 5px;
-        right: 0;
+      .col-xs-3 {
+        max-width: min(65%, 300px);
     }
 
+      .btn_shopping_cart {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #gift_msg {
+        width: 46vw;
+      }
+
+      #item_details {
+        width: 100%;
+      }
     }
 
 
@@ -297,77 +418,78 @@
 
     <div class="container" id="container">
       <br>
-      <div class="span_header">
       <span id="page_title"></span>
+      <h2 id="store_type">Gift Shipper Web Store</h2><br>
+
       <div class="donate_button">
-        <form action="https://www.paypal.com/donate" method="post" target="_blank">
+        <form action="https://www.paypal.com/donate" method="post" target="">
           <input type="hidden" name="hosted_button_id" value="A588BMC2UH8LU" />
           <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
           <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
           </form>
           
       </div>
-      <h5 id="store_type">Gift Shipper Web Store</h5><br>
-      <span id="page_description" style="text-align: left;"></span></div>
-      <span id="scoutname">
-        Scout Name or Org Name: </span>
-      <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
+      
+      <span id="page_description" style="text-align: left;"></span>
+      <div>
+        <span id="scoutname">
+          Scout Name or Org Name: </span>
+        <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
 
-        <input type="button" class="" data-toggle="modal" data-target="#scout_info_modal" style="border:none; background:none; color:blue;" value="[i]">
-      </span>
+          <input type="button" class="scout_info" onclick="toggle_modal('popup_scout_info')" style="border:none; background:none; color:blue;" value="[i]">
+        </span>
 
 
 
-        <button type="button" onclick="build_cart()" class="btn cart_btn btn-success btn-sm ml-5" data-toggle="modal" data-target="#cart_modal" id="cart_button">Shopping Cart</button>
+          <button type="button" onclick="build_cart()" class="btn btn_green btn_shopping_cart" id="cart_button">Shopping Cart</button>
 
-        <div class="alert alert-primary alert-dismissable mt-2" style="display:none;" role="alert" id="sale_over_alert" >
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-          <strong>The wreath sale is over! Thank you for supporting Scouts!</strong>
+      </div>
+
+        <div id="sale_over_alert" class="popup" style="display: none;">
+          <button class="popup_button" onclick="toggle_modal('sale_over_alert')">Close</button>
+          <div id="popup_content_alert" class="popup_content">
+            <strong><center><h3>The wreath sale is over!</h3>Thank you for supporting Scouts!</center></strong>
+          </div>
         </div>
 
-        <div class="mt-2">
-          <h6 style="text-align: center;">Swipe right to see more products >>> <span class="badge badge-pill badge-info"></span></h6>
+        <div class="middle_swipe_info">
+          <h6 style="text-align: center;">&lt&lt&lt Swipe to see more products &gt&gt&gt</h6>
         </div>
 
-        <div class="container1 item_group">
+        <div class="container1">
           <div id="arrow-left" class="arrow" onmousedown="go_left(event)" onmouseup="cancel_scroll()"></div>
-          <div class="row text-center" id="items_slider">
+          <div class="items_group"> <div class="items_slider" id="items_slider"></div>
+          
 
           </div>
           <div id="arrow-right" class="arrow" onmousedown="go_right(event)" onmouseup="cancel_scroll()"></div>
         </div>
 
-        <center>
-        </center>
         <div>
-          <center id="footer1">* All prices include shipping cost.</center>
+          <center id="footer1">All prices include shipping cost. [<a href="https://Troop432LO.org" target="_blank">Troop Website</a>] </center>
           </div>
-      </div>
-      <!-- Modal form -->
-      <div class="modal fade" id="form_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal_style" role="document">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-              <h5 class="modal-title" id="ModalLabel">Item Shipping Details</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body mx-3">
-          <div class="md-form mb-3">
-            <form id="form_main">
+        <div id="popup_info" class="popup" style="display: none;">
+          <button class="popup_button" onclick="toggle_modal()">Close</button>
+          <div id="popup_content_info" class="popup_content">
+          </div>
+        </div>
+
+        <div id="popup_order" class="popup" style="display: none;">
+          <button class="popup_button" onclick="toggle_modal('popup_order')">Close</button>
+          <div id="popup_content_order" class="popup_content">
+            <h3 class="modal-title" id="ModalLabel">Item Shipping Details</h3>
+            <form id="form_main" class="form_main">
               <p id="item_details"></p>
-              Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"> <br>
-              <span id="delivery_info1">
+              <span id="delivery_info1" class="delivery_info1">
+
+                Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"> <br>
                 * Gift Message <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"> <br>
                 * Name of person you want this shipped to:
-                <span class="ml-3">
                   <input type="text" id="ship_name" style="width:13em;" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = char_only_format(this.value)" required> <br>
-                </span>
-                <div class="mt-2 mb-3">
-                  * Their Address: (required)<br>
+                
+                  <div class="delivery_info_span"> * Their Address: (required)<br></div>
             <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
-                  <div class="ml-3">
+                <div class="delivery_info_span2">
                   Street Address <input type="text" id="street_address_search" style="width:14em;" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required> <br>
                   City <input type="text" id="city" name="city_search" style="width:10em;" autocomplete="off" onInput="this.value = char_only_format(this.value)" required>
                   <br>
@@ -424,86 +546,71 @@
                   	<option value="WV">WV</option>
                   	<option value="WY">WY</option>
                   </select>
-                    <span class="ml-3">
                     Zip code <input type="text" inputmode="decimal" id="zip_code_search" style="width:6em;" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" required>
-                  </span>
-                </div>
                 </div>
             </span>
 
 
-            <div class="modal-footer">
+            <div class="popup_footer">
               <span></span>
               <span>
-              <button type="button" onclick="form_reset()" class="btn btn-secondary">Cancel</button>
-              <button type="submit" id="add_to_cart_button" class="btn btn-primary">Add to Cart</button>
+              <button type="button" onclick="form_reset()" class="btn btn_gray">Cancel</button>
+              <button type="submit" id="add_to_cart_button" class="btn btn_blue">Add to Cart</button>
               <label id="add_msg"></label>
             </span>
             </div>
             </form>
+
+          </div>
+        </div>
+
+        <div id="popup_cart" class="popup" style="display: none;">
+          <button class="popup_button" onclick="toggle_modal('popup_cart')">Close</button>
+          <div id="popup_content_cart" class="popup_content">
+            <h3 class="modal-title" id="ModalLabel">Shopping Cart</h3>
+            <div class="modal-body ml-3 mr-3">
+              <div>
+                <p>Thank you for supporting Scouts!</p>
+                <div class="delivery_info_span2">
+                  <span id="scoutname_span"></span>
+                  <span id="cart_contents">
+                  </span>
+                  <span id="footer2">**Prices include shipping cost.</span>
+                </div>
+              </div>
+              <div class="popup_footer">
+                <span id="cart_total_footer"></span>
+                <span>
+                  <button type="button" onclick="clear_cart()" class="btn btn_gray">Clear</button>
+                  <button type="button" id="paypal_button" onclick="paypal()" class="btn btn_blue">Pay with PayPal</button>
+                  <label id="add_msg"></label>
+                </span>
+              </div>
+              </div>
+
+          </div>
+        </div>
+
+        <div id="popup_scout_info" class="popup" style="display: none;">
+          <button class="popup_button" onclick="toggle_modal('popup_scout_info')">Close</button>
+          <div id="popup_content_scout_info" class="popup_content">
+            <h3 class="modal-title" id="ModalLabel">Scout Name or Organization Name</h3>
+            <div class="md-form mb-5">
+              <p>The Scout Name or Organization Name is an optional field. The field is intended to provide the appropriate Scout or Organization credit for the sale.</p>
+              <span id="cart_contents">
+              </span>
             </div>
           </div>
         </div>
+
+
+        <div id="popup_overlay" class="popup_overlay" style="display: none;" onclick="toggle_modal('popup_overlay')"></div>
       </div>
-    </div>
-
-    <!-- Modal shopping cart -->
-    <div class="modal fade" id="cart_modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal_style" role="document">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <h5 class="modal-title" id="ModalLabel">Shopping Cart</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body ml-3 mr-3">
-        <div class="md-form mb-3">
-          <p>Thank you for supporting Scouts!</p>
-          <span id="cart_contents">
-          </span>
-          <p id="footer2">**Prices include shipping cost.</p>
-
-        </div>
-        <div class="modal-footer">
-          <span id="cart_total_footer"></span>
-          <span>
-            <button type="button" onclick="clear_cart()" class="btn btn-secondary">Clear</button>
-            <button type="button" id="paypal_button" onclick="paypal()" class="btn btn-primary">Pay with PayPal</button>
-            <label id="add_msg"></label>
-          </span>
-        </div>
-        </div>
-        </div>
-      </div>
-    </div>
-
-        <div class="modal fade" id="scout_info_modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal_style" role="document">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <h5 class="modal-title" id="ModalLabel">Scout Name or Organization Name</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <p>The Scout Name or Organization Name is an optional field. The field is intended to provide the appropriate Scout or Organization credit for the sale.</p>
-          <span id="cart_contents">
-          </span>
-        </div>
-        </div>
-        </div>
-      </div>
-    </div>
-
 
     <div id="paypal_div">
     </div>
 </body>
     <script>
-      var API_KEY = API_key1;
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
       var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
@@ -522,6 +629,14 @@
       var local = false;
       var prod = true;
 
+      var order_form = `
+
+      `;
+
+      var shopping_cart_content = `
+
+      `;
+
       var left_chevron = `
         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="dodgerblue" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
@@ -537,10 +652,11 @@
       `;
 
       var orgs;
-
+        /*
       document.addEventListener('DOMContentLoaded', function() {
 
-      }, false);
+      }, false); 
+      */
 
       function handleClientLoad() {
         gapi.load('client', initClient);
@@ -550,12 +666,12 @@
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         gapi.client.init({
-          apiKey: API_KEY,
+          apiKey: urlParams.get("id2"),
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
         }).then(function () {
-          if (urlParams.get("id")) {
-            document.getElementById("container").style.display = "block";
+          if (urlParams.get("id1")) {
+            document.getElementById("container").style.display = "";
             init_web_app();
             document.getElementById("arrow-left").innerHTML = left_chevron;
             document.getElementById("arrow-right").innerHTML = right_chevron; 
@@ -569,10 +685,10 @@
       function init_web_app(){
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        if (urlParams.get("id")) {
-          var id = urlParams.get("id").replace("/", "");
+        if (urlParams.get("id1")) {
+          var id1 = urlParams.get("id1").replace("/", "");
           gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: id +"RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw",
+            spreadsheetId: id1,
             range: "'Orgs'!A2:C",
           }).then(function(response) {
             var range3 = response.result;
@@ -583,7 +699,7 @@
 
             local == true ? target_sheet = "'Local'!A2:F" : target_sheet = "'Store'!A2:F";
             gapi.client.sheets.spreadsheets.values.get({
-              spreadsheetId: id + "RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw",
+              spreadsheetId: id1,
               range: "'Setup'!A1:I",
             }).then(function(response) {
               var range1 = response.result;
@@ -594,7 +710,7 @@
             });
 
             gapi.client.sheets.spreadsheets.values.get({
-              spreadsheetId: id + "RIdjUld1dRYwC1ydpUS-CWKmR0C-V04EJv3b5yHdqw",
+              spreadsheetId: id1,
               range: target_sheet,
             }).then(function(response) {
               var range2 = response.result;
@@ -647,21 +763,23 @@
         }
       }
 
+      function clear_order_form(){
+        document.getElementById("form_main").reset();
+
+      }
+
       function form_reset(){
       //  $('#form_modal').fadeOut();
       //  $('.modal-backdrop').fadeOut();
-      $('#form_modal').modal('hide');
+      //$('#form_modal').modal('hide');
+      toggle_modal('popup_order');
+      clear_order_form();
       }
-
-      //whenever the modal is closed, then clear the form
-      $('.modal').on('hidden.bs.modal', function () {
-        document.getElementById("form_main").reset();
-      });
 
       document.querySelector('#form_main').addEventListener("submit", (e) => {
         local == false ?
         (
-          document.getElementById("ship_name").value = (document.getElementById("ship_name").value).replace(/[,@*&!^%$#'\.]/g, ''),
+          document.getElementById("ship_name").value = (document.getElementById("ship_name").value).replace(/[,@*!^%$#'\.]/g, ''),
           document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[,@*&!^%$#'\.]/g, ''),
           document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#'\.]/g, '')
         )
@@ -684,17 +802,23 @@
         shopping_cart.push(formvalues);
         formvalues = [];
         //console.log(shopping_cart);
-        $('#add_to_cart_button').prop('disabled',true);
+        //$('#add_to_cart_button').prop('disabled',true);
+        document.getElementById('add_to_cart_button').disabled = true;
+        document.getElementById('add_to_cart_button').classList.add('btn_disabled');
         document.getElementById("add_msg").innerHTML="&nbsp;Item added to cart";
         document.getElementById("cart_button").innerHTML="Shopping Cart " + shopping_cart.length;
         setTimeout(function clear_text(){
           document.getElementById("add_msg").innerHTML="";
           //$('#form_modal').fadeOut();
           //$('.modal-backdrop').fadeOut();
-          $('#form_modal').modal('hide');
-          $('#add_to_cart_button').prop('disabled',false);
+          //$('#form_modal').modal('hide');
+          document.getElementById('popup_order').style.display == '' ? toggle_modal('popup_order') : null;
+          //$('#add_to_cart_button').prop('disabled',false);
+          document.getElementById('add_to_cart_button').disabled = false;
+          document.getElementById('add_to_cart_button').classList.remove('btn_disabled');
 
-        }, 2000);
+
+        }, 1500);
       });
 
        function clear_item(m5){
@@ -706,25 +830,45 @@
         else {
           document.getElementById("cart_button").innerHTML = "Shopping Cart";
         }
-        build_cart();
+        build_cart("keep_open");
       }
 
-      function build_cart(){
+      function build_cart(key){
         var cart_total = 0;
         if (shopping_cart.length > 0 && (paypal_param[1][0] == "yes" || prod == false)) {
-          $('#paypal_button').prop('disabled',false);
+          //$('#paypal_button').prop('disabled',false);
+          document.getElementById('paypal_button').disabled = false;
+          document.getElementById('paypal_button').title = "";
+          document.getElementById('paypal_button').classList.remove("btn_disabled");
         }
+        else if (shopping_cart.length == 0 && (paypal_param[1][0] == "yes" || prod == false)) {
+          document.getElementById('paypal_button').disabled = true;
+          document.getElementById('paypal_button').classList.add("btn_disabled");
+
+          //$('#paypal_button').prop('disabled',true);
+        }
+
         else {
-          $('#paypal_button').prop('disabled',true);
+          document.getElementById('paypal_button').disabled = true;
+          document.getElementById('paypal_button').classList.add("btn_disabled");
+          document.getElementById('paypal_button').title = "Wreath Sale is Over!";
+
         }
-        var show_cart = "Scout/Org Name: " + document.getElementById("scout_name").value + "<br>";
+        
+        document.getElementById('scoutname_span').innerHTML = "Scout/Org Name: " + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "<br>";
+        var show_cart = "";
+
+        if (shopping_cart.length == 0){
+          show_cart = "<br><strong>*** Cart is empty ***</strong><br><br>";
+        }
+
         for (m1 = 0; m1 < shopping_cart.length; m1++ ) {
             //console.log(shopping_cart[m1][m2]);
             if (local == false) {
               shopping_cart[m1][2] = shopping_cart[m1][2].replace(/\$/g, '');
               show_cart += "<ul>";
               show_cart += "<li>Item: " + shopping_cart[m1][1];
-              show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; width:5rem;' value='[delete]' onclick='clear_item";
+              show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; cursor:pointer; width:5rem;' value='[delete]' onclick='clear_item";
               show_cart += "(" + m1 + ")'></li>";
               show_cart += "<ul>";
               show_cart += "<li>Price Each: $" + shopping_cart[m1][2] + "</li>";
@@ -738,7 +882,7 @@
             else {
               show_cart += "<ul>";
               show_cart += "<li>Item: " + shopping_cart[m1][1];
-              show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; width:5rem;' value='[delete]' onclick='clear_item";
+              show_cart += "<input type='button' style='border:none; background:none; margin:2px; color:blue; cursor:pointer; width:5rem;' value='[delete]' onclick='clear_item";
               show_cart += "(" + m1 + ")'></li>";
               show_cart += "<ul>";
               show_cart += "<li>Price Each: $" + shopping_cart[m1][2] + "</li>";
@@ -753,18 +897,19 @@
         //show_cart += "Total: $" + cart_total;
         document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
         document.getElementById("cart_contents").innerHTML = show_cart;
+        key == "keep_open" ? null : toggle_modal('popup_cart');
       }
 
       function build_paypal(data){
         paypal_param = [...data];
           if (paypal_param[1][0] == "yes" && prod == true) {
-          $("#sale_over_alert").hide();
+          //$("#sale_over_alert").hide();
         }
         else {
-          $("#sale_over_alert").show();
+          toggle_modal('sale_over_alert');
         }
 
-        document.getElementById("page_title").innerHTML = "<h3><center>" + paypal_param [1][1] + "</center></h3>";
+        document.getElementById("page_title").innerHTML = "<h1>" + paypal_param [1][1] + "</h1>";
 
         url_org != "" ? document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>" :
           document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='mailto:troop432wreathsales@gmail.com' target='_blank'>[Contact Link]<a></p>";
@@ -826,7 +971,7 @@
               paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
               paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + shopping_cart[m2][4] + "'>";
               paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
-              paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + document.getElementById("scout_name").value + "'>";
+              paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "'>";
               paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
               paypal_items += "<input type='hidden' name='os3_" + count + "' value='" + part_number[part_name.findIndex(x=>x.includes(shopping_cart[m2][1]))] + "'>";
             }
@@ -839,7 +984,7 @@
               paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
               paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + "NA" + "'>";
               paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
-              paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + document.getElementById("scout_name").value + "'>";
+              paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "'>";
               paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
               paypal_items += "<input type='hidden' name='os3_" + count + "' value='" + part_number[part_name.findIndex(x=>x.includes(shopping_cart[m2][1]))] + "'>";
 
@@ -847,7 +992,8 @@
 
           }
           document.getElementById("paypal_div").innerHTML = paypal_start + paypal_items + "</form>";
-          $('#cart_modal').modal('hide');
+         //$('#cart_modal').modal('hide');
+          toggle_modal('popup_cart');
           clear_cart();
           document.getElementById("paypal_form").submit();
         }
@@ -856,9 +1002,11 @@
       }
 
       function clear_cart(){
-        document.getElementById("cart_contents").innerHTML = "<br>Cart is empty<br>";
+        //"Scout/Org Name: " + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "<br>";
+        document.getElementById("cart_contents").innerHTML = "<br>Cart is empty<br><br>";
         document.getElementById("cart_button").innerHTML = "Shopping Cart";
-        $('#paypal_button').prop('disabled',true);
+        //$('#paypal_button').prop('disabled',true);
+        document.getElementById('paypal_button').disabled = true;
         shopping_cart = [];
         cart_total = 0;
         document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
@@ -872,7 +1020,9 @@
       }
 
       function select_item(item){
-        currentIndex = Number(item.id);
+        //document.getElementById("popup_order").style.display = '';
+        toggle_modal("popup_order");
+        currentIndex = Number((item.id).split("_")[1]);
         var item_details;
         item_details = "<strong>" + store_items[currentIndex][1] + "</strong>: " + store_items[currentIndex][2];
         item_details += " [$" + store_items[currentIndex][3] + "]";
@@ -903,6 +1053,25 @@
         return input;	
       }
 
+      function toggle_modal(which_popup){
+        var overlay = document.getElementById("popup_overlay");
+        var popup_elem = document.getElementById(which_popup);
+        document.getElementById('popup_order').style.display == '' ? clear_order_form() : null;
+
+        if (which_popup == "popup_overlay") {
+          var all_popups = document.getElementsByClassName("popup");
+          Array.from(all_popups).forEach((item, i) => {
+            item.style.display = 'none';
+          });
+          overlay.style.display = 'none';
+        }
+        else {
+          popup_elem.style.display = popup_elem.style.display == 'none' ? '' : 'none';
+          overlay.style.display = overlay.style.display == 'none' ? '' : 'none';
+        }
+
+      }
+
       function build_html(items){
         var i = 0;
         var n = 0;
@@ -922,21 +1091,21 @@
           if (i < store_items.length){
             store_items[i][3] =  store_items[i][3].replace(/\$/g, '');
             url_split = store_items[i][4].split(/=w/);
-            dynamic_html_items += "<div class='col-xs-3 align-middle'>";
-            dynamic_html_items += "<div class='justify-content-center text-center text-wrap'>";
+            dynamic_html_items += "<div class='col-xs-3'>";
+            dynamic_html_items += "<div class='center_items'>";
             dynamic_html_items += "<img class='w-100 rounded' src='" + url_split[0] + "=w480 '";
-            dynamic_html_items += "id='" + n + "' onclick='select_item(this)' data-toggle='modal'";
+            dynamic_html_items += "id=img_" + n + " onclick='select_item(this)'";
             dynamic_html_items += "data-target='#form_modal '";
             dynamic_html_items += "alt=' '>";
-            dynamic_html_items += "<h4 class='mt-3'>" + store_items[i][1] + "</h4>";
-            dynamic_html_items += "<h6>" + "Cost: $" + store_items[i][3] + "</h6>";
+            dynamic_html_items += "<h2 class=''>" + store_items[i][1] + "</h2>";
+            dynamic_html_items += "<h3>" + "Cost: $" + store_items[i][3] + "</h3>";
             dynamic_html_items += "<p>" + store_items[i][2] + "</p>";
-            dynamic_html_items += "<button type='button' class='btn btn-primary btn-sm' id='" + n + "'";
-            dynamic_html_items += "onclick='select_item(this)' data-toggle='modal'";
+            dynamic_html_items += "<button type='button' class='btn btn_blue' id='btn_" + n + "'";
+            dynamic_html_items += "onclick='select_item(this)'";
             dynamic_html_items += "data-target='#form_modal'>Select Item</button>";
             dynamic_html_items += "</div>";
             dynamic_html_items += "</div>"
-            dynamic_html_items += "<div class='col-xs-3 v_bar justify-content-center ml-5 mr-5'></div>";
+            dynamic_html_items += "<div class='v_bar justify-content-center'></div>";
             part_number[n] = store_items[i][5];
             part_name[n] = store_items[i][1];
             n++;
@@ -950,9 +1119,66 @@
         document.getElementById("items_slider").innerHTML = dynamic_html_items;
         dynamic_html_indicators = "";
         dynamic_html_items = "";
-        document.getElementById("items_slider").scrollLeft = 150;
+
+        //move slider to the right a little
+        document.getElementById("items_slider").scrollLeft = 170;
+
+        //using IntersectionObserver from
+        //https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+        
+        let options = {
+          root: document.getElementById("items_slider"),
+          rootMargin: "0px",
+          threshold: 1,
+        };
+
+        var first_image = "#img_0";
+        var last_image = "#img_" + (n-1);
+
+        let callback = (entries, observer) => {
+          entries.forEach((entry) => {
+            // Each entry describes an intersection change for one observed
+            // target element:
+            //   entry.boundingClientRect
+            //   entry.intersectionRatio
+            //   entry.intersectionRect
+            //   entry.isIntersecting
+            //   entry.rootBounds
+            //   entry.target
+            //   entry.time
+            //entry.isIntersecting ? console.log("call back triggered " + entry.target.id) : null;
+
+            document.getElementById("arrow-right").style.display == 'none' ? document.getElementById("arrow-right").style.display = '' : null;
+            document.getElementById("arrow-left").style.display == 'none' ? document.getElementById("arrow-left").style.display = '' : null;
+
+            if (entry.isIntersecting){
+              if (entry.target.id == first_image.replace(/#/, '')) {
+                //document.getElementById("arrow_left").style.display = none;
+                document.getElementById("arrow-left").style.display == '' ? document.getElementById("arrow-left").style.display = 'none' : null;
+                clearInterval(scroll_timer);
+
+              }
+              else if (entry.target.id == last_image.replace(/#/, '')) {
+                document.getElementById("arrow-right").style.display == '' ? document.getElementById("arrow-right").style.display = 'none' : null;
+                clearInterval(scroll_timer);
+
+
+              }
+            }
+          });
+        };
+
+   
+        let target1 = document.querySelector(first_image);
+        let target2 = document.querySelector(last_image);
+
+        let observer = new IntersectionObserver(callback, options);
+        observer.observe(target1);
+        observer.observe(target2);
 
       }
+
+
 
       function go_left(event){
         event.stopPropagation();
