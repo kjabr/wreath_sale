@@ -143,6 +143,10 @@
       background-color: #E3EEFC;
     }
 
+    #state_search {
+      font-size: 16px;
+    }
+
     body::-webkit-scrollbar, #items_slider::-webkit-scrollbar {
      width: 0px;  /* Remove scrollbar space */
      background: transparent;  /* Optional: just make scrollbar invisible */
@@ -452,7 +456,7 @@
       <div>
         <span id="scoutname">
           Scout Name or Org Name: </span>
-        <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
+        <span id="scoutname_field"> <input type="text" style="width:8em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
 
           <input type="button" class="scout_info" onclick="toggle_modal('popup_scout_info')" style="border:none; background:none; color:blue;" value="[i]">
         </span>
@@ -502,14 +506,14 @@
 
                 Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"> <br>
                 * Gift Message <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"> <br>
-                * Name of person you want this shipped to:
-                  <input type="text" id="ship_name" style="width:13em;" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = char_only_format(this.value)" required> <br>
+                * Ship-to Name:
+                  <input type="text" id="ship_name" style="width:10em;" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = char_only_format(this.value)" required> <br>
                 
                   <div class="delivery_info_span"> * Their Address: (required)<br></div>
             <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
                 <div class="delivery_info_span2">
-                  Street Address <input type="text" id="street_address_search" style="width:14em;" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required> <br>
-                  City <input type="text" id="city" name="city_search" style="width:10em;" autocomplete="off" onInput="this.value = char_only_format(this.value)" required>
+                  Street Address <input type="text" id="street_address_search" style="width:10em;" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required> <br>
+                  City <input type="text" id="city" name="city_search" style="width:8em;" autocomplete="off" onInput="this.value = char_only_format(this.value)" required>
                   <br>
                   State <select id="state_search" name="state">
                   	<option value="AL">AL</option>
