@@ -251,6 +251,7 @@
 
     .scout_info {
       margin-left: -8px;
+      font-size: 16px;
     }
 
     .arrow {
@@ -285,9 +286,9 @@
     }
 
     .middle_swipe_info > h6 {
-      font-size: 16px;
-      margin-bottom: -20px;
-
+      font-size: 12px;
+      margin-bottom: -30px;
+      margin-top: 16px;
     }
 
     .popup {
@@ -360,7 +361,7 @@
         background-color: #e3eaec4f;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
         border-radius: 5px;
-        scrollbar-color: #c3cdd0 #ff8c5e2b;
+        scrollbar-color: #c3cdd0 #e3eaec4f;
       }
 
       #cart_contents > ul {
@@ -911,7 +912,7 @@
         local == false ?
           formvalues[6] = formvalues[6] + ", " + formvalues[7] + ", " + formvalues[8] + " " + formvalues[9]
           : formvalues[6] = "";
-          
+
         shopping_cart.push(formvalues);
         formvalues = [];
 
