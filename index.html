@@ -417,6 +417,10 @@
         border: transparent; 
       }
 
+      #add_msg {
+        color: blue;
+      }
+
     @media (max-width: 1000px), (min-width: 761px) {
       .container {
         max-width: 95%;
@@ -662,12 +666,11 @@
 
 
             <div class="popup_footer2">
-              <span></span>
-              <span>
-              <button type="button" onclick="form_reset()" class="btn btn_gray">Cancel</button>
+              <span id="cart_footer">
+              <button type="button" id="cancel_cart_button" onclick="form_reset()" class="btn btn_gray">Cancel</button>
               <button type="submit" id="add_to_cart_button" class="btn btn_blue">Add to Cart</button>
-              <label id="add_msg"></label>
             </span>
+            <span id="add_msg"></span>
             </div>
             </form>
 
@@ -908,25 +911,17 @@
         local == false ?
           formvalues[6] = formvalues[6] + ", " + formvalues[7] + ", " + formvalues[8] + " " + formvalues[9]
           : formvalues[6] = "";
-        //console.log(formvalues);
+          
         shopping_cart.push(formvalues);
         formvalues = [];
-        //console.log(shopping_cart);
-        //$('#add_to_cart_button').prop('disabled',true);
-        document.getElementById('add_to_cart_button').disabled = true;
-        document.getElementById('add_to_cart_button').classList.add('btn_disabled');
-        document.getElementById("add_msg").innerHTML="&nbsp;Item added to cart";
+
+        document.getElementById("add_msg").innerHTML="** Item added to cart **";
         document.getElementById("cart_button").innerHTML="Shopping Cart " + shopping_cart.length;
+        document.getElementById("cart_footer").style.display = "none";
         setTimeout(function clear_text(){
           document.getElementById("add_msg").innerHTML="";
-          //$('#form_modal').fadeOut();
-          //$('.modal-backdrop').fadeOut();
-          //$('#form_modal').modal('hide');
           document.getElementById('popup_order').style.display == '' ? toggle_modal('popup_order') : null;
-          //$('#add_to_cart_button').prop('disabled',false);
-          document.getElementById('add_to_cart_button').disabled = false;
-          document.getElementById('add_to_cart_button').classList.remove('btn_disabled');
-
+          document.getElementById("cart_footer").style.display = "";
 
         }, 1500);
       });
