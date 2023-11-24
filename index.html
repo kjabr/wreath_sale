@@ -363,6 +363,7 @@
         border-radius: 5px;
         scrollbar-color: #c3cdd0 #e3eaec4f;
         overscroll-behavior: none;
+        position: relative;
       }
 
       #cart_contents > ul {
@@ -406,6 +407,42 @@
         border-radius: 4px;
         width: 8em;
 
+      }
+
+      .down-arrow {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 0;
+        height: 30px;
+        border: 2px solid;
+        border-radius: 2px;
+        animation: jumpInfinite 1.5s infinite;
+      }
+
+      .down-arrow:after {
+        content: " ";
+        position: absolute;
+        top: 12px;
+        left: -10px;
+        width: 16px;
+        height: 16px;
+        border-bottom: 4px solid;
+        border-right: 4px solid;
+        border-radius: 4px;
+        transform: rotateZ(45deg);
+      }
+
+      @keyframes jumpInfinite {
+        0% {
+          margin-bottom: 0;
+        }
+        50% {
+          margin-bottom: 20px;
+        }
+        100% {
+          margin-bottom: 0;
+        }
       }
 
       .input_form_div {
@@ -688,8 +725,10 @@
                 <p>Thank you for supporting Scouts!</p>
                 <div class="delivery_info_span2">
                   <span id="scoutname_span"></span>
-                  <span id="cart_contents">
-                  </span>
+                  <div id="cart_contents" onscroll="cart_contents_scroll()">
+                    <div id="cart_items"></div>
+                    <div id="down-arrow" class="down-arrow" style="display: none;"></div>
+                  </div>
                   <span id="footer2">**Prices include shipping cost.</span>
                 </div>
               </div>
@@ -712,8 +751,6 @@
             <h3 class="modal-title" id="ModalLabel">Scout Name or Organization Name</h3>
             <div class="md-form mb-5">
               <p>The Scout Name or Organization Name is an optional field. The field is intended to provide the appropriate Scout or Organization credit for the sale.</p>
-              <span id="cart_contents">
-              </span>
             </div>
           </div>
         </div>
@@ -1003,8 +1040,15 @@
         }
         //show_cart += "Total: $" + cart_total;
         document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
-        document.getElementById("cart_contents").innerHTML = show_cart;
+        document.getElementById("cart_items").innerHTML = show_cart;
         key == "keep_open" ? null : toggle_modal('popup_cart');
+        //console.log(isScrollable(document.getElementById("cart_contents")));
+        isScrollable(document.getElementById("cart_contents")) ? document.getElementById("down-arrow").style.display="" 
+            : document.getElementById("down-arrow").style.display="none";
+      }
+
+      function cart_contents_scroll() {
+        document.getElementById("down-arrow").style.display="none";
       }
 
       function build_paypal(data){
@@ -1110,7 +1154,7 @@
 
       function clear_cart(){
         //"Scout/Org Name: " + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "<br>";
-        document.getElementById("cart_contents").innerHTML = "<br>Cart is empty<br><br>";
+        document.getElementById("cart_items").innerHTML = "<br>Cart is empty<br><br>";
         document.getElementById("cart_button").innerHTML = "Shopping Cart";
         //$('#paypal_button').prop('disabled',true);
         document.getElementById('paypal_button').disabled = true;
@@ -1158,6 +1202,10 @@
         //var size = input.length;
         //if (size>0) {input += input}
         return input;	
+      }
+
+      function isScrollable(elem) {
+        return elem.scrollHeight > elem.clientHeight;
       }
 
       function toggle_modal(which_popup){
