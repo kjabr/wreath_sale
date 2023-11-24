@@ -403,6 +403,11 @@
         flex-wrap: nowrap;
       }
 
+      #state_search {
+        background-color: #E3EEFC;
+        border: transparent; 
+      }
+
     @media (max-width: 1000px), (min-width: 761px) {
       .container {
         max-width: 95%;
@@ -578,7 +583,7 @@
                 <div class="input_form_div"><label for="quantity">Quantity </label> <input type="number" class="input-small" style="width:2em;" id="quantity" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"></div>
                 <div class="input_form_div"><label for="gift_msg">* Gift Message: </label> <input type="text" style="flex-grow: 1;" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"></div>
                 <div class="input_form_div">
-                  <label for="ship_name">* Their Name:</label>
+                  <label for="ship_name">* Name to ship to:</label>
                     <input type="text" id="ship_name" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = char_only_format(this.value)" required>
                 </div>
                 
