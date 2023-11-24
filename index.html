@@ -158,6 +158,11 @@
       position: relative;
    }
 
+   label {
+    white-space: nowrap;
+    margin-right: 10px;
+   }
+
     .items_slider {
       display: flex;
       flex-wrap:nowrap;
@@ -195,9 +200,10 @@
       width: 80%;
     }
 
+      /*
     #item_details {
       width: 37vw;
-    }
+    } */
 
     .v_bar {
       border-right: 3px solid grey;
@@ -348,7 +354,13 @@
         margin-left: -1em;
       }
 
-      .delivery_info1 > input {
+      .delivery_info1 {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .delivery_info1 > div > input {
 
         background-color: #E3EEFC;
         margin: 3px;
@@ -357,8 +369,7 @@
         padding: 1px 5px 1px 5px;
         border: 0.2px solid #000000;
         border-radius: 4px;
-        width: 14em;
-        max-width: 95%;
+        width: 8em;
       }
 
       .delivery_info_span {
@@ -368,9 +379,11 @@
 
       .delivery_info_span2 {
         margin-left: 1em;
+        display: flex;
+        flex-direction: column;
       }
 
-      .delivery_info_span2 > input {
+      .delivery_info_span2 > div > input {
         background-color: #E3EEFC;
         margin: 3px;
         margin-bottom: 0.3em;
@@ -378,15 +391,36 @@
         padding: 1px 5px 1px 5px;
         border: 0.2px solid #000000;
         border-radius: 4px;
-        width: 14em;
+        width: 8em;
+
+      }
+
+      .input_form_div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+
+    @media (max-width: 1000px), (min-width: 761px) {
+      .container {
         max-width: 95%;
       }
 
-      #gift_msg {
-        width: 22vw;
+      .delivery_info1 > div > input {
+        max-width: 50%;
       }
 
-    @media (max-width: 800px) {
+      .delivery_info_span2 > div > input {
+        max-width: 50%;
+      }
+
+      .form_main {
+        margin: 1em;
+      }
+
+    }
+
+    @media (max-width: 760px) {
 
       
         h1 {
@@ -429,10 +463,6 @@
         margin-right: auto;
       }
 
-      #gift_msg {
-        width: 46vw;
-      }
-
       #item_details {
         width: 100%;
       }
@@ -440,32 +470,17 @@
       #footer1 {
         margin-top: -20px;
       }
-    }
 
-    @media (max-width: 400px) {
-
-      /*
-      .btn_shopping_cart {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    h1 {
-      font-size: 20px;
-    }
-
-    h2 {
-      font-size: 18px;
-    } */
-
-    .troopsite_link {
+      .troopsite_link {
       display: block;
       margin-left: auto;
       margin-right: auto;
-    }
-  }
+      }
 
+      .form_main {
+        margin: 10px;
+      }
+    }
 
 </style>
 
@@ -537,71 +552,74 @@
               <p id="item_details"></p>
               <span id="delivery_info1" class="delivery_info1">
 
-                Quantity <input type="number" class="input-small" id="quantity" style="width:4em;" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"> <br>
-                * Gift Message <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"> <br>
-                * Ship-to Name:
-                  <input type="text" id="ship_name" style="width:10em;" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = char_only_format(this.value)" required> <br>
+                <div class="input_form_div"><label for="quantity">Quantity </label> <input type="number" class="input-small" style="width:2em;" id="quantity" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"></div>
+                <div class="input_form_div"><label for="gift_msg">* Gift Message: </label> <input type="text" style="flex-grow: 1;" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"></div>
+                <div class="input_form_div">
+                  <label for="ship_name">* Their Name:</label>
+                    <input type="text" id="ship_name" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = char_only_format(this.value)" required>
+                </div>
                 
                   <div class="delivery_info_span"> * Their Address: (required)<br></div>
             <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
                 <div class="delivery_info_span2">
-                  Street Address <input type="text" id="street_address_search" style="width:10em;" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required> <br>
-                  City <input type="text" id="city" name="city_search" style="width:8em;" autocomplete="off" onInput="this.value = char_only_format(this.value)" required>
-                  <br>
-                  State <select id="state_search" name="state">
-                  	<option value="AL">AL</option>
-                  	<option value="AK">AK</option>
-                  	<option value="AR">AR</option>
-                  	<option value="AZ">AZ</option>
-                  	<option value="CA">CA</option>
-                  	<option value="CO">CO</option>
-                  	<option value="CT">CT</option>
-                  	<option value="DC">DC</option>
-                  	<option value="DE">DE</option>
-                  	<option value="FL">FL</option>
-                  	<option value="GA">GA</option>
-                  	<option value="HI">HI</option>
-                  	<option value="IA">IA</option>
-                  	<option value="ID">ID</option>
-                  	<option value="IL">IL</option>
-                  	<option value="IN">IN</option>
-                  	<option value="KS">KS</option>
-                  	<option value="KY">KY</option>
-                  	<option value="LA">LA</option>
-                  	<option value="MA">MA</option>
-                  	<option value="MD">MD</option>
-                  	<option value="ME">ME</option>
-                  	<option value="MI">MI</option>
-                  	<option value="MN">MN</option>
-                  	<option value="MO">MO</option>
-                  	<option value="MS">MS</option>
-                  	<option value="MT">MT</option>
-                  	<option value="NC">NC</option>
-                  	<option value="NE">NE</option>
-                  	<option value="NH">NH</option>
-                  	<option value="NJ">NJ</option>
-                  	<option value="NM">NM</option>
-                  	<option value="NV">NV</option>
-                  	<option value="NY">NY</option>
-                  	<option value="ND">ND</option>
-                  	<option value="OH">OH</option>
-                  	<option value="OK">OK</option>
-                  	<option value="OR" selected>OR</option>
-                  	<option value="PA">PA</option>
-                  	<option value="RI">RI</option>
-                  	<option value="SC">SC</option>
-                  	<option value="SD">SD</option>
-                  	<option value="TN">TN</option>
-                  	<option value="TX">TX</option>
-                  	<option value="UT">UT</option>
-                  	<option value="VT">VT</option>
-                  	<option value="VA">VA</option>
-                  	<option value="WA">WA</option>
-                  	<option value="WI">WI</option>
-                  	<option value="WV">WV</option>
-                  	<option value="WY">WY</option>
-                  </select>
-                    Zip code <input type="text" inputmode="decimal" id="zip_code_search" style="width:6em;" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" required>
+                  <div class="input_form_div"><label for="street_address_search">Street Address: </label><input type="text" id="street_address_search" style="flex-grow: 1;" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required></div>
+                  <div class="input_form_div"><label for="city_search">City: </label><input type="text" id="city" name="city_search" autocomplete="off" onInput="this.value = char_only_format(this.value)" required></div>
+                  <div class="input_form_div">
+                    <label for="state_search">State</label> <select id="state_search" name="state">
+                      <option value="AL">AL</option>
+                      <option value="AK">AK</option>
+                      <option value="AR">AR</option>
+                      <option value="AZ">AZ</option>
+                      <option value="CA">CA</option>
+                      <option value="CO">CO</option>
+                      <option value="CT">CT</option>
+                      <option value="DC">DC</option>
+                      <option value="DE">DE</option>
+                      <option value="FL">FL</option>
+                      <option value="GA">GA</option>
+                      <option value="HI">HI</option>
+                      <option value="IA">IA</option>
+                      <option value="ID">ID</option>
+                      <option value="IL">IL</option>
+                      <option value="IN">IN</option>
+                      <option value="KS">KS</option>
+                      <option value="KY">KY</option>
+                      <option value="LA">LA</option>
+                      <option value="MA">MA</option>
+                      <option value="MD">MD</option>
+                      <option value="ME">ME</option>
+                      <option value="MI">MI</option>
+                      <option value="MN">MN</option>
+                      <option value="MO">MO</option>
+                      <option value="MS">MS</option>
+                      <option value="MT">MT</option>
+                      <option value="NC">NC</option>
+                      <option value="NE">NE</option>
+                      <option value="NH">NH</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NM">NM</option>
+                      <option value="NV">NV</option>
+                      <option value="NY">NY</option>
+                      <option value="ND">ND</option>
+                      <option value="OH">OH</option>
+                      <option value="OK">OK</option>
+                      <option value="OR" selected>OR</option>
+                      <option value="PA">PA</option>
+                      <option value="RI">RI</option>
+                      <option value="SC">SC</option>
+                      <option value="SD">SD</option>
+                      <option value="TN">TN</option>
+                      <option value="TX">TX</option>
+                      <option value="UT">UT</option>
+                      <option value="VT">VT</option>
+                      <option value="VA">VA</option>
+                      <option value="WA">WA</option>
+                      <option value="WI">WI</option>
+                      <option value="WV">WV</option>
+                      <option value="WY">WY</option>
+                    </select>
+                  </div>
+                    <div class="input_form_div"><label for="zip_code_search">Zip code: </label><input type="text" inputmode="decimal" id="zip_code_search" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" required></div>
                 </div>
             </span>
 
