@@ -328,8 +328,8 @@
 
       .popup_button {
         position: absolute;
-        top: -16px;
-        right: -16px;
+        top: -7px;
+        right: -12px;
         background-color: teal;
         border: 1px solid transparent;
         border-radius: 8px;
@@ -483,6 +483,27 @@
         margin: 10px;
       }
     }
+
+    @media (max-width: 320px) {
+      .delivery_info1 > div > input {
+        max-width: 65%;
+      }
+
+      .delivery_info_span2 > div > input {
+        max-width: 60%;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .delivery_info1 > div > input {
+        max-width: 50%;
+      }
+
+      .delivery_info_span2 > div > input {
+        max-width: 45%;
+      }
+    }
+
 
 </style>
 
