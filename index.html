@@ -763,13 +763,13 @@
     </div>
 </body>
     <script>
-      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
-      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
       var setup_sheet_name = "Setup";
       var store_sheet_name = "Store";
       var orgs_sheet_name = "Orgs";
       var local_sheet_name = "Local";
-      var sheet_names = ['Setup', 'Store', 'Orgs', 'Local', 'Webform Setup'];
+      var webform_sheet_name = "Webform Setup";
+      var sheet_names = [setup_sheet_name, store_sheet_name, orgs_sheet_name, local_sheet_name, webform_sheet_name];
+      var sheet_ranges = "A1:I20";
       var sheet_values = {};
 
       var formvalues = [];
@@ -818,7 +818,7 @@
 
         var range_of_sheets = "";
         sheet_names.forEach((item, i) => {
-          range_of_sheets += "&ranges=" + item + "!A1:I20";
+          range_of_sheets += "&ranges=" + item + "!" + sheet_ranges;
         });
 
         fetch_spreadsheet(
@@ -834,7 +834,7 @@
               var row_values = [];
 
               item2.values.forEach((item3, i3) => {
-                if (item3.effectiveValue) {
+                if (item3.formattedValue) {
                   row_values.push(item3.formattedValue);
                 }
                 
@@ -854,10 +854,10 @@
           //console.log(sheet_values);
           document.getElementById("container").style.display = "";
 
-          orgs_init(sheet_values["Orgs"].slice(1));
-          local == true ? target_sheet = "Local" : target_sheet = "Store";
+          orgs_init(sheet_values[orgs_sheet_name].slice(1));
+          local == true ? target_sheet = local_sheet_name : target_sheet = store_sheet_name;
 
-          build_paypal(sheet_values["Setup"]);
+          build_paypal(sheet_values[setup_sheet_name]);
           build_html(sheet_values[target_sheet].slice(1));
 
           document.getElementById("arrow-left").innerHTML = left_chevron;
