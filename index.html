@@ -767,8 +767,8 @@
       var store_sheet_name = "Store";
       var orgs_sheet_name = "Orgs";
       var local_sheet_name = "Local";
-      var webform_sheet_name = "Webform Setup";
-      var sheet_names = [setup_sheet_name, store_sheet_name, orgs_sheet_name, local_sheet_name, webform_sheet_name];
+      //var webform_sheet_name = "Webform Setup";
+      var sheet_names = [setup_sheet_name, store_sheet_name, orgs_sheet_name, local_sheet_name];
       var sheet_ranges = "A1:I20";
       var sheet_values = {};
 
@@ -814,7 +814,6 @@
         //console.log(Date.now());
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        var sheet_interesting_values;
 
         var range_of_sheets = "";
         sheet_names.forEach((item, i) => {
@@ -827,31 +826,8 @@
           range_of_sheets
         ).then(r => {
           //console.log(r.sheets);
-          r.sheets.forEach((item, i) => {
-            sheet_interesting_values = [];
-            //console.log(item.properties.title);
-            item.data[0].rowData.forEach((item2, i2) => {
-              var row_values = [];
-
-              item2.values.forEach((item3, i3) => {
-                if (item3.formattedValue) {
-                  row_values.push(item3.formattedValue);
-                }
-                
-                //console.log(item3.effectiveValue.stringValue);
-                //sheet_interesting_values[i2][i3] = item3.effectiveValue.stringValue;
-              });
-              //console.log(row_values);
-              if (row_values.length > 0 ) {
-                sheet_interesting_values.push(row_values);
-
-              }
-            });
-            sheet_values[item.properties.title] = sheet_interesting_values;
-
-          }); 
+          extract_values(r); //extracts a row:column array of values of each sheet and populates global variable sheet_values
           
-          //console.log(sheet_values);
           document.getElementById("container").style.display = "";
 
           orgs_init(sheet_values[orgs_sheet_name].slice(1));
@@ -874,6 +850,34 @@
 	      const data = await response.json();
 	      return data;
 	    } 
+
+      function extract_values(r){
+        var sheet_interesting_values;
+
+        r.sheets.forEach((item, i) => {
+            sheet_interesting_values = [];
+            //console.log(item.properties.title);
+            item.data[0].rowData.forEach((item2, i2) => {
+              var row_values = [];
+
+              item2.values.forEach((item3, i3) => {
+                if (item3.formattedValue) {
+                  row_values.push(item3.formattedValue);
+                }
+                
+                //console.log(item3.effectiveValue.stringValue);
+                //sheet_interesting_values[i2][i3] = item3.effectiveValue.stringValue;
+              });
+              //console.log(row_values);
+              if (row_values.length > 0 ) {
+                sheet_interesting_values.push(row_values);
+
+              }
+            });
+            sheet_values[item.properties.title] = sheet_interesting_values;
+
+          }); 
+      }
 
       function orgs_init(org_data){
         orgs = org_data.reduce((a, [k1, k2, k3]) => {
