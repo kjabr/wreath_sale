@@ -292,7 +292,6 @@
     }
 
     .popup {
-        max-width: 40%;
         max-height: 100%;
         position: fixed;
         z-index: 1101;
@@ -304,6 +303,8 @@
         transition: opacity 400ms ease-in;
         background: #F7F6EF;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: auto;
+        max-width: 700px;
       }
 
       .popup_overlay {
@@ -383,7 +384,7 @@
         padding: 1px 5px 1px 5px;
         border: 0.2px solid #000000;
         border-radius: 4px;
-        width: 10em;
+        width: 100%;
       }
 
       .delivery_info_span {
@@ -449,6 +450,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
+        width: 100%;
       }
 
       #state_search {
@@ -469,18 +471,34 @@
         margin-left: -16px;
       }
 
-    @media (max-width: 1000px), (min-width: 761px) {
+      #ship_name, #city {
+        max-width: 10em;
+      }
+
+      #street_address_search, #gift_msg {
+        width: 100%;
+        max-width: 20em;
+      }
+
+      
+
+    @media (max-width: 1000px) and (min-width: 761px) {
       .container {
         max-width: 95%;
       }
 
+      .popup {
+        max-width: 75%;
+      }
+
+      /*
       .delivery_info1 > div > input {
         max-width: 50%;
       }
 
       .delivery_info_span2 > div > input {
         max-width: 50%;
-      }
+      } */
 
       .form_main {
         margin: 1em;
@@ -550,7 +568,7 @@
         margin: 10px;
       }
     }
-
+/*
     @media (max-width: 320px) {
       .delivery_info1 > div > input {
         max-width: 65%;
@@ -563,13 +581,13 @@
 
     @media (max-width: 550px) {
       .delivery_info1 > div > input {
-        max-width: 50%;
+        max-width: 65%;
       }
 
       .delivery_info_span2 > div > input {
         max-width: 45%;
       }
-    }
+    }*/
 
 
 </style>
@@ -594,7 +612,7 @@
       <div>
         <span id="scoutname">
           Scoutname: </span>
-        <span id="scoutname_field"> <input type="text" style="width:8em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
+        <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
 
           <input type="button" class="scout_info" onclick="toggle_modal('popup_scout_info')" style="border:none; background:none; color:blue;" value="[i]">
         </span>
@@ -643,7 +661,7 @@
               <span id="delivery_info1" class="delivery_info1">
 
                 <div class="input_form_div"><label for="quantity">Quantity: </label> <input type="number" class="input-small" style="width:2em;" id="quantity" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"></div>
-                <div class="input_form_div"><label for="gift_msg">* Gift Message: </label> <input type="text" style="flex-grow: 1;" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"></div>
+                <div class="input_form_div"><label for="gift_msg">* Gift Message: </label> <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"></div>
                 <div class="input_form_div">
                   <label for="ship_name">* Name to ship to:</label>
                     <input type="text" id="ship_name" name="ship_name" autocomplete="off" placeholder="Required" onInput="this.value = char_only_format(this.value)" required>
@@ -652,7 +670,7 @@
                   <div class="delivery_info_span"> * Their Address: (required)<br></div>
             <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
                 <div class="delivery_info_span2">
-                  <div class="input_form_div"><label for="street_address_search">Street Address: </label><input type="text" id="street_address_search" style="flex-grow: 1;" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required></div>
+                  <div class="input_form_div"><label for="street_address_search">Street Address: </label><input type="text" id="street_address_search" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required></div>
                   <div class="input_form_div"><label for="city_search">City: </label><input type="text" id="city" name="city_search" autocomplete="off" onInput="this.value = char_only_format(this.value)" required></div>
                   <div class="input_form_div">
                     <label for="state_search">State</label> <select id="state_search" name="state">
@@ -988,6 +1006,12 @@
 
       function build_cart(key){
         var cart_total = 0;
+
+        if (document.getElementById("scout_name") != "") {
+          document.getElementById("scout_name").value = 
+            (document.getElementById("scout_name").value).toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+        }
+
         if (shopping_cart.length > 0 && (paypal_param[1][0] == "yes" || prod == false)) {
           //$('#paypal_button').prop('disabled',false);
           document.getElementById('paypal_button').disabled = false;
@@ -1012,7 +1036,7 @@
         var show_cart = "";
 
         if (shopping_cart.length == 0){
-          show_cart = "<br><strong>*** Cart is empty ***</strong><br><br>";
+          show_cart = "<br><center><strong>*** Cart is empty ***</strong></center><br>";
         }
 
         for (m1 = 0; m1 < shopping_cart.length; m1++ ) {
@@ -1191,7 +1215,7 @@
 
       function numb_char_format(input) {
         //returns numbers and characters only
-        input = input.replace(/[^&a-zA-Z0-9\s]/g, '');
+        input = input.replace(/[^&!a-zA-Z0-9\s\-]/g, '');
         //var size = input.length;
         //if (size>0) {input += input}
         return input;	
@@ -1199,7 +1223,7 @@
 
       function char_only_format(input) {
         //returns characters only
-        input = input.replace(/[^&a-zA-Z\s]/g, '');
+        input = input.replace(/[^&!a-zA-Z\s\-]/g, '');
         //var size = input.length;
         //if (size>0) {input += input}
         return input;	
