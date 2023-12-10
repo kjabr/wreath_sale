@@ -400,7 +400,7 @@
 
       }
 
-      .delivery_info_span2 > div > input {
+      .delivery_info_span2 > div > input, .delivery_info_span2 > div > div > input {
         background-color: #E3EEFC;
 
         padding: 1px 5px 1px 5px;
@@ -456,6 +456,7 @@
       #state_search {
         background-color: #E3EEFC;
         border: transparent; 
+        margin-right: 16px;
       }
 
       #add_msg {
@@ -734,8 +735,9 @@
                       <option value="WV">WV</option>
                       <option value="WY">WY</option>
                     </select>
-                  </div>
+                  
                     <div class="input_form_div"><label for="zip_code_search">Zip code: </label><input type="text" inputmode="decimal" style="width: 5em;" id="zip_code_search" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" required></div>
+                  </div>
                 </div>
             </span>
 
