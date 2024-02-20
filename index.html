@@ -459,7 +459,7 @@
         margin-right: 16px;
       }
 
-      #add_msg {
+      #add_msg, #add_msg2 {
         color: blue;
       }
 
@@ -665,10 +665,10 @@
             <h3 class="modal-title" id="ModalLabel">Item Shipping Details</h3>
             <form id="form_main" class="form_main">
               <p id="item_details"></p>
-              <span id="delivery_info1" class="delivery_info1">
 
                 <div class="input_form_div"><label for="quantity">Quantity: </label> 
                   <input type="number" class="input-small" style="width:2em;" id="quantity" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"></div>
+              <span id="delivery_info1" class="delivery_info1">
                 <div class="input_form_div"><label for="gift_msg">* Gift Message: </label> 
                   <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)"></div>
                 <div class="input_form_div">
@@ -775,7 +775,7 @@
                 <span>
                   <button type="button" onclick="clear_cart()" class="btn btn_gray">Clear</button>
                   <button type="button" id="paypal_button" onclick="paypal()" class="btn btn_blue">Pay with PayPal</button>
-                  <label id="add_msg"></label>
+                  <span id="add_msg2"></span>
                 </span>
               </div>
               </div>
@@ -1133,7 +1133,7 @@
 
         if (shopping_cart.length > 0) {
           if (local == false) {
-            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='theForm'>"
+            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='paypal_form'>"
             paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
             paypal_start += "<input type='hidden' name='upload' value='1'>";
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
@@ -1142,7 +1142,7 @@
             paypal_start += "<input type='hidden' name='custom' value='" + paypal_param[1][4] + "'>";
           }
           else {
-            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='theForm'>"
+            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='paypal_form'>"
             paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
             paypal_start += "<input type='hidden' name='upload' value='1'>";
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
@@ -1292,7 +1292,7 @@
             dynamic_html_items += "<div class='col-xs-3'>";
             dynamic_html_items += "<div class='center_items'>";
             dynamic_html_items += "<img class='w-100 rounded' src='" + url_split[0] + "=w480 '";
-            dynamic_html_items += "id=img_" + n + " onclick='select_item(this)'";
+            dynamic_html_items += "id=img_" + i + " onclick='select_item(this)'";
             dynamic_html_items += "data-target='#form_modal '";
             dynamic_html_items += "alt=' '>";
             dynamic_html_items += "<h2 class=''>" + store_items[i][1] + "</h2>";
