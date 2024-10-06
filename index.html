@@ -1079,10 +1079,10 @@
               show_cart += "</ul>";
             }
             //console.log(shopping_cart[m1][2]);
-            cart_total += round(shopping_cart[m1][2] * Number(shopping_cart[m1][3]), 2);
+            cart_total += shopping_cart[m1][2] * Number(shopping_cart[m1][3]);
         }
         //show_cart += "Total: $" + cart_total;
-        document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
+        document.getElementById("cart_total_footer").innerText = "Total: $" + round(cart_total, 2);
         document.getElementById("cart_items").innerHTML = show_cart;
         key == "keep_open" ? null : toggle_modal('popup_cart');
         //console.log(isScrollable(document.getElementById("cart_contents")));
