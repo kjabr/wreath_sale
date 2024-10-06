@@ -1079,7 +1079,7 @@
               show_cart += "</ul>";
             }
             //console.log(shopping_cart[m1][2]);
-            cart_total += (shopping_cart[m1][2] * Number(shopping_cart[m1][3])).toFixed(2);
+            cart_total += (shopping_cart[m1][2]).toFixed(2) * Number(shopping_cart[m1][3]);
         }
         //show_cart += "Total: $" + cart_total;
         document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
