@@ -1090,6 +1090,10 @@
             : document.getElementById("down-arrow").style.display="none";
       }
 
+      function round(value, decimals) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      } 
+
       function cart_contents_scroll() {
         document.getElementById("down-arrow").style.display="none";
       }
