@@ -1185,7 +1185,8 @@
               paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "'>";
               paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
               paypal_items += "<input type='hidden' name='os3_" + count + "' value='" + part_number[part_name.findIndex(x=>x.includes(shopping_cart[m2][1]))] + "'>";
-
+              paypal_items += "<input type='hidden' name='on4_" + count + "' value='Part_Index'>";
+              paypal_items += "<input type='hidden' name='os4_" + count + "' value='" + part_name.findIndex(x=>x.includes(shopping_cart[m2][1])) + "'>";
             }
 
           }
