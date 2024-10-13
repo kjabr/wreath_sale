@@ -969,7 +969,7 @@
         local == false ?
         (
           document.getElementById("ship_name").value = (document.getElementById("ship_name").value).replace(/[,@*!^%$#'\.]/g, ''),
-          document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[,@*&!^%$#'\.]/g, ''),
+          document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[@*&!^%$'\.]/g, ''),
           document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#'\.]/g, '')
         )
         : null;
