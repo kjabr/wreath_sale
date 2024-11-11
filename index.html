@@ -1101,7 +1101,7 @@
 
       function build_paypal(data){
         paypal_param = [...data];
-          if (paypal_param[1][0] == "yes" || prod == true) {
+          if (paypal_param[1][0] == "yes" && prod == true) {
         }
         else {
           toggle_modal('sale_over_alert');
