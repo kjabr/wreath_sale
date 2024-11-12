@@ -1109,8 +1109,18 @@
 
         document.getElementById("page_title").innerHTML = "<h1>" + paypal_param [1][1] + "</h1>";
 
-        url_org != "" ? document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>" :
+        if (url_org != ""){
+          document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>";
+        }
+        else if (local == true) {
+          document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][3] + "<a href='mailto:troop432wreathsales@gmail.com' target='_blank'>[Contact Link]<a></p>";
+        }
+        else {
           document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='mailto:troop432wreathsales@gmail.com' target='_blank'>[Contact Link]<a></p>";
+        }
+
+        //url_org != "" ? document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>" :
+        //  document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='mailto:troop432wreathsales@gmail.com' target='_blank'>[Contact Link]<a></p>";
         //google.script.run.withSuccessHandler(build_html).get_data_from_sheets("Store");
         //build_html(wreath_data);
 
