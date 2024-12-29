@@ -810,6 +810,11 @@
       var sheet_ranges = "A1:K25";
       var sheet_values = {};
 
+      var isgiftshipperprod, isdoorhangerprod, website_title, giftshipper_desc, doorhanger_desc, custom_field, prod_paypal_id, 
+        prod_paypal_url, staging_paypal_id, staging_paypal_url, contact_email;
+      isgiftshipperprod = isdoorhangerprod = website_title = giftshipper_desc = doorhanger_desc = custom_field = prod_paypal_id =
+        prod_paypal_url = staging_paypal_id = staging_paypal_url = contact_email = "";
+
       var formvalues = [];
       var shopping_cart = [];
       var store_items = [];
@@ -1023,13 +1028,13 @@
             (document.getElementById("scout_name").value).toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
         }
 
-        if (shopping_cart.length > 0 && (paypal_param[1][0] == "yes" || prod == false)) {
+        if (shopping_cart.length > 0 && (isgiftshipperprod == "yes" || prod == false)) {
           //$('#paypal_button').prop('disabled',false);
           document.getElementById('paypal_button').disabled = false;
           document.getElementById('paypal_button').title = "";
           document.getElementById('paypal_button').classList.remove("btn_disabled");
         }
-        else if (shopping_cart.length == 0 && (paypal_param[1][0] == "yes" || prod == false)) {
+        else if (shopping_cart.length == 0 && (isgiftshipperprod == "yes" || prod == false)) {
           document.getElementById('paypal_button').disabled = true;
           document.getElementById('paypal_button').classList.add("btn_disabled");
 
@@ -1101,22 +1106,39 @@
 
       function build_paypal(data){
         paypal_param = [...data];
-          if (paypal_param[1][0] == "yes" && prod == true) {
+
+
+        //var isgiftshipperprod, isdoorhangerprod, website_title, giftshipper_desc, doorhanger_desc, custom_field, prod_paypal_id, 
+        // prod_paypal_url, staging_paypal_id, staging_paypal_url, contact_email;
+
+        isgiftshipperprod = paypal_param[1][0];
+        isdoorhangerprod = paypal_param[1][1];
+        website_title = paypal_param[1][2];
+        giftshipper_desc = paypal_param[1][3];
+        doorhanger_desc = paypal_param[1][4];
+        custom_field = paypal_param[1][5];
+        prod_paypal_id = paypal_param[1][6];
+        prod_paypal_url = paypal_param[1][7];
+        staging_paypal_id = paypal_param[1][8];
+        staging_paypal_url = paypal_param[1][9];
+        contact_email = paypal_param[1][10];
+
+          if (isgiftshipperprod == "yes" && prod == true) {
         }
         else {
           toggle_modal('sale_over_alert');
         }
 
-        document.getElementById("page_title").innerHTML = "<h1>" + paypal_param [1][1] + "</h1>";
+        document.getElementById("page_title").innerHTML = "<h1>" + website_title + "</h1>";
 
         if (url_org != ""){
           document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>";
         }
         else if (local == true) {
-          document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][3] + "<a href='mailto:" + paypal_param [1][9] + "' target='_blank'>[Email]<a></p>";
+          document.getElementById("page_description").innerHTML = "<p>" + doorhanger_desc + "<a href='mailto:" + contact_email + "' target='_blank'>[Email]<a></p>";
         }
         else {
-          document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='mailto:" + paypal_param [1][9] + "' target='_blank'>[Email]<a></p>";
+          document.getElementById("page_description").innerHTML = "<p>" + giftshipper_desc + "<a href='mailto:" + contact_email + "' target='_blank'>[Email]<a></p>";
         }
 
         //url_org != "" ? document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>" :
@@ -1134,14 +1156,14 @@
         var paypal_account = "";
         var paypal_url = "";
 
-        if (paypal_param[1][0] == "yes" && prod == true) {
-          paypal_account = paypal_param[1][5];
-          paypal_url = paypal_param[1][6];
+        if (isgiftshipperprod == "yes" && prod == true) {
+          paypal_account = prod_paypal_id;
+          paypal_url = prod_paypal_url;
 
         }
         else {
-          paypal_account = paypal_param[1][7];
-          paypal_url = paypal_param[1][8];
+          paypal_account = staging_paypal_id;
+          paypal_url = staging_paypal_url;
         }
 
 
@@ -1153,7 +1175,7 @@
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
             paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
-            paypal_start += "<input type='hidden' name='custom' value='" + paypal_param[1][4] + "'>";
+            paypal_start += "<input type='hidden' name='custom' value='" + custom_field + "'>";
           }
           else {
             paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='paypal_form'>"
