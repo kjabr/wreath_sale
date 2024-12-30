@@ -1028,24 +1028,48 @@
             (document.getElementById("scout_name").value).toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
         }
 
-        if (shopping_cart.length > 0 && (isgiftshipperprod == "yes" || prod == false)) {
-          //$('#paypal_button').prop('disabled',false);
-          document.getElementById('paypal_button').disabled = false;
-          document.getElementById('paypal_button').title = "";
-          document.getElementById('paypal_button').classList.remove("btn_disabled");
+        if (local == false) { //disable paypal button routine for none local
+
+          if (shopping_cart.length > 0 && (isgiftshipperprod == "yes" || prod == false)) {
+            //$('#paypal_button').prop('disabled',false);
+            document.getElementById('paypal_button').disabled = false;
+            document.getElementById('paypal_button').title = "";
+            document.getElementById('paypal_button').classList.remove("btn_disabled");
+          }
+          else if (shopping_cart.length == 0 && (isgiftshipperprod == "yes" || prod == false)) {
+            document.getElementById('paypal_button').disabled = true;
+            document.getElementById('paypal_button').classList.add("btn_disabled");
+
+            //$('#paypal_button').prop('disabled',true);
+          }
+
+          else {
+            document.getElementById('paypal_button').disabled = true;
+            document.getElementById('paypal_button').classList.add("btn_disabled");
+            document.getElementById('paypal_button').title = "Wreath Sale is Over!";
+
+          }
         }
-        else if (shopping_cart.length == 0 && (isgiftshipperprod == "yes" || prod == false)) {
-          document.getElementById('paypal_button').disabled = true;
-          document.getElementById('paypal_button').classList.add("btn_disabled");
+        else { //disable paypal button for local
+          if (shopping_cart.length > 0 && (isdoorhangerprod == "yes" || prod == false)) {
+            //$('#paypal_button').prop('disabled',false);
+            document.getElementById('paypal_button').disabled = false;
+            document.getElementById('paypal_button').title = "";
+            document.getElementById('paypal_button').classList.remove("btn_disabled");
+          }
+          else if (shopping_cart.length == 0 && (isdoorhangerprod == "yes" || prod == false)) {
+            document.getElementById('paypal_button').disabled = true;
+            document.getElementById('paypal_button').classList.add("btn_disabled");
 
-          //$('#paypal_button').prop('disabled',true);
-        }
+            //$('#paypal_button').prop('disabled',true);
+          }
 
-        else {
-          document.getElementById('paypal_button').disabled = true;
-          document.getElementById('paypal_button').classList.add("btn_disabled");
-          document.getElementById('paypal_button').title = "Wreath Sale is Over!";
+          else {
+            document.getElementById('paypal_button').disabled = true;
+            document.getElementById('paypal_button').classList.add("btn_disabled");
+            document.getElementById('paypal_button').title = "Wreath Sale is Over!";
 
+          }
         }
         
         document.getElementById('scoutname_span').innerHTML = "Scout/Org Name: " + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "<br>";
@@ -1123,8 +1147,10 @@
         staging_paypal_url = paypal_param[1][9];
         contact_email = paypal_param[1][10];
 
-          if (isgiftshipperprod == "yes" && prod == true) {
-        }
+        if (isgiftshipperprod == "yes" && prod == true && local == false) {
+          }
+        else if (isdoorhangerprod == "yes" && prod == true && local == true) {
+          }
         else {
           toggle_modal('sale_over_alert');
         }
