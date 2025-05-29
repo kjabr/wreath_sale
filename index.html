@@ -60,6 +60,13 @@
       justify-content: center;
     }
 
+    .container2{
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+      margin: auto;
+    }
+
       /*
     .donate_button {
       position: absolute;
@@ -596,6 +603,28 @@
 
   <body>
 
+    <div class="container2" style="display: none;" id="container2">
+      <h2 style="text-align: center;">Troop432 Annual Wreath Sale</h2>
+      <p id="description2">
+        Thank you for supporting our scouts! This Troop432's annual Wreath Sale. This fundraiser supports our troop and makes our activities more affordable. 
+      </p>
+
+      <p id="description3">
+        There are two ways to order wreaths online. One for local wreaths for the Lake Oswego area to be delivered in by our scouts. The other is for mail order 
+        (aka Giftshipper) that is shipped directly from our supplier (a local farm) to anyone via UPS to any US address. Please expect delivery right after Thanksgiving.
+
+        If you need any help please contact us at <a href="mailto:troop432wreathsales@gmail.com?subject=Wreath Order Support" target="_blank">troop432wreathsales@gmail.com</a>
+      </p>
+
+      <span style="text-align: left;">
+        <ul>
+          <li><a id="local_store_link" href="https://doorhanger.troop432lo.org" target="_blank">Local Wreath Webstore</a></li>
+          <li><a id="giftshipper_store_link" href="https://giftshipper.troop432lo.org" target="_blank">Gift Shipper Webstore</a></li>
+        </ul>
+      </span>
+    </div>
+
+
     <div class="container" id="container">
       <br>
       <span id="page_title"></span>
@@ -858,24 +887,35 @@
           range_of_sheets += "&ranges=" + item + "!" + sheet_ranges;
         });
 
-        fetch_spreadsheet(
-          urlParams.get("id1").replace("/", ""),
-          urlParams.get("id2").replace("/", ""),
-          range_of_sheets
-        ).then(r => {
-          extract_values(r); //extracts a [row][column] array of values of each sheet and populates global variable sheet_values
-          document.getElementById("container").style.display = "";
+        if (urlParams.get("id1") == undefined){
+          document.getElementById("container").style.display = "none";
+          document.getElementById("container2").style.display = "";
 
-          orgs_init(sheet_values[orgs_sheet_name].slice(1));
-          local == true ? target_sheet = local_sheet_name : target_sheet = store_sheet_name;
+          urlParams.get("scoutname") == null ? null : (
+            document.getElementById("local_store_link").href += "?scoutname=" + urlParams.get("scoutname"),
+            document.getElementById("giftshipper_store_link").href += "?scoutname=" + urlParams.get("scoutname")
+          );
 
-          build_paypal(sheet_values[setup_sheet_name]);
-          build_html(sheet_values[target_sheet].slice(1));
+        }
+        else {
+          fetch_spreadsheet(
+            urlParams.get("id1").replace("/", ""),
+            urlParams.get("id2").replace("/", ""),
+            range_of_sheets
+          ).then(r => {
+            extract_values(r); //extracts a [row][column] array of values of each sheet and populates global variable sheet_values
+            document.getElementById("container").style.display = "";
 
-          document.getElementById("arrow-left").innerHTML = left_chevron;
-          document.getElementById("arrow-right").innerHTML = right_chevron;
-	      });
+            orgs_init(sheet_values[orgs_sheet_name].slice(1));
+            local == true ? target_sheet = local_sheet_name : target_sheet = store_sheet_name;
 
+            build_paypal(sheet_values[setup_sheet_name]);
+            build_html(sheet_values[target_sheet].slice(1));
+
+            document.getElementById("arrow-left").innerHTML = left_chevron;
+            document.getElementById("arrow-right").innerHTML = right_chevron;
+	        });
+        }
         
       }, false); 
 
