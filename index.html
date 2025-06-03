@@ -652,8 +652,15 @@
         font-size: 14px;
       }
     }
-/*
-    @media (max-width: 320px) {
+
+    @media (max-width: 400px) {
+      #scoutname {
+        display: none;
+      }
+
+    }
+
+      /*
       .delivery_info1 > div > input {
         max-width: 65%;
       }
@@ -1006,6 +1013,10 @@
         sheet_names.forEach((item, i) => {
           range_of_sheets += "&ranges=" + item + "!" + sheet_ranges;
         });
+
+        if (screen.width < 400) {
+          document.getElementById("scout_name").placeholder = "Scoutname";
+        }
 
         if (urlParams.get("id1") == undefined){
           document.getElementById("container").style.display = "none";
