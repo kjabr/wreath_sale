@@ -137,7 +137,7 @@
       padding: 2px;
       border:0.2px solid #000000;
       border-radius: 4px;
-      width:12em
+      width:10em
     }
 
 
@@ -593,7 +593,7 @@
         max-width: min(65%, 300px);
     }
       .btn_shopping_cart {
-        display: block;
+        /*display: block;*/
         margin-left: auto;
         margin-right: auto;
       }
@@ -640,6 +640,17 @@
         margin-bottom: 8px;  
       }
 
+      #scout_name {
+        width: 8em;;
+      }
+
+      #scoutname {
+        font-size: 14px;
+      }
+
+      #page_description {
+        font-size: 14px;
+      }
     }
 /*
     @media (max-width: 320px) {
@@ -723,7 +734,7 @@
       <div>
         <span id="scoutname">
           Scoutname: </span>
-        <span id="scoutname_field"> <input type="text" style="width:10em; margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
+        <span id="scoutname_field"> <input type="text" style="margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
 
           <input type="button" class="scout_info" onclick="toggle_modal('popup_scout_info')" style="border:none; background:none; color:blue;" value="[i]">
         </span>
