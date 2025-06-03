@@ -678,6 +678,18 @@
         font-size: 14px;
       }      
 
+      #cart_items ul {
+        white-space: wrap;
+      }
+
+      #cart_items > ul > li > ul > li {
+        white-space: wrap;
+      }
+
+      #cart_items > ul > li {
+        white-space: nowrap;
+      }
+
     }
 
       /*
@@ -943,7 +955,7 @@
                   <span id="footer2">Prices include shipping cost.</span>
                 </div>
               </div>
-              <div class="popup_footer">
+              <div class="popup_footer span_nowrap">
                 <span id="cart_total_footer"></span>
                 <span>
                   <button type="button" onclick="clear_cart()" class="btn btn_gray">Clear</button>
