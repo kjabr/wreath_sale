@@ -1236,6 +1236,7 @@
 
         if (shopping_cart.length == 0){
           show_cart = "<br><center><strong>*** Cart is empty ***</strong></center><br>";
+          document.getElementById("local_shipping_info").style.display = "none";
         }
 
         for (m1 = 0; m1 < shopping_cart.length; m1++ ) {
@@ -1451,6 +1452,7 @@
         cart_total = 0;
         document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
         document.getElementById("down-arrow").style.display="none";
+        document.getElementById("local_shipping_info").style.display = "none";
       }
 
       function fetch_logic(){
