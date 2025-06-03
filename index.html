@@ -169,7 +169,7 @@
       position: relative;
    }
 
-   label {
+   #popup_order label {
     white-space: nowrap;
     margin-right: 10px;
    }
@@ -408,7 +408,7 @@
         display: flex;
         flex-direction: column;
         gap: 6px;
-
+        font-size: 14px;
       }
 
       .delivery_info_span2 > div > input, .delivery_info_span2 > div > div > input {
@@ -417,8 +417,41 @@
         padding: 1px 5px 1px 5px;
         border: 0.2px solid #000000;
         border-radius: 4px;
-        width: 9em;
+        width: 6em;
 
+      }
+
+      .local_shipping_info {
+        position: relative;
+        display: none;
+        border: 1px dotted gray;
+        border-radius: 5px;
+        padding: 5px;
+        line-height: 24px;
+        background-color: lightblue;
+        font-size: 14px;
+        margin-top: 1.5em;
+        margin-bottom: 1em;
+      }
+
+      .local_shipping_info #local_zip_code {width: auto;}
+
+      .local_shipping_addr {
+        position: absolute;
+        left: 0;
+        top: -21px;
+      }
+
+      #local_ship_name {
+        width: 50%;
+      }
+
+      #local_street_addr{
+        width: 60%;
+      }
+
+      #popup_cart label {
+        margin-left: 5px;
       }
 
       .down-arrow {
@@ -746,7 +779,6 @@
                 </div>
                 
                   <div class="delivery_info_span"> * Their Address: (required)<br></div>
-            <!--    <textarea id="ship_addr" name="ship_addr" rows="4" cols="25" placeholder="US addresses only" required></textarea> -->
                 <div class="delivery_info_span2">
                   <div class="input_form_div"><label for="street_address_search">Street Address: </label><input type="text" id="street_address_search" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required></div>
                   <div class="input_form_div"><label for="city_search">City: </label><input type="text" id="city" name="city_search" autocomplete="off" onInput="this.value = char_only_format(this.value)" required></div>
@@ -808,16 +840,16 @@
                     <div class="input_form_div"><label for="zip_code_search">Zip code: </label><input type="text" inputmode="decimal" style="width: 5em;" id="zip_code_search" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" required></div>
                   </div>
                 </div>
-            </span>
+              </span>
 
 
-            <div class="popup_footer2">
-              <span id="cart_footer">
-              <button type="button" id="cancel_cart_button" onclick="form_reset()" class="btn btn_gray">Cancel</button>
-              <button type="submit" id="add_to_cart_button" class="btn btn_blue">Add to Cart</button>
-            </span>
-            <span id="add_msg"></span>
-            </div>
+              <div class="popup_footer2">
+                <span id="cart_footer">
+                <button type="button" id="cancel_cart_button" onclick="form_reset()" class="btn btn_gray">Cancel</button>
+                <button type="submit" id="add_to_cart_button" class="btn btn_blue">Add to Cart</button>
+              </span>
+              <span id="add_msg"></span>
+              </div>
             </form>
 
           </div>
@@ -825,14 +857,41 @@
 
         <div id="popup_cart" class="popup" style="display: none;">
           <button class="popup_button" onclick="toggle_modal('popup_cart')">Close</button>
-          <div id="popup_content_cart" class="popup_content">
+          <form id="popup_content_cart" class="popup_content" onsubmit="event.preventDefault(); paypal();" novalidate autocomplete="off">
             <h3 class="modal-title" id="ModalLabel">Shopping Cart</h3>
             <div class="modal-body ml-3 mr-3">
               <div>
                 <p>Thank you for supporting Scouts!</p>
                 <div class="delivery_info_span2">
                   <span id="scoutname_span"></span>
+                  <div id="local_shipping_info" class="local_shipping_info">
+                    <div class="local_shipping_addr">Delivery Address</div>
+                    <label for="local_ship_firstname">Name:</label>
+                    <input type="text" id="local_ship_firstname" name="local_ship_firstname" autocomplete="off" placeholder="First" onInput="this.value = char_only_format(this.value)" required>
+                    <input type="text" id="local_ship_lastname" name="local_ship_lastname" autocomplete="off" placeholder="Last" onInput="this.value = char_only_format(this.value)" required>
+
+                    <br>
+                    <label for="local_street_addr">Street Address:</label>
+                    <input type="text" id="local_street_addr" name="local_street_addr" autocomplete="off" placeholder="Required" onInput="this.value = numb_char_format(this.value)" required>
+                    <br>
+                    <label for="local_city_search">City</label> 
+                      <select id="local_city_search" name="local_city_search">
+                        <option value="Lake Oswego" selected>Lake Oswego</option>
+                      </select> 
+                    <label for="local_state_search">State</label> 
+                      <select id="local_state_search" name="local_state">
+                        <option value="OR" selected>OR</option>
+                      </select> 
+                        <label for="local_zip_code">zip</label> 
+                        <select id="local_zip_code" name="local_zip_code" required>
+                            <option value="" selected>select</option>
+                            <option value="97034">97034</option>
+                            <option value="97035">97035</option>
+                        </select>
+
+                  </div>
                   <div id="cart_contents" onscroll="cart_contents_scroll()">
+                    <div class="shopping_cart_title">Cart Items</div>
                     <div id="cart_items"></div>
                     <div id="down-arrow" class="down-arrow" style="display: none;"></div>
                   </div>
@@ -843,13 +902,13 @@
                 <span id="cart_total_footer"></span>
                 <span>
                   <button type="button" onclick="clear_cart()" class="btn btn_gray">Clear</button>
-                  <button type="button" id="paypal_button" onclick="paypal()" class="btn btn_blue">Pay with PayPal</button>
+                  <button type="submit" id="paypal_button" class="btn btn_blue">Pay with PayPal</button>
                   <span id="add_msg2"></span>
                 </span>
               </div>
               </div>
 
-          </div>
+            </form>
         </div>
 
         <div id="popup_scout_info" class="popup" style="display: none;">
@@ -898,6 +957,7 @@
       var target_sheet = "";
       var local = false;
       var prod = true;
+      var add_item_timer = undefined;
 
       var order_form = `
 
@@ -959,18 +1019,22 @@
 
             document.getElementById("arrow-left").innerHTML = left_chevron;
             document.getElementById("arrow-right").innerHTML = right_chevron;
-	        });
+	        }).catch(error => {
+            // ...handle error...
+            console.log("error error: " + error);
+          });
         }
         
       }, false); 
 
       async function fetch_spreadsheet(sheet_ID, api_key, range_of_sheets) {
         //more info about the link and options: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get
-	      const response = await fetch("https://sheets.googleapis.com/v4/spreadsheets/" + sheet_ID 
-          + "?includeGridData=true" + range_of_sheets + "&key=" + api_key);
-	      const data = await response.json();
-	      return data;
-	    } 
+          const response = await fetch("https://sheets.googleapis.com/v4/spreadsheets/" + sheet_ID 
+            + "?includeGridData=true" + range_of_sheets + "&key=" + api_key);
+	        const data = await response.json();
+	        return data;
+
+	    }
 
       function extract_values(r){
         var sheet_interesting_values;
@@ -1026,9 +1090,9 @@
           {urlParams.get("local") == "yes" ? (
             local = true,
             document.getElementById("store_type").innerHTML = "<u>Local Wreaths</u> Web Store",
-            document.getElementById("footer1").innerHTML = "* You delivery address will be collected when you pay with PayPal.",
-            document.getElementById("footer2").innerHTML = "** You delivery address will be collected when you pay with PayPal.",
-            document.getElementById("delivery_info1").innerHTML = "<br>"
+            document.getElementById("delivery_info1").innerHTML = "<br>",
+            document.getElementById("popup_content_cart").removeAttribute("novalidate"),
+            document.getElementById("footer2").innerHTML = "Our scouts will deliver your order"
             //toggle_modal('sale_over_alert')
           )
             : local = false;}
@@ -1058,7 +1122,7 @@
           document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[@*&!^%$'\.]/g, ''),
           document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#'\.]/g, '')
         )
-        : null;
+        : document.getElementById("local_shipping_info").style.display = "block";
         const formData = new FormData(e.target);
         e.preventDefault();
         //console.log(formData.get("gift_msg"));
@@ -1080,7 +1144,7 @@
         document.getElementById("add_msg").innerHTML="** Item added to cart **";
         document.getElementById("cart_button").innerHTML="Shopping Cart " + shopping_cart.length;
         document.getElementById("cart_footer").style.display = "none";
-        setTimeout(function clear_text(){
+        add_item_timer = setTimeout(function clear_text(){
           document.getElementById("add_msg").innerHTML="";
           document.getElementById('popup_order').style.display == '' ? toggle_modal('popup_order') : null;
           document.getElementById("cart_footer").style.display = "";
@@ -1254,7 +1318,7 @@
 
       }
 
-      function paypal(){
+     function paypal(){
         var paypal_start = "";
         var paypal_items = "";
         var count = 0;
@@ -1281,16 +1345,40 @@
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
             paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='custom' value='" + custom_field + "'>";
+            paypal_start += "<input type='hidden' name='currency_code' value='USD'>";
+            paypal_start += "<input type='hidden' name='landing_page' value='Billing'>"; // Prioritize Guest Checkout
+            //paypal_start += "<input type='hidden' name='solution_type' value='Sole'>"; // Emphasize card payment option
           }
           else {
+            // Split local_ship_name into first_name and last_name
+            //const nameParts = document.getElementById("local_ship_name").value.trim().replace(/[,@*!^%$#'"]/g, '').split(' ');
+            //const firstName = nameParts[0] || '';
+            //const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+            const firstName = document.getElementById("local_ship_firstname").value.trim().replace(/[,@*!^%$#'"]/g, '');
+            const lastName = document.getElementById("local_ship_lastname").value.trim().replace(/[,@*!^%$#'"]/g, '');
             paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='paypal_form'>"
             paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
             paypal_start += "<input type='hidden' name='upload' value='1'>";
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
             paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='custom' value='" + "local_wreaths" + "'>";
+            paypal_start += "<input type='hidden' name='currency_code' value='USD'>";
+            paypal_start += "<input type='hidden' name='landing_page' value='Billing'>"; // Prioritize Guest Checkout
+            //paypal_start += "<input type='hidden' name='solution_type' value='Sole'>"; // Emphasize card payment option
+            // Add shipping address override for local orders
+            paypal_start += "<input type='hidden' name='address_override' value='1'>"; // Override shipping address
+            paypal_start += `<input type='hidden' name='first_name' value='${firstName}'>`; // Shipping first name
+            paypal_start += `<input type='hidden' name='last_name' value='${lastName}'>`; // Shipping last name
+            paypal_start += `<input type='hidden' name='address1' value='${document.getElementById("local_street_addr").value.trim().replace(/[,@*!^%$#'"]/g, '')}'>`; // Shipping street
+            paypal_start += `<input type='hidden' name='city' value='${document.getElementById("local_city_search").value.trim().replace(/[,@*!^%$#'"]/g, '')}'>`; // Shipping city
+            paypal_start += `<input type='hidden' name='state' value='${document.getElementById("local_state_search").value.trim()}'>`; // Shipping state
+            paypal_start += `<input type='hidden' name='zip' value='${document.getElementById("local_zip_code").value.trim().replace(/[^0-9]/g, '')}'>`; // Shipping zip
+            paypal_start += "<input type='hidden' name='country' value='US'>"; // Shipping country
+            paypal_start += "<input type='hidden' name='no_shipping' value='2'>";
           }
 
           // url_split = dynamic_data[i][3].split(/=w/);
@@ -1358,6 +1446,9 @@
 
       function select_item(item){
         //document.getElementById("popup_order").style.display = '';
+        document.getElementById("add_msg").innerHTML="";
+        document.getElementById("cart_footer").style.display = "";
+        add_item_timer ? clearTimeout(add_item_timer) : null;
         toggle_modal("popup_order");
         currentIndex = Number((item.id).split("_")[1]);
         var item_details;
