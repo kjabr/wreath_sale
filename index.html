@@ -308,6 +308,7 @@
         z-index: 1101;
         left: 50%;
         top: 50%;
+        transform: translateY(-50%);
         border-radius: 8px;
         margin: auto;
         transform: translate(-50%, -50%);
@@ -667,7 +668,9 @@
       }
 
       .popup {
-        width: 90%;
+        width: fit-content;
+        max-width: 90%;
+        min-width: 70%;
       }
 
     }
@@ -767,7 +770,7 @@
         <div id="sale_over_alert" class="popup" style="display: none;">
           <button class="popup_button" onclick="toggle_modal('sale_over_alert')">Close</button>
           <div id="popup_content_alert" class="popup_content">
-            <strong><center><h3>The wreath sale is over!</h3>Thank you for supporting Scouts!</center></strong>
+            <strong><center><span class="span_nowrap"><h3>The wreath sale is over!</h3></span>Thank you for supporting Scouts!</center></strong>
           </div>
         </div>
 
@@ -876,7 +879,7 @@
 
 
               <div class="popup_footer2">
-                <span id="cart_footer">
+                <span id="cart_footer" class="span_nowrap">
                 <button type="button" id="cancel_cart_button" onclick="form_reset()" class="btn btn_gray">Cancel</button>
                 <button type="submit" id="add_to_cart_button" class="btn btn_blue">Add to Cart</button>
               </span>
