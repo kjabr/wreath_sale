@@ -432,6 +432,7 @@
         font-size: 14px;
         margin-top: 1.5em;
         margin-bottom: 1em;
+        width: 90%;
       }
 
       .local_shipping_info #local_zip_code {width: auto;}
@@ -447,7 +448,7 @@
       }
 
       #local_street_addr{
-        width: 60%;
+        width: 50%;
       }
 
       #popup_cart label {
@@ -874,19 +875,21 @@
                     <label for="local_street_addr">Street Address:</label>
                     <input type="text" id="local_street_addr" name="local_street_addr" autocomplete="off" placeholder="Required" onInput="this.value = numb_char_format(this.value)" required>
                     <br>
-                    <label for="local_city_search">City</label> 
-                      <select id="local_city_search" name="local_city_search">
-                        <option value="Lake Oswego" selected>Lake Oswego</option>
+                    <!-- <label for="local_city_search">City</label> -->
+                      <select id="local_city_search" name="local_city_search" required>
+                        <option value="" selected>City</option>
+                        <option value="Lake Oswego">Lake Oswego</option>
                       </select> 
-                    <label for="local_state_search">State</label> 
-                      <select id="local_state_search" name="local_state">
-                        <option value="OR" selected>OR</option>
+                    <!--  <label for="local_state_search">State</label> -->
+                      <select id="local_state_search" name="local_state" required>
+                        <option value="" selected>State</option>
+                        <option value="OR">OR</option>
                       </select> 
-                        <label for="local_zip_code">zip</label> 
+                      <!-- <label for="local_zip_code">zip</label> -->
                         <select id="local_zip_code" name="local_zip_code" required>
-                            <option value="" selected>select</option>
-                            <option value="97034">97034</option>
-                            <option value="97035">97035</option>
+                          <option value="" selected>zipcode</option>
+                          <option value="97034">97034</option>
+                          <option value="97035">97035</option>
                         </select>
 
                   </div>
