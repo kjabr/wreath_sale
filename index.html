@@ -317,6 +317,10 @@
         max-width: fit-content;
       }
 
+      .span_nowrap {
+        white-space: nowrap;
+      }
+
       #popup_cart {
         /*width: 700px;*/
       }
@@ -414,7 +418,7 @@
         font-size: 14px;
       }
 
-      .delivery_info_span2 > div > input, .delivery_info_span2 > div > div > input {
+      .delivery_info_span2  input {
         background-color: #E3EEFC;
 
         padding: 1px 5px 1px 5px;
@@ -894,14 +898,17 @@
                   <span id="scoutname_span"></span>
                   <div id="local_shipping_info" class="local_shipping_info">
                     <div class="local_shipping_addr">Delivery Address</div>
-                    <label for="local_ship_firstname">Name:</label>
-                    <input type="text" id="local_ship_firstname" name="local_ship_firstname" autocomplete="off" placeholder="First" onInput="this.value = char_only_format(this.value)" required>
-                    <input type="text" id="local_ship_lastname" name="local_ship_lastname" autocomplete="off" placeholder="Last" onInput="this.value = char_only_format(this.value)" required>
-
+                    <span class="span_nowrap">
+                      <label for="local_ship_firstname">Name:</label>
+                      <input type="text" id="local_ship_firstname" name="local_ship_firstname" autocomplete="off" placeholder="First" onInput="this.value = char_only_format(this.value)" required>
+                      <input type="text" id="local_ship_lastname" name="local_ship_lastname" autocomplete="off" placeholder="Last" onInput="this.value = char_only_format(this.value)" required>
+                    </span>
                     <br>
                     <label for="local_street_addr">Street:</label>
                     <input type="text" id="local_street_addr" name="local_street_addr" autocomplete="off" placeholder="Required" onInput="this.value = numb_char_format(this.value)" required>
                     <br>
+                    <span class="span_nowrap">
+
                     <!-- <label for="local_city_search">City</label> -->
                       <select id="local_city_search" name="local_city_search" required>
                         <option value="">City</option>
@@ -918,7 +925,7 @@
                           <option value="97034">97034</option>
                           <option value="97035">97035</option>
                         </select>
-
+                    </span>
                   </div>
                   <div id="cart_contents" onscroll="cart_contents_scroll()">
                     <div class="shopping_cart_title">Cart Items</div>
