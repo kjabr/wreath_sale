@@ -489,6 +489,8 @@
 
       #local_street_addr{
         width: 74%;
+        margin-top: 5px;
+        margin-bottom: 5px;
       }
 
       #popup_cart label {
@@ -572,11 +574,23 @@
       }
 
       #street_address_search {
-        width: 90%;
+        width: 100%;
       }
 
       #scoutname_span{
         width: 100%;
+      }
+
+      .local_addr_span {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+
+      .local_addr_span select {
+        background-color: #E3EEFC;
+        border: none;
       }
 
       
@@ -752,6 +766,10 @@
 
       #popup_content_order {
         width: 85vw;
+      }
+
+      #ship_name {
+        max-width: 50%;
       }
 
     }
@@ -994,10 +1012,12 @@
                       <input type="text" id="local_ship_lastname" name="local_ship_lastname" autocomplete="off" placeholder="Last" onInput="this.value = char_only_format(this.value)" required>
                     </span>
                     <br>
-                    <label for="local_street_addr">Street:</label>
-                    <input type="text" id="local_street_addr" name="local_street_addr" autocomplete="off" placeholder="Required" onInput="this.value = numb_char_format(this.value)" required>
-                    <br>
                     <span class="span_nowrap">
+                      <label for="local_street_addr">Street:</label>
+                      <input type="text" id="local_street_addr" name="local_street_addr" autocomplete="off" placeholder="Required" onInput="this.value = numb_char_format(this.value)" required>
+                    </span>
+                    <br>
+                    <span class="local_addr_span">
 
                     <!-- <label for="local_city_search">City</label> -->
                       <select id="local_city_search" name="local_city_search" required>
