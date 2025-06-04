@@ -322,6 +322,13 @@
         white-space: nowrap;
       }
 
+      .span_border {
+        border: 0.2px dotted #000000;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: lightblue;
+      }
+
       #popup_cart {
         /*width: 700px;*/
       }
@@ -404,11 +411,6 @@
         border: 0.2px solid #000000;
         border-radius: 4px;
         width: 100%;
-      }
-
-      .delivery_info_span {
-        margin-bottom: 0.3em;
-
       }
 
       .delivery_info_span2 {
@@ -831,11 +833,16 @@
                 </div>
                 
                   <div class="delivery_info_span"> * Their Address: (required)<br></div>
-                <div class="delivery_info_span2">
-                  <div class="input_form_div"><label for="street_address_search">Street Address: </label><input type="text" id="street_address_search" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" required></div>
-                  <div class="input_form_div"><label for="city_search">City: </label><input type="text" id="city" name="city_search" autocomplete="off" onInput="this.value = char_only_format(this.value)" required></div>
+                <div class="delivery_info_span2 span_border">
                   <div class="input_form_div">
-                    <label for="state_search">State</label> <select id="state_search" name="state">
+                    <!-- <label for="street_address_search">Street Address: </label> -->
+                    <input type="text" id="street_address_search" name="street_address" autocomplete="off" onInput="this.value = numb_char_format(this.value)" placeholder="Street Address" required></div>
+                  <span class="span_nowrap">
+                    <!-- <label for="city_search">City: </label> -->
+                    <input type="text" id="city" name="city_search" autocomplete="off" onInput="this.value = char_only_format(this.value)" placeholder="City" required>
+                    <!-- <label for="state_search">State</label> -->
+                    <select id="state_search" name="state" required>
+                      <option value="" selected>State</option>
                       <option value="AL">AL</option>
                       <option value="AK">AK</option>
                       <option value="AR">AR</option>
@@ -873,7 +880,7 @@
                       <option value="ND">ND</option>
                       <option value="OH">OH</option>
                       <option value="OK">OK</option>
-                      <option value="OR" selected>OR</option>
+                      <option value="OR">OR</option>
                       <option value="PA">PA</option>
                       <option value="RI">RI</option>
                       <option value="SC">SC</option>
@@ -889,8 +896,9 @@
                       <option value="WY">WY</option>
                     </select>
                   
-                    <div class="input_form_div"><label for="zip_code_search">Zip code: </label><input type="text" inputmode="decimal" style="width: 5em;" id="zip_code_search" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" required></div>
-                  </div>
+                      <!-- <label for="zip_code_search">Zip code: </label> -->
+                      <input type="text" inputmode="decimal" style="width: 5em;" id="zip_code_search" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" placeholder="Zipcode" required>
+                  </span>
                 </div>
               </span>
 
