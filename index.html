@@ -419,7 +419,7 @@
         flex-direction: column;
         gap: 6px;
         font-size: 14px;
-        width: fit-content;
+        width: 60%;
       }
 
       .delivery_info_span2  input {
@@ -428,7 +428,7 @@
         padding: 1px 5px 1px 5px;
         border: 0.2px solid #000000;
         border-radius: 4px;
-        max-width: 70%;
+        max-width: 95%;
       }
 
       .local_delivery_address input {
@@ -529,12 +529,20 @@
         white-space: nowrap;
       }
 
-      #ship_name, #city {
-        max-width: 10em;
+      #ship_name {
+        max-width: 5em;
       }
 
-      #street_address_search, #gift_msg {
-        width: 70%;
+      #city {
+        max-width: 5em;
+      }
+
+      #gift_msg {
+        width: 65%;
+      }
+
+      #street_address_search {
+        width: 90%;
       }
 
       
@@ -560,6 +568,10 @@
 
       .form_main {
         margin: 1em;
+      }
+
+      .delivery_info_span2{
+        width: fit-content;
       }
 
     }
@@ -662,6 +674,10 @@
       #page_description {
         font-size: 14px;
       }
+
+      .delivery_info_span2{
+        width: fit-content;
+      }
     }
 
     @media (max-width: 420px) {
@@ -693,6 +709,10 @@
 
       #cart_items > ul > li {
         white-space: nowrap;
+      }
+
+      .delivery_info_span2{
+        width: fit-content;
       }
 
     }
