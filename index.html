@@ -420,9 +420,27 @@
         gap: 6px;
         font-size: 14px;
         width: 60%;
+
+      }
+
+      .delivery_info_span3 {
+        margin-left: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 14px;
       }
 
       .delivery_info_span2  input {
+        background-color: #E3EEFC;
+
+        padding: 1px 5px 1px 5px;
+        border: 0.2px solid #000000;
+        border-radius: 4px;
+        max-width: 95%;
+      }
+
+      .delivery_info_span3 input {
         background-color: #E3EEFC;
 
         padding: 1px 5px 1px 5px;
@@ -543,6 +561,10 @@
 
       #street_address_search {
         width: 90%;
+      }
+
+      #scoutname_span{
+        width: 100%;
       }
 
       
@@ -945,7 +967,7 @@
             <div class="modal-body ml-3 mr-3">
               <div>
                 <p>Thank you for supporting Scouts!</p>
-                <div class="delivery_info_span2 local_delivery_address">
+                <div class="delivery_info_span3 local_delivery_address">
                   <span id="scoutname_span"></span>
                   <div id="local_shipping_info" class="local_shipping_info">
                     <div class="local_shipping_addr"><b>Delivery Address</b></div>
@@ -1308,7 +1330,7 @@
           }
         }
         
-        document.getElementById('scoutname_span').innerHTML = "Scout/Org Name: " + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "<br>";
+        document.getElementById('scoutname_span').innerHTML = "<b>Scout/Org Name:</b> " + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "<br>";
         var show_cart = "";
 
         if (shopping_cart.length == 0){
