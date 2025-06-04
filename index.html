@@ -554,11 +554,17 @@
       }
 
       #ship_name {
-        width: 10em;
+        width: 100%;
+        max-width: 35%;
+      }
+
+      #zip_code_search {
+        width: 100%;
+        max-width: 5em;
       }
 
       #city {
-        max-width: 5em;
+        width: 100%;
       }
 
       #gift_msg {
@@ -708,7 +714,7 @@
       }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 430px) {
       #scoutname {
         display: none;
       }
@@ -740,7 +746,8 @@
       }
 
       .delivery_info_span2{
-        width: fit-content;
+        width: 95%;
+        margin-left: 0;
       }
 
     }
@@ -948,7 +955,7 @@
                     </select>
                   
                       <!-- <label for="zip_code_search">Zip code: </label> -->
-                      <input type="text" inputmode="decimal" style="width: 5em;" id="zip_code_search" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" placeholder="Zipcode" required>
+                      <input type="text" inputmode="decimal" id="zip_code_search" name="zip_code" autocomplete="off" onInput="this.value = numb_only_format(this.value)" placeholder="Zipcode" required>
                   </div>
                 </div>
               </span>
