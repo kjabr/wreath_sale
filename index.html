@@ -419,6 +419,7 @@
         flex-direction: column;
         gap: 6px;
         font-size: 14px;
+        width: fit-content;
       }
 
       .delivery_info_span2  input {
@@ -427,8 +428,11 @@
         padding: 1px 5px 1px 5px;
         border: 0.2px solid #000000;
         border-radius: 4px;
-        width: 6em;
+        max-width: 70%;
+      }
 
+      .local_delivery_address input {
+        width: 6em;
       }
 
       .local_shipping_info {
@@ -531,7 +535,6 @@
 
       #street_address_search, #gift_msg {
         width: 100%;
-        max-width: 20em;
       }
 
       
@@ -922,7 +925,7 @@
             <div class="modal-body ml-3 mr-3">
               <div>
                 <p>Thank you for supporting Scouts!</p>
-                <div class="delivery_info_span2">
+                <div class="delivery_info_span2 local_delivery_address">
                   <span id="scoutname_span"></span>
                   <div id="local_shipping_info" class="local_shipping_info">
                     <div class="local_shipping_addr"><b>Delivery Address</b></div>
