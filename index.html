@@ -1243,11 +1243,11 @@
         //document.getElementById("ship_addr").value = (document.getElementById("ship_addr").value).replace(/(?:\r\n|\r|\n)/g, ' ');
         for (var value of formData.values()){
           //console.log(value);
-          formvalues.push(value);
+          formvalues.push(value.trim());
         }
         formvalues.unshift(store_items[currentIndex][3]);
         formvalues.unshift(store_items[currentIndex][1]);
-        formvalues.unshift(document.getElementById("scout_name").value);
+        formvalues.unshift(document.getElementById("scout_name").value.trim());
         local == false ?
           formvalues[6] = formvalues[6] + ", " + formvalues[7] + ", " + formvalues[8] + " " + formvalues[9]
           : formvalues[6] = "";
