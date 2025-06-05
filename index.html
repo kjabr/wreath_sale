@@ -76,6 +76,14 @@
       max-width: 80%;
     }
 
+    .main_page a:visited {
+      color: blue;
+    }
+
+    .main_page li {
+      font-size: 18px;
+    }
+
       /*
     .donate_button {
       position: absolute;
@@ -1249,7 +1257,8 @@
             document.getElementById("store_type").innerHTML = "<u>Local Wreaths</u> Web Store",
             document.getElementById("delivery_info1").innerHTML = "<br>",
             document.getElementById("popup_content_cart").removeAttribute("novalidate"),
-            document.getElementById("footer2").innerHTML = "Our scouts will deliver your order"
+            document.getElementById("footer2").innerHTML = "Our scouts will deliver your order",
+            document.getElementById("local_shipping_info").style.display = "block"
             //toggle_modal('sale_over_alert')
           )
             : local = false;}
@@ -1279,7 +1288,7 @@
           document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[@*&!^%$'\.]/g, ''),
           document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#'\.]/g, '')
         )
-        : document.getElementById("local_shipping_info").style.display = "block";
+        : null; //document.getElementById("local_shipping_info").style.display = "block";
         const formData = new FormData(e.target);
         e.preventDefault();
         //console.log(formData.get("gift_msg"));
@@ -1378,7 +1387,7 @@
 
         if (shopping_cart.length == 0){
           show_cart = "<br><center><strong>*** Cart is empty ***</strong></center><br>";
-          document.getElementById("local_shipping_info").style.display = "none";
+          //document.getElementById("local_shipping_info").style.display = "none";
         }
 
         for (m1 = 0; m1 < shopping_cart.length; m1++ ) {
@@ -1586,7 +1595,7 @@
 
       function clear_cart(){
         //"Scout/Org Name: " + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "<br>";
-        document.getElementById("cart_items").innerHTML = "<br>Cart is empty<br><br>";
+        document.getElementById("cart_items").innerHTML = "<br><center><strong>*** Cart is empty ***</strong></center><br>";
         document.getElementById("cart_button").innerHTML = "Shopping Cart";
         //$('#paypal_button').prop('disabled',true);
         document.getElementById('paypal_button').disabled = true;
@@ -1594,7 +1603,8 @@
         cart_total = 0;
         document.getElementById("cart_total_footer").innerText = "Total: $" + cart_total;
         document.getElementById("down-arrow").style.display="none";
-        document.getElementById("local_shipping_info").style.display = "none";
+        //document.getElementById("local_shipping_info").style.display = "none";
+        local == true ? document.getElementById("popup_content_cart").reset() : null;
       }
 
       function fetch_logic(){
