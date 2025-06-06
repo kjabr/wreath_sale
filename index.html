@@ -43,38 +43,6 @@
       font-size: 16px;
     }
 
-    /*
-    select, option {
-      -webkit-appearance: none;
-    }
-    .select-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-    .select-wrapper:after {
-        content: '\0025BC';
-        color: darkgray;
-        right: 0px;
-        top: -12px;
-        height: 26px;
-        padding: 15px 0px 0px 8px;
-        position: absolute;
-        pointer-events: none;
-    }
-
-    select
-     {
-      font-family: Geneva, 'Lucida Grande', 'Lucida Sans Unicode', serif;
-      text-align: center;
- 
-      background-color: #333;
-      border-radius: 1vh;
-      border-color: transparent;
-      width: 5em;
-    }
-
-    */
-
     select {
       -webkit-appearance: none;
       background-color: #E3EEFC;
@@ -133,13 +101,6 @@
       font-size: 18px;
     }
 
-      /*
-    .donate_button {
-      position: absolute;
-      top: 30px;
-      right: 40px;
-    }
-    */
     .donate_button {
       align-items: center;
 
@@ -258,20 +219,11 @@
 
     }
 
-   /* .col-xs-3:hover {
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    }*/
-
     #items_slider img {
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       height: auto;
       width: 80%;
     }
-
-      /*
-    #item_details {
-      width: 37vw;
-    } */
 
     .v_bar {
       border-right: 3px solid grey;
@@ -327,26 +279,14 @@
       position: absolute;
       top: 50%;
       margin-top: -10vh;
-    /*  width: 0;
-      height: 0;
-      border-style: solid;
-      */
     }
     #arrow-left {
-      /*
-      border-width: 20px 30px 20px 0;
-      border-color: transparent dodgerblue transparent transparent;
-      */
       left: 0;
       margin-left: -3vw;
       z-index: 10;
     }
 
     #arrow-right {
-      /*
-      border-width: 20px 0 20px 30px;
-      border-color: transparent transparent transparent dodgerblue;
-      */
       right: 0;
       margin-right: -3vw;
       z-index: 10;
@@ -658,15 +598,6 @@
         max-width: 90%;
       }
 
-      /*
-      .delivery_info1 > div > input {
-        max-width: 50%;
-      }
-
-      .delivery_info_span2 > div > input {
-        max-width: 50%;
-      } */
-
       .form_main {
         margin: 1em;
       }
@@ -716,7 +647,6 @@
         max-width: min(65%, 300px);
     }
       .btn_shopping_cart {
-        /*display: block;*/
         margin-left: auto;
         margin-right: auto;
       }
@@ -843,26 +773,6 @@
       }
 
     }
-
-      /*
-      .delivery_info1 > div > input {
-        max-width: 65%;
-      }
-
-      .delivery_info_span2 > div > input {
-        max-width: 60%;
-      }
-    }
-
-    @media (max-width: 550px) {
-      .delivery_info1 > div > input {
-        max-width: 65%;
-      }
-
-      .delivery_info_span2 > div > input {
-        max-width: 45%;
-      }
-    }*/
 
     @media (min-height: 1070px) {
       .popup {
@@ -1554,6 +1464,7 @@
         var cost = [];
         var paypal_account = "";
         var paypal_url = "";
+        var customer_shipto = "";
 
         if (isgiftshipperprod == "yes" && prod == true) {
           paypal_account = prod_paypal_id;
@@ -1587,6 +1498,11 @@
             //const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
             const firstName = document.getElementById("local_ship_firstname").value.trim().replace(/[,@*!^%$#'"]/g, '');
             const lastName = document.getElementById("local_ship_lastname").value.trim().replace(/[,@*!^%$#'"]/g, '');
+            customer_shipto = firstName + " " + lastName + ": "
+              + document.getElementById("local_street_addr").value.trim().replace(/[,@*!^%$#'"]/g, '') + ", "
+              + document.getElementById("local_city_search").value.trim().replace(/[,@*!^%$#'"]/g, '') + ", "
+              + document.getElementById("local_state_search").value.trim()
+              + document.getElementById("local_zip_code").value.trim().replace(/[^0-9]/g, '');
             paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='paypal_form'>"
             paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
             paypal_start += "<input type='hidden' name='upload' value='1'>";
@@ -1599,15 +1515,15 @@
             paypal_start += "<input type='hidden' name='landing_page' value='Billing'>"; // Prioritize Guest Checkout
             //paypal_start += "<input type='hidden' name='solution_type' value='Sole'>"; // Emphasize card payment option
             // Add shipping address override for local orders
-            paypal_start += "<input type='hidden' name='address_override' value='1'>"; // Override shipping address
-            paypal_start += `<input type='hidden' name='first_name' value='${firstName}'>`; // Shipping first name
-            paypal_start += `<input type='hidden' name='last_name' value='${lastName}'>`; // Shipping last name
-            paypal_start += `<input type='hidden' name='address1' value='${document.getElementById("local_street_addr").value.trim().replace(/[,@*!^%$#'"]/g, '')}'>`; // Shipping street
-            paypal_start += `<input type='hidden' name='city' value='${document.getElementById("local_city_search").value.trim().replace(/[,@*!^%$#'"]/g, '')}'>`; // Shipping city
-            paypal_start += `<input type='hidden' name='state' value='${document.getElementById("local_state_search").value.trim()}'>`; // Shipping state
-            paypal_start += `<input type='hidden' name='zip' value='${document.getElementById("local_zip_code").value.trim().replace(/[^0-9]/g, '')}'>`; // Shipping zip
+            //paypal_start += "<input type='hidden' name='address_override' value='1'>"; // Override shipping address
+            //paypal_start += `<input type='hidden' name='first_name' value='${firstName}'>`; // Shipping first name
+            //paypal_start += `<input type='hidden' name='last_name' value='${lastName}'>`; // Shipping last name
+            //paypal_start += `<input type='hidden' name='address1' value='${document.getElementById("local_street_addr").value.trim().replace(/[,@*!^%$#'"]/g, '')}'>`; // Shipping street
+            //paypal_start += `<input type='hidden' name='city' value='${document.getElementById("local_city_search").value.trim().replace(/[,@*!^%$#'"]/g, '')}'>`; // Shipping city
+            //paypal_start += `<input type='hidden' name='state' value='${document.getElementById("local_state_search").value.trim()}'>`; // Shipping state
+            //paypal_start += `<input type='hidden' name='zip' value='${document.getElementById("local_zip_code").value.trim().replace(/[^0-9]/g, '')}'>`; // Shipping zip
             paypal_start += "<input type='hidden' name='country' value='US'>"; // Shipping country
-            paypal_start += "<input type='hidden' name='no_shipping' value='2'>";
+            paypal_start += "<input type='hidden' name='no_shipping' value='1'>";
           }
 
           // url_split = dynamic_data[i][3].split(/=w/);
@@ -1633,7 +1549,7 @@
               paypal_items += "<input type='hidden' name='amount_" + count + "' value='" + shopping_cart[m2][2] + "'>";
               paypal_items += "<input type='hidden' name='quantity_" + count + "' value='" + Number(shopping_cart[m2][3]) + "'>";
               paypal_items += "<input type='hidden' name='on0_" + count + "' value='Ship_to'>";
-              paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + "NA" + "'>";
+              paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + customer_shipto + "'>";
               paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
               paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + "NA" + "'>";
               paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
