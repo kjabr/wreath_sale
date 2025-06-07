@@ -1526,7 +1526,7 @@
             paypal_start += "<input type='hidden' name='no_shipping' value='1'>";
           }
 
-          // url_split = dynamic_data[i][3].split(/=w/);
+          // url_split = dynamic_data[i][3].split(/=w/); 
 
           for (m2 = 0; m2 < shopping_cart.length; m2++ ) {
             count++;
@@ -1536,9 +1536,9 @@
               paypal_items += "<input type='hidden' name='amount_" + count + "' value='" + shopping_cart[m2][2] + "'>";
               paypal_items += "<input type='hidden' name='quantity_" + count + "' value='" + Number(shopping_cart[m2][3]) + "'>";
               paypal_items += "<input type='hidden' name='on0_" + count + "' value='Ship_to'>";
-              paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + shopping_cart[m2][5] + ": " + shopping_cart[m2][6] + "'>";
+              paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + shopping_cart[m2][4] + "'>";
               paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
-              paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + shopping_cart[m2][4] + "'>";
+              paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + shopping_cart[m2][5] + ": " + shopping_cart[m2][6] + "'>";
               paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
               paypal_items += "<input type='hidden' name='os2_" + count + "' value='" + (document.getElementById("scout_name").value == "" ? "N/A" : document.getElementById("scout_name").value) + "'>";
               paypal_items += "<input type='hidden' name='on3_" + count + "' value='Part_Number'>";
