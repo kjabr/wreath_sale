@@ -424,7 +424,7 @@
       }
 
       .delivery_info_span3 {
-        margin-left: 1em;
+        margin-left: 10px;
         display: flex;
         flex-direction: column;
         gap: 6px;
@@ -468,6 +468,12 @@
         min-width: 90%;
       }
 
+      .local_addr_div{
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+      }
+
       .local_shipping_info #local_zip_code {width: auto;}
       .local_shipping_info select:focus {font-size: 14px;}
 
@@ -482,7 +488,7 @@
       }
 
       #local_street_addr{
-        width: 74%;
+        width: 100%;
         margin-top: 5px;
         margin-bottom: 5px;
       }
@@ -731,6 +737,11 @@
     }
 
     @media (max-width: 430px) {
+
+      .local_shipping_info {
+        margin-left: -7px;
+      }
+      
       #scoutname {
         display: none;
       }
@@ -752,14 +763,15 @@
       #cart_items ul {
         white-space: wrap;
       }
-
+      
       #cart_items > ul > li > ul > li {
         white-space: wrap;
       }
-
+      /*
       #cart_items > ul > li {
         white-space: nowrap;
       }
+        */
 
       .delivery_info_span2{
         width: 95%;
@@ -1004,30 +1016,32 @@
                       <input type="text" id="local_ship_lastname" name="local_ship_lastname" autocomplete="off" placeholder="Last" onInput="this.value = char_only_format(this.value)" required>
                     </span>
                     <br>
-                    <span class="span_nowrap">
-                      <label for="local_street_addr">Street:</label>
-                      <input type="text" id="local_street_addr" name="local_street_addr" autocomplete="off" placeholder="Required" onInput="this.value = numb_char_format(this.value)" required>
-                    </span>
-                    <br>
-                    <span class="local_addr_span">
+                    <div class="local_addr_div">
+                      <span class="span_nowrap">
+                        <!-- <label for="local_street_addr">Street:</label>  -->
+                        <input type="text" id="local_street_addr" name="local_street_addr" autocomplete="off" placeholder="Street Address" onInput="this.value = numb_char_format(this.value)" required>
+                      </span>
+                      <br>
+                      <span class="local_addr_span">
 
-                    <!-- <label for="local_city_search">City</label> -->
-                      <select id="local_city_search" name="local_city_search" required>
-                        <option value="">City ↯</option>
-                        <option value="Lake Oswego" selected>Lake Oswego</option>
-                      </select> 
-                    <!--  <label for="local_state_search">State</label> -->
-                      <select id="local_state_search" name="local_state" required>
-                        <option value="">State ↯</option>
-                        <option value="OR" selected>OR</option>
-                      </select> 
-                      <!-- <label for="local_zip_code">zip</label> -->
-                        <select id="local_zip_code" name="local_zip_code" required>
-                          <option value="" selected>zipcode ↯</option>
-                          <option value="97034">97034</option>
-                          <option value="97035">97035</option>
-                        </select>
-                    </span>
+                      <!-- <label for="local_city_search">City</label> -->
+                        <select id="local_city_search" name="local_city_search" required>
+                          <option value="">City ↯</option>
+                          <option value="Lake Oswego" selected>Lake Oswego</option>
+                        </select> 
+                      <!--  <label for="local_state_search">State</label> -->
+                        <select id="local_state_search" name="local_state" required>
+                          <option value="">State ↯</option>
+                          <option value="OR" selected>OR</option>
+                        </select> 
+                        <!-- <label for="local_zip_code">zip</label> -->
+                          <select id="local_zip_code" name="local_zip_code" required>
+                            <option value="" selected>zipcode ↯</option>
+                            <option value="97034">97034</option>
+                            <option value="97035">97035</option>
+                          </select>
+                      </span>
+                    </div>
                   </div>
                   <div id="cart_contents" onscroll="cart_contents_scroll()">
                     <div class="shopping_cart_title"><b>Cart Items</b></div>
