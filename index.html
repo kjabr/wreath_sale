@@ -1519,7 +1519,7 @@
         var paypal_url = "";
         var customer_shipto = "";
 
-        if (isgiftshipperprod == "yes" && prod == true) {
+        if ((isgiftshipperprod == "yes" || isdoorhangerprod == "yes") && prod == true) {
           paypal_account = prod_paypal_id;
           paypal_url = prod_paypal_url;
 
