@@ -1533,7 +1533,7 @@
 
         if (shopping_cart.length > 0) {
           if (local == false) {
-            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='paypal_form'>"
+            paypal_start = "<form action='" + paypal_url + "' method='post' id='paypal_form' name='paypal_form'>"
             paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
             paypal_start += "<input type='hidden' name='upload' value='1'>";
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
@@ -1559,7 +1559,7 @@
               + document.getElementById("local_city_search").value.trim().replace(/[,@*!^%$#'"]/g, '') + ", "
               + document.getElementById("local_state_search").value.trim()
               + document.getElementById("local_zip_code").value.trim().replace(/[^0-9]/g, '');
-            paypal_start = "<form action='" + paypal_url + "'method='post' id='paypal_form' name='paypal_form'>"
+            paypal_start = "<form action='" + paypal_url + "' method='post' id='paypal_form' name='paypal_form'>"
             paypal_start += "<input type='hidden' name='cmd' value='_cart'>";
             paypal_start += "<input type='hidden' name='upload' value='1'>";
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
