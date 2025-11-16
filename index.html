@@ -1086,6 +1086,15 @@
           </div>
         </div>
 
+        <div id="popup_merci_info" class="popup" style="display: none;">
+          <button class="popup_button" onclick="toggle_modal('popup_scout_info')">Close</button>
+          <div id="popup_content_merci_info" class="popup_content">
+            <div class="md-form mb-5">
+              <p>Thank you! We appreciate your order. Please expect an email receipt from us shortly.</p>
+            </div>
+          </div>
+        </div>
+
 
         <div id="popup_overlay" class="popup_overlay" style="display: none;" onclick="toggle_modal('popup_overlay')"></div>
       </div>
@@ -1123,6 +1132,7 @@
       var local = false;
       var prod = true;
       var add_item_timer = undefined;
+      var merci = 'no';
 
       var order_form = `
 
@@ -1180,6 +1190,15 @@
             extract_values(r); //extracts a [row][column] array of values of each sheet and populates global variable sheet_values
             document.getElementById("container").style.display = "";
 
+            if (urlParams.get("merci")) {
+              if (urlParams.get("merci") == "yes") {
+                merci = "yes";
+                //urlParams.delete('merci');
+
+                remove_url_parameter('merci');
+              }
+            }
+
             orgs_init(sheet_values[orgs_sheet_name].slice(1));
             local == true ? target_sheet = local_sheet_name : target_sheet = store_sheet_name;
 
@@ -1188,6 +1207,7 @@
 
             document.getElementById("arrow-left").innerHTML = left_chevron;
             document.getElementById("arrow-right").innerHTML = right_chevron;
+
 	        }).catch(error => {
             // ...handle error...
             console.log("error error: " + error);
@@ -1294,6 +1314,7 @@
         if (urlParams.get("prod")) {
           urlParams.get("prod") == "no" ? prod = false : prod = true;
         }
+        merci == "yes" ? toggle_modal("popup_merci_info") : null;
       }
 
       function clear_order_form(){
@@ -1466,6 +1487,14 @@
       function cart_contents_scroll() {
         document.getElementById("down-arrow").style.display="none";
       }
+    
+      function remove_url_parameter(parameterName) {
+        const currentUrl = window.location.href;
+        const url = new URL(currentUrl);
+        const params = url.searchParams;
+        params.delete(parameterName);
+        window.history.replaceState({}, '', url);
+      }
 
       function build_paypal(data){
         paypal_param = [...data];
@@ -1491,7 +1520,9 @@
         else if (isdoorhangerprod == "yes" && prod == true && local == true) {
           }
         else {
-          toggle_modal('sale_over_alert');
+          if (merci != "yes") {
+            toggle_modal('sale_over_alert');
+          }
         }
 
         document.getElementById("page_title").innerHTML = "<h1>" + website_title + "</h1>";
@@ -1541,7 +1572,7 @@
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
             paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
-            paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "&merci=yes" + "'>";
             paypal_start += "<input type='hidden' name='custom' value='" + custom_field + "'>";
             paypal_start += "<input type='hidden' name='currency_code' value='USD'>";
             //paypal_start += "<input type='hidden' name='lc' value='en_US'>";
@@ -1569,7 +1600,7 @@
             paypal_start += "<input type='hidden' name='business' value='" + paypal_account +"'>";
             paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
-            paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "'>";
+            paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "&merci=yes" + "'>";
             paypal_start += "<input type='hidden' name='custom' value='" + "local_wreaths" + "'>";
             paypal_start += "<input type='hidden' name='currency_code' value='USD'>";
             //paypal_start += "<input type='hidden' name='landing_page' value='Billing'>"; // Prioritize Guest Checkout
