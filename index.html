@@ -1790,14 +1790,19 @@
         if (n == 0) {
           //if catalog has no items then hide container1
           var container1_elem = document.getElementsByClassName("container1");
+          var middle_swipe_info_elem = document.getElementsByClassName("middle_swipe_info");
           container1_elem[0].style.visibility = "hidden";
+          //middle_swipe_info_elem[0].style.visibility = "hidden";
+          middle_swipe_info_elem[0].innerHTML = "<br>... Catalog is empty ...";
           return;
         }
 
         if (!checkHorizontalScroll("items_slider")) {
           //if the number of items to show don't overflow the horizontal axis then hide the arrows
+          var middle_swipe_info_elem = document.getElementsByClassName("middle_swipe_info");
           document.getElementById("arrow-right").style.display = 'none';
           document.getElementById("arrow-left").style.display = 'none';
+          middle_swipe_info_elem[0].style.visibility = "hidden";
           return;
         }
 
