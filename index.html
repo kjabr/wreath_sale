@@ -1784,8 +1784,24 @@
 
         }
 
-        //document.getElementById("carousel-indicators").innerHTML = dynamic_html_indicators;
         document.getElementById("items_slider").innerHTML = dynamic_html_items;
+
+
+        if (n == 0) {
+          //if catalog has no items then hide container1
+          var container1_elem = document.getElementsByClassName("container1");
+          container1_elem[0].style.visibility = "hidden";
+          return;
+        }
+
+        if (!checkHorizontalScroll("items_slider")) {
+          //if the number of items to show don't overflow the horizontal axis then hide the arrows
+          document.getElementById("arrow-right").style.display = 'none';
+          document.getElementById("arrow-left").style.display = 'none';
+          return;
+        }
+
+        //document.getElementById("carousel-indicators").innerHTML = dynamic_html_indicators;
         dynamic_html_indicators = "";
         dynamic_html_items = "";
 
@@ -1850,7 +1866,13 @@
 
       }
 
-
+      function checkHorizontalScroll(element){
+        var elem = document.getElementById(element);
+        elem.scrollLeft = 1;
+        const hasScroll = elem.scrollLeft > 0;
+        elem.scrollLeft = 0;
+      return hasScroll;
+    }
 
       function go_left(event){
         event.stopPropagation();
