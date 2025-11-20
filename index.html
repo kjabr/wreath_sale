@@ -1117,6 +1117,7 @@
       isgiftshipperprod = isdoorhangerprod = website_title = giftshipper_desc = doorhanger_desc = custom_field = prod_paypal_id =
         prod_paypal_url = staging_paypal_id = staging_paypal_url = contact_email = "";
 
+      var scout_email = "";
       var formvalues = [];
       var shopping_cart = [];
       var store_items = [];
@@ -1197,6 +1198,10 @@
 
                 remove_url_parameter('merci');
               }
+            }
+
+            if (urlParams.get("email")){
+              scout_email = urlParams.get("email");
             }
 
             orgs_init(sheet_values[orgs_sheet_name].slice(1));
@@ -1580,6 +1585,7 @@
             //paypal_start += "<input type='hidden' name='landing_page' value='Billing'>"; // Prioritize Guest Checkout
             paypal_start += "<input type='hidden' name='solution_type' value='Sole'>"; // Emphasize card payment option
             paypal_start += "<input type='hidden' name='no_shipping' value='1'>";
+            paypal_start += "<input type='hidden' name='invoice' value='" + scout_email + "'>";
 
           }
           else {
@@ -1615,6 +1621,7 @@
             //paypal_start += `<input type='hidden' name='zip' value='${document.getElementById("local_zip_code").value.trim().replace(/[^0-9]/g, '')}'>`; // Shipping zip
             paypal_start += "<input type='hidden' name='country' value='US'>"; // Shipping country
             paypal_start += "<input type='hidden' name='no_shipping' value='1'>";
+            paypal_start += "<input type='hidden' name='invoice' value='" + scout_email + "'>";
           }
 
           // url_split = dynamic_data[i][3].split(/=w/);
