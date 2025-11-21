@@ -1578,15 +1578,13 @@
             paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "&merci=yes" + "'>";
-            paypal_start += "<input type='hidden' name='custom' value='" + custom_field + "'>";
+            paypal_start += "<input type='hidden' name='custom' value='" + custom_field + "__" + scout_email + "'>";
             paypal_start += "<input type='hidden' name='currency_code' value='USD'>";
             //paypal_start += "<input type='hidden' name='lc' value='en_US'>";
             paypal_start += "<input type='hidden' name='country' value='US'>";
             //paypal_start += "<input type='hidden' name='landing_page' value='Billing'>"; // Prioritize Guest Checkout
             paypal_start += "<input type='hidden' name='solution_type' value='Sole'>"; // Emphasize card payment option
             paypal_start += "<input type='hidden' name='no_shipping' value='1'>";
-            paypal_start += "<input type='hidden' name='invoice' value='" + scout_email + "'>";
-
           }
           else {
             // Split local_ship_name into first_name and last_name
@@ -1607,7 +1605,7 @@
             paypal_start += "<input type='hidden' name='shopping_url' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='cancel_return' value='" + window.location.href + "'>";
             paypal_start += "<input type='hidden' name='return' value='" + window.location.href + "&merci=yes" + "'>";
-            paypal_start += "<input type='hidden' name='custom' value='" + "local_wreaths" + "'>";
+            paypal_start += "<input type='hidden' name='custom' value='" + "local_wreaths__" + scout_email + "'>";
             paypal_start += "<input type='hidden' name='currency_code' value='USD'>";
             //paypal_start += "<input type='hidden' name='landing_page' value='Billing'>"; // Prioritize Guest Checkout
             //paypal_start += "<input type='hidden' name='solution_type' value='Sole'>"; // Emphasize card payment option
@@ -1621,7 +1619,6 @@
             //paypal_start += `<input type='hidden' name='zip' value='${document.getElementById("local_zip_code").value.trim().replace(/[^0-9]/g, '')}'>`; // Shipping zip
             paypal_start += "<input type='hidden' name='country' value='US'>"; // Shipping country
             paypal_start += "<input type='hidden' name='no_shipping' value='1'>";
-            paypal_start += "<input type='hidden' name='invoice' value='" + scout_email + "'>";
           }
 
           // url_split = dynamic_data[i][3].split(/=w/);
