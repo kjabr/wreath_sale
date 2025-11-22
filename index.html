@@ -552,7 +552,9 @@
       }
 
       #add_msg, #add_msg2 {
+        display: none;
         color: blue;
+        font-size: small;
       }
 
       #cart_items  ul {
@@ -1061,6 +1063,7 @@
                     <div id="down-arrow" class="down-arrow" style="display: none;"></div>
                   </div>
                   <span id="footer2">Prices include shipping cost.</span>
+                  <span id="add_msg2">Wreath Sale is Over!</span>
                 </div>
               </div>
               <div class="popup_footer span_nowrap">
@@ -1068,7 +1071,6 @@
                 <span>
                   <button type="button" onclick="clear_cart()" class="btn btn_gray">Clear</button>
                   <button type="submit" id="paypal_button" class="btn btn_blue">Pay with PayPal</button>
-                  <span id="add_msg2"></span>
                 </span>
               </div>
               </div>
@@ -1420,15 +1422,13 @@
           else if (shopping_cart.length == 0 && (isgiftshipperprod == "yes" || prod == false)) {
             document.getElementById('paypal_button').disabled = true;
             document.getElementById('paypal_button').classList.add("btn_disabled");
-
-            //$('#paypal_button').prop('disabled',true);
           }
 
           else {
             document.getElementById('paypal_button').disabled = true;
             document.getElementById('paypal_button').classList.add("btn_disabled");
             document.getElementById('paypal_button').title = "Wreath Sale is Over!";
-
+            document.getElementById("add_msg2").style.display = "block";
           }
         }
         else { //disable paypal button for local
@@ -1441,7 +1441,6 @@
           else if (shopping_cart.length == 0 && (isdoorhangerprod == "yes" || prod == false)) {
             document.getElementById('paypal_button').disabled = true;
             document.getElementById('paypal_button').classList.add("btn_disabled");
-
             //$('#paypal_button').prop('disabled',true);
           }
 
@@ -1449,7 +1448,7 @@
             document.getElementById('paypal_button').disabled = true;
             document.getElementById('paypal_button').classList.add("btn_disabled");
             document.getElementById('paypal_button').title = "Wreath Sale is Over!";
-
+            document.getElementById("add_msg2").style.display = "block";
           }
         }
         
