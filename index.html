@@ -1172,15 +1172,20 @@
           document.getElementById("scout_name").placeholder = "Scoutname";
         }
 
+        if (urlParams.get("email")) {
+          var email = urlParams.get("email");
+          var scout_email_array = email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+          if (scout_email_array !== null) {
+            scout_email = email;
+          }
+        }
+
         if (urlParams.get("id1") == undefined){
           document.getElementById("container").style.display = "none";
           document.getElementById("container2").style.display = "";
 
-          urlParams.get("scoutname") == null ? null : (
-            document.getElementById("local_store_link").href += "?scoutname=" + urlParams.get("scoutname"),
-            document.getElementById("giftshipper_store_link").href += "?scoutname=" + urlParams.get("scoutname")
-          );
-
+          document.getElementById("local_store_link").href += "?" + getUrlParameters();
+          document.getElementById("giftshipper_store_link").href += "?" + getUrlParameters();
         }
         else {
           fetch_spreadsheet(
@@ -1198,10 +1203,6 @@
 
                 remove_url_parameter('merci');
               }
-            }
-
-            if (urlParams.get("email")){
-              scout_email = urlParams.get("email");
             }
 
             orgs_init(sheet_values[orgs_sheet_name].slice(1));
@@ -1320,6 +1321,22 @@
           urlParams.get("prod") == "no" ? prod = false : prod = true;
         }
         merci == "yes" ? toggle_modal("popup_merci_info") : null;
+      }
+
+      function getUrlParameters() {
+        const params = new URLSearchParams(window.location.search);
+        let paramString = '';
+
+        for (const [key, value] of params) {
+          paramString += `${key}=${value}&`;
+        }
+
+        // Remove the trailing '&' if any parameters were added
+        if (paramString) {
+          paramString = paramString.slice(0, -1);
+        }
+
+        return paramString;
       }
 
       function clear_order_form(){
