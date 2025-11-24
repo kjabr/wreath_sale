@@ -1181,6 +1181,13 @@
       `;
 
       var orgs;
+      var giftshipper = "no";
+      var doorhanger = "no";
+      var id1 = "";
+      var id2 = "";
+
+      handle_ids();
+
       document.addEventListener('DOMContentLoaded', function() {
         //console.log(Date.now());
         var queryString = window.location.search;
@@ -1203,7 +1210,7 @@
           }
         }
 
-        if (urlParams.get("id1") == undefined){
+        if (doorhanger == "no" && giftshipper == "no"){
           document.getElementById("container").style.display = "none";
           document.getElementById("container2").style.display = "";
 
@@ -1212,8 +1219,8 @@
         }
         else {
           fetch_spreadsheet(
-            urlParams.get("id1").replace("/", ""),
-            urlParams.get("id2").replace("/", ""),
+            id1.replace("/", ""),
+            id2.replace("/", ""),
             range_of_sheets
           ).then(r => {
             extract_values(r); //extracts a [row][column] array of values of each sheet and populates global variable sheet_values
@@ -1540,6 +1547,55 @@
         const params = url.searchParams;
         params.delete(parameterName);
         window.history.replaceState({}, '', url);
+      }
+
+      function add_url_parameter(parameterName, parameterValue) {
+        const currentUrl = window.location.href;
+        const url = new URL(currentUrl);
+        const params = url.searchParams;
+
+        // Set the new parameter or update the existing one
+        params.set(parameterName, parameterValue);
+        window.history.replaceState({}, '', url);
+      }
+
+
+      function handle_ids(){
+        var queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+
+      giftshipper = urlParams.get("giftshipper") ? urlParams.get("giftshipper") : "no";
+      doorhanger = urlParams.get("local") ? urlParams.get("local") : "no";
+
+      if (urlParams.get("id1") != undefined && urlParams.get("id2") != undefined){
+        //check to see if the URL parameters exist and if yes store for future visits
+        id1 = urlParams.get("id1");
+        id2 = urlParams.get("id2")
+        localStorage.setItem("id1", id1);
+        localStorage.setItem("id2", id2);
+        remove_url_parameter("id1");
+        remove_url_parameter("id2");
+
+        if (giftshipper == "no" && doorhanger == "no"){
+          giftshipper = "yes";
+          add_url_parameter("giftshipper", "yes");
+        }
+      }
+      else {
+        localStorage.getItem("id1") ? id1 = localStorage.getItem("id1") : id1 = "";
+        localStorage.getItem("id2") ? id2 = localStorage.getItem("id2") : id2 = "";
+      
+
+        if ((id1 == "" || id2 == "") && (giftshipper == "yes" && doorhanger == "no")){
+          //if not then redirect
+          window.location.href = "https://giftshipper.troop432lo.org/?" + getUrlParameters() ;
+        }
+        else if ((id1 == "" || id2 == "") && (giftshipper == "no" && doorhanger == "yes")) {
+          window.location.href = "https://doorhanger.troop432lo.org/?" + getUrlParameters() ;
+        }
+      }
+
       }
 
       function build_paypal(data){
