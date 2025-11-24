@@ -1588,10 +1588,11 @@
       
 
         if ((id1 == "" || id2 == "") && (giftshipper == "yes" && doorhanger == "no")){
-          //if not then redirect
+          remove_url_parameter ("giftshipper");
           window.location.href = "https://giftshipper.troop432lo.org/?" + getUrlParameters() ;
         }
         else if ((id1 == "" || id2 == "") && (giftshipper == "no" && doorhanger == "yes")) {
+          remove_url_parameter("local");
           window.location.href = "https://doorhanger.troop432lo.org/?" + getUrlParameters() ;
         }
       }
