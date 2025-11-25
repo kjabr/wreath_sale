@@ -1216,7 +1216,7 @@
           document.getElementById("local_store_link").href += "?" + getUrlParameters();
           document.getElementById("giftshipper_store_link").href += "?" + getUrlParameters();
         }
-        else {
+        else if (id1 != "") {
           fetch_spreadsheet(
             id1.replace("/", ""),
             id2.replace("/", ""),
