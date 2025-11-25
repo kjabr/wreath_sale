@@ -1186,9 +1186,8 @@
       var id1 = "";
       var id2 = "";
 
-      handle_ids();
-
       document.addEventListener('DOMContentLoaded', function() {
+        handle_ids();
         //console.log(Date.now());
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -1576,28 +1575,23 @@
         localStorage.setItem("id2", id2);
         remove_url_parameter("id1");
         remove_url_parameter("id2");
-        console.log("first match");
 
         if (giftshipper == "no" && doorhanger == "no"){
           giftshipper = "yes";
           add_url_parameter("giftshipper", "yes");
-          console.log("second match");
         }
       }
       else {
         localStorage.getItem("id1") ? id1 = localStorage.getItem("id1") : id1 = "";
         localStorage.getItem("id2") ? id2 = localStorage.getItem("id2") : id2 = "";
-        console.log("third match");
 
         if ((id1 == "" || id2 == "") && (giftshipper == "yes" && doorhanger == "no")){
           remove_url_parameter ("giftshipper");
           window.location.href = "https://giftshipper.troop432lo.org/?" + getUrlParameters() ;
-          console.log("fourth match");
         }
         else if ((id1 == "" || id2 == "") && (giftshipper == "no" && doorhanger == "yes")) {
           remove_url_parameter("local");
           window.location.href = "https://doorhanger.troop432lo.org/?" + getUrlParameters() ;
-          console.log("fifth match");
         }
       }
 
