@@ -1230,7 +1230,8 @@
                 merci = "yes";
                 //urlParams.delete('merci');
 
-                remove_url_parameter('merci');
+                //remove_url_parameter('merci');
+                clean_url_params_from_paypal();
               }
             }
 
@@ -1546,6 +1547,29 @@
         const params = url.searchParams;
         params.delete(parameterName);
         window.history.replaceState({}, '', url);
+      }
+
+      function clean_url_params_from_paypal(){
+        // Define the keys you want to keep
+        const allowedKeys = ['giftshipper', 'prod', 'local'];
+
+        // Get the current URL's search parameters
+        const params = new URLSearchParams(window.location.search);
+
+        // Create a new URLSearchParams object with only allowed keys
+        const filteredParams = new URLSearchParams();
+        allowedKeys.forEach(key => {
+          if (params.has(key)) {
+            filteredParams.append(key, params.get(key));
+          }
+        });
+
+        // Update the URL (without reloading)
+        const newUrl = `${window.location.pathname}?${filteredParams.toString()}`;
+        window.history.replaceState({}, '', newUrl);
+
+        //console.log('Filtered URL:', newUrl);
+
       }
 
       function add_url_parameter(parameterName, parameterValue) {
