@@ -921,7 +921,7 @@
               <span id="delivery_info1" class="delivery_info1">
                 <div class="input_form_div">
                   <label for="ship_name">* Ship to:</label>
-                    <input type="text" id="ship_name" name="ship_name" autocomplete="off" placeholder="Name Required" onInput="this.value = char_only_format(this.value)" required>
+                    <input type="text" id="ship_name" name="ship_name" autocomplete="off" placeholder="Name Required" onInput="this.value = char_only_format2(this.value)" required>
                 </div>
                 <div class="input_form_div"><label for="gift_msg">* Gift Message: </label> 
                   <input type="text" id="gift_msg" name="gift_msg" placeholder="Optional" onInput="this.value = numb_char_format(this.value)">
@@ -1389,7 +1389,7 @@
       document.querySelector('#form_main').addEventListener("submit", (e) => {
         local == false ?
         (
-          document.getElementById("ship_name").value = (document.getElementById("ship_name").value).replace(/[,@*!^%$#'\.]/g, ''),
+          document.getElementById("ship_name").value = (document.getElementById("ship_name").value).replace(/[,@*!^%$#\.]/g, ''),
           document.getElementById("street_address_search").value = (document.getElementById("street_address_search").value).replace(/[@*&!^%$'\.]/g, ''),
           document.getElementById("city").value = (document.getElementById("city").value).replace(/[,@*&!^%$#'\.]/g, '')
         )
@@ -1751,7 +1751,8 @@
               paypal_items += "<input type='hidden' name='amount_" + count + "' value='" + shopping_cart[m2][2] + "'>";
               paypal_items += "<input type='hidden' name='quantity_" + count + "' value='" + Number(shopping_cart[m2][3]) + "'>";
               paypal_items += "<input type='hidden' name='on0_" + count + "' value='Ship_to'>";
-              paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + shopping_cart[m2][4] + ": " + shopping_cart[m2][6] + "'>";
+              //paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + shopping_cart[m2][4] + ": " + shopping_cart[m2][6] + "'>";
+             paypal_items += "<input type='hidden' name='os0_" + count + "' value='" + escapeHtml(shopping_cart[m2][4]) + ": " + escapeHtml(shopping_cart[m2][6]) + "'>";
               paypal_items += "<input type='hidden' name='on1_" + count + "' value='Gift_Message'>";
               paypal_items += "<input type='hidden' name='os1_" + count + "' value='" + shopping_cart[m2][5] + "'>";
               paypal_items += "<input type='hidden' name='on2_" + count + "' value='Scout_Name'>";
@@ -1834,6 +1835,15 @@
         //if (size>0) {input += input}
         return input;	
       }
+
+      function char_only_format2(input) {
+        //returns characters only
+        input = input.replace(/[^&!'a-zA-Z\s\-]/g, '');
+        //var size = input.length;
+        //if (size>0) {input += input}
+        return input;	
+      }
+
 
       function numb_only_format(input) {
         //returns characters only
@@ -2021,6 +2031,17 @@
 
       function cancel_scroll(){
         clearInterval(scroll_timer);
+      }
+
+      function escapeHtml(text) {
+        const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        };
+        return text.replace(/[&<>"']/g, char => map[char]);
       }
 
     </script>
