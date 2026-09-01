@@ -1186,6 +1186,9 @@
       var id1 = "";
       var id2 = "";
 
+      var reloadCount = sessionStorage.getItem('reloadCount') || 0;
+
+
       document.addEventListener('DOMContentLoaded', function() {
         handle_ids();
         //console.log(Date.now());
@@ -1267,11 +1270,21 @@
           const data = await response.json();
           return data;
         } catch (error) {
-          console.error("Error fetching spreadsheet:", error);
-          var popup_elem = document.getElementById("popup_content");
-          popup_elem.innerHTML = "An error occured while fetching from the server, please try again in few min<br> <br>" + error;
-          toggle_modal();
+            console.log(`reloadCount: ${reloadCount}`);
+            if (reloadCount < 1) {
+              reloadCount = parseInt(reloadCount) + 1;
+              sessionStorage.setItem('reloadCount', reloadCount);
+              localStorage.setItem("id1", "");
+              localStorage.setItem("id2", "");
+              location.reload();
           }
+          else {
+            console.error("Error fetching spreadsheet:", error);
+            var popup_elem = document.getElementById("popup_content");
+            popup_elem.innerHTML = "An error occured while fetching from the server, please try again in few min<br> <br>" + error;
+            toggle_modal();
+          }
+        }
       }
 
       function extract_values(r){
