@@ -1279,6 +1279,7 @@
               location.reload();
           }
           else {
+            sessionStorage.removeItem('reloadCount');
             console.error("Error fetching spreadsheet:", error);
             var popup_elem = document.getElementById("popup_content");
             popup_elem.innerHTML = "An error occured while fetching from the server, please try again in few min<br> <br>" + error;
