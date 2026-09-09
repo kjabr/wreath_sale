@@ -1610,13 +1610,13 @@
         if (urlParams.get("id1") != undefined && urlParams.get("id2") != undefined){
           remove_url_parameter("id1");
           remove_url_parameter("id2");
-
-          if (giftshipper == "no" && doorhanger == "no"){
-            giftshipper = "yes";
-            add_url_parameter("giftshipper", "yes");
-          }
         }
-
+        
+        if (giftshipper == "no" && doorhanger == "no"){
+          giftshipper = "yes";
+          add_url_parameter("giftshipper", "yes");
+        }
+        
         if ((id1 == "" || id2 == "") && (giftshipper == "yes" && doorhanger == "no")){
           dnsTXT = await dnsLookup('giftshipper.troop432lo.org')
           .then((dnsTXT) => {
