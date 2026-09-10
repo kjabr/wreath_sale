@@ -1616,11 +1616,13 @@
         if (giftshipper == "no" && doorhanger == "no"){
           if (url.hostname.startsWith("giftshipper")){
             giftshipper = "yes";
+            doorhanger = "no";
             add_url_parameter("giftshipper", "yes");
           }
 
-          else if (url.hostname.startsWith("doorhanger")){
+          if (url.hostname.startsWith("doorhanger")){
             doorhanger = "yes";
+            giftshipper = "no";
             add_url_parameter("local", "yes");
           }
 
