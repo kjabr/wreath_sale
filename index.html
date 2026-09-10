@@ -1613,32 +1613,30 @@
           remove_url_parameter("id2");
         }
 
+        console.log(windowURL);
         if (giftshipper == "no" && doorhanger == "no"){
           if (windowURL.startsWith("giftshipper")){
             giftshipper = "yes";
             doorhanger = "no";
             add_url_parameter("giftshipper", "yes");
-
-            console.log("first");
           }
 
           else if (windowURL.startsWith("doorhanger")){
             doorhanger = "yes";
             giftshipper = "no";
             add_url_parameter("local", "yes");
-            console.log("second");
           }
 
         }
         
-        if ((id1 == "" || id2 == "") && (giftshipper == "yes" && doorhanger == "no")){
+        if (giftshipper == "yes" && doorhanger == "no"){
           dnsTXT = await dnsLookup('giftshipper.troop432lo.org')
           .then((dnsTXT) => {
             id1 = dnsTXT.id1;
             id2 = dnsTXT.id2;
           });
         }
-        else if ((id1 == "" || id2 == "") && (giftshipper == "no" && doorhanger == "yes")) {
+        else if (giftshipper == "no" && doorhanger == "yes") {
           dnsTXT = await dnsLookup('doorhanger.troop432lo.org')
           .then((dnsTXT) => {
             id1 = dnsTXT.id1;
