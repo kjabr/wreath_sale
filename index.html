@@ -1601,6 +1601,7 @@
       async function handle_ids(){
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
+        const url = new URL(window.location.href);
         localStorage.getItem("id1") ? localStorage.removeItem("id1") : null;
         localStorage.getItem("id2") ? localStorage.removeItem("id2") : null;
 
@@ -1611,10 +1612,18 @@
           remove_url_parameter("id1");
           remove_url_parameter("id2");
         }
-        
+
         if (giftshipper == "no" && doorhanger == "no"){
-          giftshipper = "yes";
-          add_url_parameter("giftshipper", "yes");
+          if (url.hostname.startsWith("giftshipper")){
+            giftshipper = "yes";
+            add_url_parameter("giftshipper", "yes");
+          }
+
+          else if (url.hostname.startsWith("doorhanger")){
+            doorhanger = "yes";
+            add_url_parameter("local", "yes");
+          }
+
         }
         
         if ((id1 == "" || id2 == "") && (giftshipper == "yes" && doorhanger == "no")){
