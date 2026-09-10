@@ -1618,12 +1618,15 @@
             giftshipper = "yes";
             doorhanger = "no";
             add_url_parameter("giftshipper", "yes");
+
+            console.log("first");
           }
 
-          if (windowURL.startsWith("doorhanger")){
+          else if (windowURL.startsWith("doorhanger")){
             doorhanger = "yes";
             giftshipper = "no";
             add_url_parameter("local", "yes");
+            console.log("second");
           }
 
         }
