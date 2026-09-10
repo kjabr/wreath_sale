@@ -1601,7 +1601,7 @@
       async function handle_ids(){
         var queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const windowURL = new URL(window.location.href);
+        const windowURL = window.location.hostname;
         localStorage.getItem("id1") ? localStorage.removeItem("id1") : null;
         localStorage.getItem("id2") ? localStorage.removeItem("id2") : null;
 
