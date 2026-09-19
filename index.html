@@ -1312,11 +1312,34 @@
               }
             });
 
-            sheet_values[item.properties.title] = sheet_interesting_values;
+            sheet_values[item.properties.title] = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
 
           }); 
           //console.log(sheet_values);
       }
+
+      function removeEmptyColumns(data) {
+        //remove columns from sheet with empty column header
+
+        // Get the first row (header row)
+        const headerRow = data[0];
+        
+        // Find indices of empty items in the header row
+        const emptyColumnIndices = [];
+        headerRow.forEach((item, index) => {
+          if (item === "") {
+            emptyColumnIndices.push(index);
+          }
+        });
+        
+        // Remove columns from all rows (iterate in reverse to avoid index issues)
+        const result = data.map(row => {
+          return row.filter((item, index) => !emptyColumnIndices.includes(index));
+        });
+        
+        return result;
+      }
+
 
       function orgs_init(org_data){
         orgs = org_data.reduce((a, [k1, k2, k3]) => {
