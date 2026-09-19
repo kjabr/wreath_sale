@@ -1311,8 +1311,16 @@
                 sheet_interesting_values.push(row_values); //only include if at least 1 cell in a row has a value
               }
             });
-
-            sheet_values[item.properties.title] = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
+              var upper_index = 0;
+              
+              temp_sheet_values = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
+              temp_sheet_values.forEach((item4, i4) => {
+                let idx = item4.map(inner_item => inner_item.toLowerCase());
+                idx.indexOf("donation") != -1 ? upper_index = i4 : null;
+              });
+              temp_sheet_values.push(...temp_sheet_values.splice(upper_index, 1))
+              sheet_values[item.properties.title] = temp_sheet_values;
+            //sheet_values[item.properties.title] = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
 
           }); 
           //console.log(sheet_values);
@@ -1670,22 +1678,24 @@
 
       function build_paypal(data){
         paypal_param = [...data];
-
+        var start_index = 0;
 
         //var isgiftshipperprod, isdoorhangerprod, website_title, giftshipper_desc, doorhanger_desc, custom_field, prod_paypal_id, 
         // prod_paypal_url, staging_paypal_id, staging_paypal_url, contact_email;
 
-        isgiftshipperprod = paypal_param[1][0];
-        isdoorhangerprod = paypal_param[1][1];
-        website_title = paypal_param[1][2];
-        giftshipper_desc = paypal_param[1][3];
-        doorhanger_desc = paypal_param[1][4];
-        custom_field = paypal_param[1][5];
-        prod_paypal_id = paypal_param[1][6];
-        prod_paypal_url = paypal_param[1][7];
-        staging_paypal_id = paypal_param[1][8];
-        staging_paypal_url = paypal_param[1][9];
-        contact_email = paypal_param[1][10];
+        /production/.test(paypal_param[0][0]) ? start_index = 1 : start_index = 0;
+
+        isgiftshipperprod = paypal_param[start_index][0];
+        isdoorhangerprod = paypal_param[start_index][1];
+        website_title = paypal_param[start_index][2];
+        giftshipper_desc = paypal_param[start_index][3];
+        doorhanger_desc = paypal_param[start_index][4];
+        custom_field = paypal_param[start_index][5];
+        prod_paypal_id = paypal_param[start_index][6];
+        prod_paypal_url = paypal_param[start_index][7];
+        staging_paypal_id = paypal_param[start_index][8];
+        staging_paypal_url = paypal_param[start_index][9];
+        contact_email = paypal_param[start_index][10];
 
         if (isgiftshipperprod == "yes" && prod == true && local == false) {
           }
@@ -1942,6 +1952,9 @@
           if (i < store_items.length){
             store_items[i][3] =  store_items[i][3].replace(/\$/g, '');
             url_split = store_items[i][4].split(/=w/);
+            /photos.google.com/.test(url_split) ? url_split = ["https://lh3.googleusercontent.com/pw/AP1GczM9y8SMUXgyjl8_RQQtWON7qz8yoSL5S1cFk7fGwyTlewM77rGGeex3fMh25nbVdFH9mStO-Q1t1jtllBkLo39wrc9xz3QS56oGE6qM5Ge5-pXZ_VoeDA-9umDJnqVkdPIIm0nOEvz0GkHnOTMsxbjz4w=w1294-h1342-s-no?authuser=0"] 
+              : null;
+
             dynamic_html_items += "<div class='col-xs-3'>";
             dynamic_html_items += "<div class='center_items'>";
             dynamic_html_items += "<img class='w-100 rounded' src='" + url_split[0] + "=w480 '";
