@@ -1248,6 +1248,10 @@
               document.getElementById("arrow-left").innerHTML = left_chevron;
               document.getElementById("arrow-right").innerHTML = right_chevron;
 
+              if (window.location.href.endsWith('&')) {
+                window.history.replaceState({}, document.title, window.location.href.slice(0, -1));
+              }       
+
             }).catch(error => {
               // ...handle error...
               console.log("error error: " + error);
@@ -1719,6 +1723,18 @@
         else {
           document.getElementById("page_description").innerHTML = "<p>" + giftshipper_desc + "</p>";
         }
+
+        //add URL parameters to the embdeded link in page description
+
+        const desc_link = document.getElementById("page_description").querySelectorAll('a')[0];
+        const params = getUrlParameters();
+        const paramsToRemove = ['giftshipper', 'local'];
+        const filteredParams = params
+          .split('&')
+          .filter(param => !paramsToRemove.some(p => param.startsWith(p + '=')))
+          .join('&');
+
+        desc_link.href += (desc_link.href.includes('?') ? '&' : '?') + filteredParams;
 
         //url_org != "" ? document.getElementById("page_description").innerHTML = "<p>" + orgs[url_org][1] + "</p>" :
         //  document.getElementById("page_description").innerHTML = "<p>" + paypal_param [1][2] + "<a href='mailto:troop432wreathsales@gmail.com' target='_blank'>[Contact Link]<a></p>";
