@@ -227,7 +227,7 @@
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       height: auto;
       width: 90%;
-      max-height: 500px;
+      max-height: 450px;
     }
 
     .v_bar {
@@ -1953,7 +1953,7 @@
           if (i < store_items.length){
             store_items[i][3] =  store_items[i][3].replace(/\$/g, '');
             url_split = store_items[i][4].split(/=w/);
-            /photos.google.com/.test(url_split) ? url_split = ["https://lh3.googleusercontent.com/pw/AP1GczOm04ZQZiK-tw0JEE2s24XJ7VzkLkrjRhGV2ZZzFLt_Foh7IKq-87_am7egigXGsNZ8Y2ILfWqj_qgUsE-jQVyJPoXSw4UCX8x4oBbkuMgIYh8v0a0w4ulpbzumQlmv2g7RkCwD-832ylG56AgU-a-2hA=w1198-h900-s-no?authuser=0"] 
+            /photos.google.com/.test(url_split[0]) || url_split[0] == "" ? url_split = ["https://lh3.googleusercontent.com/pw/AP1GczOm04ZQZiK-tw0JEE2s24XJ7VzkLkrjRhGV2ZZzFLt_Foh7IKq-87_am7egigXGsNZ8Y2ILfWqj_qgUsE-jQVyJPoXSw4UCX8x4oBbkuMgIYh8v0a0w4ulpbzumQlmv2g7RkCwD-832ylG56AgU-a-2hA=w1198-h900-s-no?authuser=0"] 
               : null;
 
             dynamic_html_items += "<div class='col-xs-3'>";
