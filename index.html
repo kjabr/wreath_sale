@@ -218,7 +218,6 @@
       width: 400px;
       /*max-width: min(30%, 330px);
       height: auto;*/
-      max-height: 500px;
       background: transparent;
       justify-content: space-between;
 
@@ -664,7 +663,8 @@
       }
 
       .col-xs-3 {
-        max-height: 500px;
+        /*max-width: min(65%, 300px);*/
+        width: 300px;
     }
       .btn_shopping_cart {
         margin-left: auto;
@@ -2023,7 +2023,7 @@
         dynamic_html_items = "";
 
         //move slider to the right a little
-        //document.getElementById("items_slider").scrollLeft = 170;
+        document.getElementById("items_slider").scrollLeft = 170;
 
         const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
         vw > 1000 ? document.getElementById("items_slider").scrollLeft = 170 : null;
