@@ -216,6 +216,14 @@
       align-items: center;
       justify-content: center;
     }
+
+    .scoutname_shoppingcart {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+    }
     
     .col-xs-3 {
       display: flex;
@@ -300,6 +308,7 @@
       width: 70%;
       align-items: center;
       justify-content: center;
+      gap: 50px;
     }
 
     #scoutname_field {
@@ -704,12 +713,9 @@
 
       .col-xs-3 {
         /*max-width: min(65%, 300px);*/
-        width: 300px;
+        flex: 0 0 43%;
+
     }
-      .btn_shopping_cart {
-        margin-left: auto;
-        margin-right: auto;
-      }
 
       #item_details {
         width: 100%;
@@ -775,6 +781,14 @@
 
       #popup_order {
         min-width: 50%;
+      }
+
+      .shopping_cart_div {
+        width: 100%;
+      }
+
+      .items_noslider {
+        align-items: start;
       }
     }
 
@@ -909,10 +923,11 @@
       
       <span id="page_description" style="text-align: left;"></span>
       <div class="shopping_cart_div">
-        <span id="scoutname">
-          Scoutname: </span>
-        <span id="scoutname_field"> <input type="text" style="" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
-
+        <span class="scoutname_shoppingcart">
+          <span id="scoutname">
+            Scoutname: </span>
+          <span id="scoutname_field"> <input type="text" style="" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
+        </span>
           <input type="button" class="scout_info" onclick="toggle_modal('popup_scout_info')" style="border:none; background:none; color:blue;" value="[i]">
         </span>
 
