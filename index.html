@@ -130,6 +130,7 @@
         padding: 5px;
         position: relative;
         margin-left: 5px;
+        white-space: nowrap;
       }
 
     .btn:hover {
@@ -205,6 +206,16 @@
       flex-direction: row;
       align-items: center;
     }
+
+    .items_noslider {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 20px;
+      gap: 20px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
     
     .col-xs-3 {
       display: flex;
@@ -220,7 +231,7 @@
       height: auto;*/
       background: transparent;
       justify-content: space-between;
-
+      flex: 0 0 40%;
     }
 
     #items_slider img {
@@ -268,6 +279,30 @@
 
     .center_items > img {
       margin: 0;
+    }
+
+    .shopping_cart_div {
+      z-index: 1000;
+      background-color: beige;
+      border-radius: 3px;
+      padding: 3px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      position: sticky;
+      top: 10px;
+      width: 70%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #scoutname_field {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 2px;
+      align-items: center;
     }
 
     .w-100:hover, .scout_info {
@@ -868,10 +903,10 @@
       </div>
       
       <span id="page_description" style="text-align: left;"></span>
-      <div>
+      <div class="shopping_cart_div">
         <span id="scoutname">
           Scoutname: </span>
-        <span id="scoutname_field"> <input type="text" style="margin-bottom:10px;" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
+        <span id="scoutname_field"> <input type="text" style="" id="scout_name" name="scout_name" placeholder="Optional" onInput="this.value = char_only_format(this.value)">
 
           <input type="button" class="scout_info" onclick="toggle_modal('popup_scout_info')" style="border:none; background:none; color:blue;" value="[i]">
         </span>
@@ -1188,6 +1223,8 @@
       var id1 = "";
       var id2 = "";
 
+      var noslider = "no";
+
       var reloadCount = sessionStorage.getItem('reloadCount') || 0;
 
 
@@ -1366,6 +1403,10 @@
         //queryString == "" ? queryString = "?scoutname=" : null;
         urlParams.get("scoutname") == null ? null : document.getElementById("scout_name").value = urlParams.get("scoutname").replace(/[\.\_\-]/g, " ")
           .toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+
+        if (urlParams.get("noslider")){
+          noslider = urlParams.get("noslider");
+        }
 
         if (urlParams.get("org")) {
         orgs.hasOwnProperty(urlParams.get("org").toUpperCase()) ? (
@@ -1958,6 +1999,14 @@
         var dynamic_html_items = "";
         var url_split = [];
         store_items = [...items];
+        const stylesheet = document.styleSheets[0];
+
+        if (noslider == "yes") {
+          document.getElementById("items_slider").classList.remove("items_slider");
+          document.getElementById("items_slider").classList.add("items_noslider");
+          //document.getElementById("v_bar").style.display = none;
+          stylesheet.insertRule('.v_bar { display: none; }', stylesheet.cssRules.length);
+        }
 
         while (i < store_items.length){
         //  i++; //starting on the 2nd row
@@ -1987,7 +2036,7 @@
             dynamic_html_items += "data-target='#form_modal'>Select Item</button>";
             dynamic_html_items += "</div>";
             dynamic_html_items += "</div>"
-            dynamic_html_items += "<div class='v_bar justify-content-center'></div>";
+            dynamic_html_items += "<div id='v_bar' class='v_bar justify-content-center'></div>";
             part_number[n] = store_items[i][5];
             part_name[n] = store_items[i][1];
             n++;
