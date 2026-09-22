@@ -477,6 +477,7 @@
         display: flex;
         flex-direction: column;
         gap: 6px;
+        margin-top: 20px;
       }
 
       .delivery_info1 > div > input {
@@ -1017,8 +1018,9 @@
                 <div class="input_form_div"><label for="quantity">Quantity: </label> 
                   <input type="number" class="input-small" style="width:2em;" id="quantity" name="quantity" value="1" min="1" onInput="this.value = numb_only_format(this.value)"></div>
               <span id="delivery_info1" class="delivery_info1">
+                Who would you like us to ship to?
                 <div class="input_form_div">
-                  <label for="ship_name">* Ship to:</label>
+                  <label for="ship_name">* Their Name:</label>
                     <input type="text" id="ship_name" name="ship_name" autocomplete="off" placeholder="Name Required" onInput="this.value = char_only_format2(this.value)" required>
                 </div>
                 <div class="input_form_div"><label for="gift_msg">* Gift Message: </label> 
