@@ -238,6 +238,7 @@
       background: transparent;
       justify-content: space-between;
       box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+      cursor: pointer;
     }
 
     #items_slider img {
@@ -2048,17 +2049,18 @@
             /photos.google.com/.test(url_split[0]) || url_split[0] == "" ? url_split = ["https://lh3.googleusercontent.com/pw/AP1GczOm04ZQZiK-tw0JEE2s24XJ7VzkLkrjRhGV2ZZzFLt_Foh7IKq-87_am7egigXGsNZ8Y2ILfWqj_qgUsE-jQVyJPoXSw4UCX8x4oBbkuMgIYh8v0a0w4ulpbzumQlmv2g7RkCwD-832ylG56AgU-a-2hA=w1198-h900-s-no?authuser=0"] 
               : null;
 
-            dynamic_html_items += "<div class='col-xs-3'>";
+            dynamic_html_items += `<div class='col-xs-3' id='catalogitem_'${n} onclick='select_item(this)' >`;
+            //dynamic_html_items += "<div class='col-xs-3'>";
             dynamic_html_items += "<div class='center_items'>";
             dynamic_html_items += "<img class='w-100 rounded' src='" + url_split[0] + "=w480 '";
-            dynamic_html_items += "id=img_" + i + " onclick='select_item(this)'";
+            //dynamic_html_items += "id=img_" + i + " onclick='select_item(this)'";
             dynamic_html_items += "data-target='#form_modal '";
             dynamic_html_items += "alt=' '>";
             dynamic_html_items += "<h2 class=''>" + store_items[i][1] + "</h2>";
             dynamic_html_items += "<h3>" + "Cost: $" + store_items[i][3] + "</h3>";
             dynamic_html_items += "<p style='text-align: center;'>" + store_items[i][2] + "</p>";
             dynamic_html_items += "<button type='button' class='btn btn_blue' id='btn_" + n + "'";
-            dynamic_html_items += "onclick='select_item(this)'";
+            //dynamic_html_items += "onclick='select_item(this)'";
             dynamic_html_items += "data-target='#form_modal'>Select Item</button>";
             dynamic_html_items += "</div>";
             dynamic_html_items += "</div>"
