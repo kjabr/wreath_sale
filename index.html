@@ -225,11 +225,10 @@
       align-items: center;
     }
     
-    .col-xs-3 {
+    .item_div_slider {
       display: flex;
       flex-shrink: 0;
       flex-direction: column;
-
       color: black;
       font-size: max(1vw, 12px);
       max-width: 45%;
@@ -238,7 +237,25 @@
       background: transparent;
       justify-content: space-between;
       box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+      cursor: pointer;
     }
+
+    .item_div_table {
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: column;
+      color: black;
+      font-size: max(1vw, 12px);
+      max-width: 45%;
+      /*max-width: min(30%, 330px);
+      height: auto;*/
+      background: transparent;
+      justify-content: space-between;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+      cursor: pointer;
+    }
+
+
 
     #items_slider img {
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
@@ -709,11 +726,15 @@
         font-size: 1em;
       }
 
-      .col-xs-3 {
+      .item_div_slider {
         /*max-width: min(65%, 300px);*/
         flex: 0 0 43%;
-
-    }
+      }
+    
+      .item_div_table {
+        /*max-width: min(65%, 300px);*/
+        flex: 0 0 43%;
+      }
 
       #item_details {
         width: 100%;
@@ -784,10 +805,11 @@
       .shopping_cart_div {
         width: 100%;
       }
-      /*
+      
       .items_noslider {
-        align-items: start;
-      } */
+       margin: 0px;
+       gap: 10px;
+      }
 
       #items_slider img {
         max-width: 100%; /*specific to mobile screens*/
@@ -2025,6 +2047,9 @@
         var url_split = [];
         store_items = [...items];
         const stylesheet = document.styleSheets[0];
+        var item_class = "item_div_slider";
+
+        noslider == "yes" ? item_class = "item_div_table" : item_class = "item_div_slider";
 
         if (noslider == "yes") {
           //testing an option to remove the slider altogether
@@ -2048,21 +2073,18 @@
             /photos.google.com/.test(url_split[0]) || url_split[0] == "" ? url_split = ["https://lh3.googleusercontent.com/pw/AP1GczOm04ZQZiK-tw0JEE2s24XJ7VzkLkrjRhGV2ZZzFLt_Foh7IKq-87_am7egigXGsNZ8Y2ILfWqj_qgUsE-jQVyJPoXSw4UCX8x4oBbkuMgIYh8v0a0w4ulpbzumQlmv2g7RkCwD-832ylG56AgU-a-2hA=w1198-h900-s-no?authuser=0"] 
               : null;
 
-            dynamic_html_items += "<div class='col-xs-3'>";
-            dynamic_html_items += "<div class='center_items'>";
-            dynamic_html_items += "<img class='w-100 rounded' src='" + url_split[0] + "=w480 '";
-            dynamic_html_items += "id=img_" + i + " onclick='select_item(this)'";
-            dynamic_html_items += "data-target='#form_modal '";
-            dynamic_html_items += "alt=' '>";
-            dynamic_html_items += "<h2 class=''>" + store_items[i][1] + "</h2>";
-            dynamic_html_items += "<h3>" + "Cost: $" + store_items[i][3] + "</h3>";
-            dynamic_html_items += "<p style='text-align: center;'>" + store_items[i][2] + "</p>";
-            dynamic_html_items += "<button type='button' class='btn btn_blue' id='btn_" + n + "'";
-            dynamic_html_items += "onclick='select_item(this)'";
-            dynamic_html_items += "data-target='#form_modal'>Select Item</button>";
-            dynamic_html_items += "</div>";
-            dynamic_html_items += "</div>"
-            dynamic_html_items += "<div id='v_bar' class='v_bar justify-content-center'></div>";
+            dynamic_html_items += 
+            `<div class='${item_class}' id='itemdiv_${n}' onclick='select_item(this)'>
+              <div class='center_items'>
+                <img class='w-100 rounded' src='${url_split[0]}=w480 ' id='img_${i}' data-target='#form_modal ' alt=' '>
+                <h2 class=''>${store_items[i][1]}</h2>
+                <h3>Cost: $${store_items[i][3]}</h3>
+                <p style='text-align: center;'>${store_items[i][2]}</p>
+                <button type='button' class='btn btn_blue' id='btn_${n}' data-target='#form_modal'>Select Item</button>
+              </div>
+            </div>
+            <div id='v_bar' class='v_bar justify-content-center'></div>`;
+
             part_number[n] = store_items[i][5];
             part_name[n] = store_items[i][1];
             n++;
