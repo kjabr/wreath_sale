@@ -737,8 +737,7 @@
 
       .items_slider {
         width: inherit;
-        margin-left: 0px;
-        margin-right: 0px;
+        margin: 0px;
       }
 
       .btn {
@@ -746,14 +745,17 @@
       }
 
       .item_div_slider {
-        /*max-width: min(65%, 300px);*/
-        flex: 0 0 43%;
+        /*max-width: min(65%, 300px);
+        flex: 0 0 43%;*/
+        max-width: none;
+        width: 230px;
+        gap: 30px
       }
     
       .item_div_table {
         /*max-width: min(65%, 300px);*/
         /*flex: 0 0 43%;*/
-        width: 45%;
+        width: 47%;
         max-width: none;
       }
 
@@ -828,6 +830,7 @@
 
       #items_slider img {
         max-width: 100%; /*specific to mobile screens*/
+        max-height: 200px;
       }
     }
 
