@@ -1857,7 +1857,7 @@
 
         const desc_link = document.getElementById("page_description").querySelectorAll('a')[0];
         const params = getUrlParameters();
-        const paramsToRemove = ['giftshipper', 'local'];
+        const paramsToRemove = ['giftshipper', 'local', 'webstore'];
         const filteredParams = params
           .split('&')
           .filter(param => !paramsToRemove.some(p => param.startsWith(p + '=')))
