@@ -1758,6 +1758,8 @@
           remove_url_parameter("id2");
         }
 
+        urlParams.get("utm_source") ? remove_url_parameter("utm_source") : null;
+
         if (giftshipper == "no" && doorhanger == "no"){
           if (windowURL.startsWith("giftshipper")){
             giftshipper = "yes";
