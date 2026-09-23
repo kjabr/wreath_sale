@@ -1495,6 +1495,19 @@
             //toggle_modal('sale_over_alert')
           )
             : local = false;}
+        
+        if (urlParams.get("webstore"))
+          {urlParams.get("webstore") == "local" ? (
+            local = true,
+            document.getElementById("store_type").innerHTML = "<u>Local Wreaths</u> Web Store",
+            document.getElementById("delivery_info1").innerHTML = "<br>",
+            document.getElementById("popup_content_cart").removeAttribute("novalidate"),
+            document.getElementById("footer2").innerHTML = "Our scouts will deliver your order",
+            document.getElementById("local_shipping_info").style.display = "block",
+            document.getElementById("ModalLabel1").innerText = "How many would you like?"
+            //toggle_modal('sale_over_alert')
+          )
+            : local = false;}
 
         if (urlParams.get("prod")) {
           urlParams.get("prod") == "no" ? prod = false : prod = true;
@@ -1752,6 +1765,11 @@
 
         giftshipper = urlParams.get("giftshipper") ? urlParams.get("giftshipper") : "no";
         doorhanger = urlParams.get("local") ? urlParams.get("local") : "no";
+
+        if (urlParams.get("webstore")){
+          urlParams.get("webstore") == "local" ? doorhanger = "yes" : null;
+          urlParams.get("webstore") == "giftshipper" ? giftshipper = "yes" : null;
+        }
 
         if (urlParams.get("id1") != undefined && urlParams.get("id2") != undefined){
           remove_url_parameter("id1");
