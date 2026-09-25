@@ -1308,6 +1308,8 @@
 
       var reloadCount = sessionStorage.getItem('reloadCount') || 0;
 
+      var url_params = "";
+
 
       document.addEventListener('DOMContentLoaded', function() {
         handle_ids()
@@ -1336,8 +1338,12 @@
             document.getElementById("container").style.display = "none";
             document.getElementById("container2").style.display = "";
 
-            document.getElementById("local_store_link").href += "?" + getUrlParameters();
-            document.getElementById("giftshipper_store_link").href += "?" + getUrlParameters();
+            url_params = getUrlParameters();
+
+            if (url_params != ""){
+              document.getElementById("local_store_link").href += "?" + url_params;
+              document.getElementById("giftshipper_store_link").href += "?" + url_params;
+            }
           }
           else if (id1 != "") {
             fetch_spreadsheet(
