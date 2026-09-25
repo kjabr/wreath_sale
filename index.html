@@ -343,6 +343,7 @@
       align-items: center;
       justify-content: center;
       gap: 50px;
+      margin-bottom: 20px;
     }
 
     #scoutname_field {
@@ -1000,7 +1001,7 @@
           </div>
         </div>
 
-        <div class="middle_swipe_info">
+        <div class="middle_swipe_info" id="middle_swipe_info">
           <h6 style="text-align: center;">&lt&lt&lt Swipe to see more products &gt&gt&gt</h6>
         </div>
 
@@ -2118,6 +2119,7 @@
           document.getElementById("items_slider").classList.add("items_noslider");
           //document.getElementById("v_bar").style.display = none;
           stylesheet.insertRule('.v_bar { display: none; }', stylesheet.cssRules.length);
+          document.getElementById('middle_swipe_info').style.display = "none";
         }
 
         while (i < store_items.length){
