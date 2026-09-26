@@ -1112,7 +1112,7 @@
               </span>
 
 
-              <div class="popup_footer2">
+              <div id="popup_footer2" class="popup_footer2">
                 <span id="cart_footer" class="span_nowrap">
                 <button type="button" id="cancel_cart_button" onclick="form_reset()" class="btn btn_gray">Cancel</button>
                 <button type="submit" id="add_to_cart_button" class="btn btn_blue">Add to Cart</button>
@@ -1513,8 +1513,11 @@
             document.getElementById("popup_content_cart").removeAttribute("novalidate"),
             document.getElementById("footer2").innerHTML = "Our scouts will deliver your order",
             document.getElementById("local_shipping_info").style.display = "block",
-            document.getElementById("ModalLabel1").innerText = "How many would you like?"
+            document.getElementById("ModalLabel1").innerText = "How many would you like?",
             //toggle_modal('sale_over_alert')
+            document.getElementById("delivery_info1").style.display = "none",
+            document.getElementById("popup_footer2").style.marginTop = "16px"
+
           )
             : local = false;}
         
@@ -1526,8 +1529,10 @@
             document.getElementById("popup_content_cart").removeAttribute("novalidate"),
             document.getElementById("footer2").innerHTML = "Our scouts will deliver your order",
             document.getElementById("local_shipping_info").style.display = "block",
-            document.getElementById("ModalLabel1").innerText = "How many would you like?"
+            document.getElementById("ModalLabel1").innerText = "How many would you like?",
             //toggle_modal('sale_over_alert')
+            document.getElementById("delivery_info1").style.display = "none",
+            document.getElementById("popup_footer2").style.marginTop = "16px"
           )
             : local = false;}
 
