@@ -936,6 +936,11 @@
         top: 0;
         right: 0;
       }
+
+      .popup_footer {
+        position: sticky;
+        bottom: 0;
+      }
     }
 
 
@@ -1454,7 +1459,9 @@
                 sheet_interesting_values.push(row_values); //only include if at least 1 cell in a row has a value
               }
             });
-              var upper_index = undefined;
+
+            //the following is trying to find the donation row. If found it will ensure it is at the bottom of the list. And only the donation row.
+              var upper_index = undefined; //important so that the logic doesn't trigger for other than a donation row find
               
               temp_sheet_values = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
               temp_sheet_values.forEach((item4, i4) => {
@@ -1462,8 +1469,8 @@
                 idx.indexOf("donation") != -1 ? upper_index = i4 : null;
               });
               //temp_sheet_values.push(...temp_sheet_values.splice(upper_index, 1));
-              if (upper_index !== undefined) {
-                temp_sheet_values.push(...temp_sheet_values.splice(upper_index, 1));
+              if (upper_index !== undefined) { //if not found, ie undefined then ignore
+                temp_sheet_values.push(...temp_sheet_values.splice(upper_index, 1)); //means remove the donation row and push it to the bottom
               }
               sheet_values[item.properties.title] = temp_sheet_values;
             //sheet_values[item.properties.title] = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
