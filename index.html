@@ -1442,14 +1442,17 @@
                 sheet_interesting_values.push(row_values); //only include if at least 1 cell in a row has a value
               }
             });
-              var upper_index = 0;
+              var upper_index = undefined;
               
               temp_sheet_values = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
               temp_sheet_values.forEach((item4, i4) => {
                 let idx = item4.map(inner_item => inner_item.toLowerCase());
                 idx.indexOf("donation") != -1 ? upper_index = i4 : null;
               });
-              temp_sheet_values.push(...temp_sheet_values.splice(upper_index, 1))
+              //temp_sheet_values.push(...temp_sheet_values.splice(upper_index, 1));
+              if (upper_index !== undefined) {
+                temp_sheet_values.push(...temp_sheet_values.splice(upper_index, 1));
+              }
               sheet_values[item.properties.title] = temp_sheet_values;
             //sheet_values[item.properties.title] = removeEmptyColumns(sheet_interesting_values).filter(row => row[1] !== "");
 
@@ -1839,12 +1842,12 @@
 
       function build_paypal(data){
         paypal_param = [...data];
-        var start_index = 0;
+        var start_index = 1;
 
         //var isgiftshipperprod, isdoorhangerprod, website_title, giftshipper_desc, doorhanger_desc, custom_field, prod_paypal_id, 
         // prod_paypal_url, staging_paypal_id, staging_paypal_url, contact_email;
 
-        /production/.test(paypal_param[0][0]) ? start_index = 1 : start_index = 0;
+       // /production/.test(paypal_param[0][0]) ? start_index = 1 : start_index = 0;
 
         isgiftshipperprod = paypal_param[start_index][0];
         isdoorhangerprod = paypal_param[start_index][1];
