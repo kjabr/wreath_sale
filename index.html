@@ -784,7 +784,7 @@
       }
 
       #cart_contents {
-        max-height: 45vh;
+        max-height: 35vh;
       }
 
       .main_page{
@@ -940,6 +940,12 @@
       .popup_footer {
         position: sticky;
         bottom: 0;
+      }
+    }
+
+    @media (max-height: 500px){
+      .modal-title {
+        display: none;
       }
     }
 
@@ -1146,7 +1152,7 @@
           <form id="popup_content_cart" class="popup_content" onsubmit="event.preventDefault(); paypal();" novalidate autocomplete="off">
             <h3 class="modal-title" id="ModalLabel">Shopping Cart</h3>
             <div class="modal-body ml-3 mr-3">
-              <div>
+              <div style="width: 22rem;">
                 <p>Thank you for supporting Scouts!</p>
                 <div class="delivery_info_span3 local_delivery_address">
                   <span id="scoutname_span"></span>
