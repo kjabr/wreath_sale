@@ -401,7 +401,7 @@
         transition: opacity 400ms ease-in;
         background: #F7F6EF;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        max-width: fit-content;
+        max-width: 30vw;
       }
 
       .span_nowrap {
@@ -472,7 +472,7 @@
         overflow-x: auto;
         max-height: 40vh;
         display: block;
-        width: 100%;
+        width: 98%;
         background-color: mintcream;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
         border-radius: 5px;
@@ -554,8 +554,7 @@
         font-size: 14px;
         margin-top: 1.5em;
         margin-bottom: 1em;
-        width: fit-content;
-        min-width: 90%;
+        width: 90%;
       }
 
       .local_addr_div{
@@ -853,6 +852,10 @@
       }
       #items_slider img {
         max-width: 100%; /*specific to mobile screens*/
+      }
+
+      .popup {
+        width: 60vw;
       }
     }
 
@@ -1182,7 +1185,7 @@
           <form id="popup_content_cart" class="popup_content" onsubmit="event.preventDefault(); paypal();" novalidate autocomplete="off">
             <h3 class="modal-title" id="ModalLabel">Shopping Cart</h3>
             <div class="modal-body ml-3 mr-3">
-              <div style="width: 22rem;">
+              <div style="width: 100%;">
                 <p id="cart_thankyou">Thank you for supporting Scouts!</p>
                 <div class="delivery_info_span3 local_delivery_address">
                   <span id="scoutname_span"></span>
