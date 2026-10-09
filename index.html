@@ -954,6 +954,12 @@
       }
     }
 
+    @media (max-height: 425px){
+      #cart_thankyou {
+        display: none;
+      }
+    }
+
 
 </style>
 
@@ -1158,7 +1164,7 @@
             <h3 class="modal-title" id="ModalLabel">Shopping Cart</h3>
             <div class="modal-body ml-3 mr-3">
               <div style="width: 22rem;">
-                <p>Thank you for supporting Scouts!</p>
+                <p id="cart_thankyou">Thank you for supporting Scouts!</p>
                 <div class="delivery_info_span3 local_delivery_address">
                   <span id="scoutname_span"></span>
                   <div id="local_shipping_info" class="local_shipping_info">
